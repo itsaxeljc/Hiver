@@ -126,7 +126,23 @@ ESTRUCTURA_BASICA ::=
     FUNCIONES CONFIG STARTUP FUNCIONES |
     FUNCIONES CONFIG FUNCIONES STARTUP |
     FUNCIONES CONFIG FUNCIONES STARTUP FUNCIONES |
-    CONFIG STARTUP 
+    CONFIG STARTUP |
+    STARTUP CONFIG 
+    {:System.out.println("Error Sintactico en la línea # | Se esperaba que bloque CONFIG se situara antes del bloque START-END");:} |
+    CONFIG 
+        {:System.out.println("Error Sintactico en la línea # | Se esperaba el bloque START-END después del bloque CONFIG");:} |
+    STARTUP
+        {:System.out.println("Error Sintactico en la línea # | Se esperaba el bloque CONFIG antes del bloque START-END");:} |
+    FUNCIONES
+        {:System.out.println("Error Sintactico en la línea # | Se esperaban los bloques CONFIG y START-END");:} |
+    FUNCIONES CONFIG
+        {:System.out.println("Error Sintactico en la línea # | Se esperaba el bloque START-END después del bloque CONFIG");:} |
+    CONFIG FUNCIONES
+        {:System.out.println("Error Sintactico en la línea # | Se esperaba el bloque START-END después del bloque CONFIG");:} |
+    FUNCIONES STARTUP
+        {:System.out.println("Error Sintactico en la línea # | Se esperaba el bloque CONFIG antes del bloque START-END");:} |
+    STARTUP FUNCIONES
+        {:System.out.println("Error Sintactico en la línea # | Se esperaba el bloque CONFIG antes del bloque START-END");:} 
 ;
 
 FUNCIONES ::=
