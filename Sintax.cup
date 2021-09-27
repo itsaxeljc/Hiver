@@ -20,6 +20,8 @@ parser code
     public ArrayList getvar_identificador() { return action_obj.var_identificador; }
     public ArrayList getvar_tipo_dato() { return action_obj.var_tipo_dato; }
     public ArrayList getvar_valor() { return action_obj.var_valor; }
+    public ArrayList getvar_err_linea() { return action_obj.err_linea; }
+    public ArrayList getvar_err_msj() { return action_obj.err_msj; }
 
 :};
 action code
@@ -36,6 +38,7 @@ action code
     // para los errores
     public ArrayList err_linea = new ArrayList();
     public ArrayList err_lexema = new ArrayList();
+    public ArrayList err_msj = new ArrayList();
     
 :}
 
@@ -107,7 +110,9 @@ start with INICIO;
 
 INICIO ::= 
     res_name Identificador sig_punto_coma 
-        ESTRUCTURA_BASICA  | error sig_punto_coma
+        ESTRUCTURA_BASICA  
+    res_name Identificador sig_punto_coma 
+        ESTRUCTURA_BASICA 
 
  
 ;
