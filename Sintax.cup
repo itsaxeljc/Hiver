@@ -22,6 +22,7 @@ parser code
     public ArrayList getvar_valor() { return action_obj.var_valor; }
     public ArrayList getvar_err_linea() { return action_obj.err_linea; }
     public ArrayList getvar_err_msj() { return action_obj.err_msj; }
+    public ArrayList getvar_err_id() { return action_obj.err_id; }
 
 :};
 action code
@@ -39,7 +40,7 @@ action code
     public ArrayList err_linea = new ArrayList();
     public ArrayList err_lexema = new ArrayList();
     public ArrayList err_msj = new ArrayList();
-    
+    public ArrayList err_id = new ArrayList();
 :}
 
 terminal res_if,
