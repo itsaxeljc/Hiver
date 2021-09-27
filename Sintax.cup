@@ -40,7 +40,7 @@ action code
     public ArrayList err_linea = new ArrayList();
     public ArrayList err_lexema = new ArrayList();
     public ArrayList err_msj = new ArrayList();
-    public ArrayList err_id = new ArrayList();
+    public ArrayList err_id = new ArrayList();/*En duda*/
 :}
 
 terminal res_if,
