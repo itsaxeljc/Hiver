@@ -200,7 +200,7 @@ DECLARACION ::=
                      System.out.println(var_identificador.size());
             :}    
             | error sig_punto_coma   
-            {: //vamos a validar cuando aparecen estas expresiones
+            {: //vamos a validar cuando aparecen estas expresiones CAMBIO
                     System.err.println("ERROR Sintactico, Falto un punto y coma");
             :}
 
