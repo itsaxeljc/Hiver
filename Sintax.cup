@@ -1,0 +1,383 @@
+package codigo;
+
+import java_cup.runtime.Symbol;
+import java.util.ArrayList;
+import java.util.Stack;
+
+parser code
+{:
+    
+    
+    public void syntax_error(Symbol s){
+       pnlSalida.textPane.setText(pnlSalida.textPane.getText()+"Error sintáctico en la línea "+(s.right+1)+": "+ s.value+"\n");
+       System.out.println("Error R de sintaxis: "+ s.value +" en la Linea "+(s.right+1) );
+    }
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
+        //pnlSalida.textPane.setText(pnlSalida.textPane.getText()+"Error NR de sintaxis: "+ s.value +" en la Linea " +  (s.left+1)+"\n");
+        System.out.println("Error NR de sintaxis: "+ s.value +" en la Linea " + (s.left+1));
+    }
+
+    public ArrayList getvar_identificador() { return action_obj.var_identificador; }
+    public ArrayList getvar_tipo_dato() { return action_obj.var_tipo_dato; }
+    public ArrayList getvar_valor() { return action_obj.var_valor; }
+
+:};
+action code
+{://Codigo de acciones vamos a simular atributos heredados con variables globales
+    String heredado="";
+    String aux="";
+    Stack<Display> display = new Stack<>();
+    Display tmp;
+
+    // para la tabla de variables
+    public ArrayList var_identificador = new ArrayList();
+    public ArrayList var_tipo_dato = new ArrayList();
+    public ArrayList var_valor = new ArrayList();
+    // para los errores
+    public ArrayList err_linea = new ArrayList();
+    public ArrayList err_lexema = new ArrayList();
+    
+:}
+
+terminal res_if,
+   res_else,
+   res_while,
+ res_do,
+ res_for,
+res_exit,
+ res_return,
+  res_function,
+  res_void,
+ res_null,
+  res_input,
+ res_output,
+res_in,
+res_out,
+res_def,
+res_true,
+res_false,
+res_start,
+res_end,
+res_array,
+res_type,
+res_display,rel_igual,
+res_config,
+res_scale,
+res_pin,
+res_volt,
+res_wait,
+res_model,
+res_sleep,
+res_switch,
+res_default,
+res_name, res_max_volt,
+asi_asignacion,
+ari_suma,
+ari_resta,
+ari_multiplicacion,
+ari_division,
+log_and,
+log_or,
+log_xor,
+log_not,
+rel_menor,
+rel_mayor,
+rel_menor_igual,
+ rel_mayor_igual,
+rel_diferente,
+ sig_punto_coma,
+par_abre,
+par_cierra,
+llave_abre,
+llave_cierra,
+cor_abre,
+cor_cierra,
+sim_dos_puntos,
+tip_tinyint,tip_int,tip_float, tip_double,tip_char,tip_boolean,
+
+Identificador,
+Numero,coma,cadena_caracter,
+Numero_incorrecto1,Numero_incorrecto2,Identificador_no_valido,Error_simbo_punto,Error_simbolo_no_valido,Error_numerico,Numero_incorrecto3,Numero_incorrecto4,ERROR;
+non terminal INICIO, ESTRUCTURA_BASICA,DECLARACION, 
+FUNCIONES, FUNCION, CONFIG, STARTUP,SENTENCIA_STARTUP,SENTENCIA_CONFIG, TIPO_DATO, PARAMETRO , PIN, DISPLAY, DISPLAY_PARAMS,
+TYPE, TYPE_IO, SCALE,DOWHILE,EXPRESION, OPERACION,IF,CASO,WHILE,SWITCH,SWITCH_ENTRADAS,VOLT, MAX_VOLT, WAIT, CONDICION, MODE, 
+VALOR_NUMERICO ,OPERADORES_CONTRACCION,INCREMENTO_FOR,FOR,OUT,SLEEP,OPERACION_PROC, OPERADOR,VALOR, OPERADOR_CONDICIONAL,RETURN,IN;
+
+start with INICIO;
+
+INICIO ::= 
+    res_name Identificador sig_punto_coma 
+        ESTRUCTURA_BASICA  | error sig_punto_coma
+
+ 
+;
+
+ESTRUCTURA_BASICA ::=
+    FUNCIONES CONFIG STARTUP |
+    CONFIG STARTUP FUNCIONES |
+    CONFIG FUNCIONES STARTUP |
+    CONFIG FUNCIONES STARTUP FUNCIONES |
+    FUNCIONES CONFIG STARTUP FUNCIONES |
+    FUNCIONES CONFIG FUNCIONES STARTUP |
+    FUNCIONES CONFIG FUNCIONES STARTUP FUNCIONES |
+    CONFIG STARTUP 
+;
+
+FUNCIONES ::=
+    FUNCIONES FUNCION | FUNCION
+;
+FUNCION ::=
+    res_function TIPO_DATO Identificador par_abre PARAMETRO par_cierra llave_abre
+            SENTENCIA_CONFIG 
+    llave_cierra |
+    res_function res_void Identificador par_abre PARAMETRO par_cierra llave_abre
+            SENTENCIA_CONFIG
+    llave_cierra
+;
+RETURN ::=
+    res_return TIPO_DATO sig_punto_coma | res_return Identificador sig_punto_coma | res_return sig_punto_coma
+;
+CONFIG ::= 
+    res_config llave_abre 
+        SENTENCIA_CONFIG
+
+    llave_cierra
+    | error sig_punto_coma
+    | error llave_cierra
+;
+
+STARTUP ::= 
+    res_start sig_punto_coma
+        SENTENCIA_STARTUP
+    res_end sig_punto_coma 
+    | error sig_punto_coma
+;
+
+SENTENCIA_CONFIG ::=
+    DECLARACION | SENTENCIA_CONFIG DECLARACION |
+    PIN | SENTENCIA_CONFIG PIN |
+    DISPLAY | SENTENCIA_CONFIG DISPLAY |
+    TYPE | SENTENCIA_CONFIG TYPE |
+    SCALE | SENTENCIA_CONFIG SCALE |
+    VOLT | SENTENCIA_CONFIG VOLT |
+    MAX_VOLT | SENTENCIA_CONFIG MAX_VOLT |
+    MODE | SENTENCIA_CONFIG MODE
+;
+
+SENTENCIA_STARTUP ::=
+   DECLARACION | SENTENCIA_STARTUP DECLARACION | 
+   VOLT | SENTENCIA_STARTUP VOLT |
+   WAIT | SENTENCIA_STARTUP WAIT |
+   RETURN| SENTENCIA_STARTUP RETURN |
+   res_exit | SENTENCIA_STARTUP res_exit |
+   IF | SENTENCIA_STARTUP IF |
+   SWITCH | SENTENCIA_STARTUP SWITCH |
+   WHILE | SENTENCIA_STARTUP WHILE |
+   DOWHILE | SENTENCIA_STARTUP DOWHILE |
+   EXPRESION | SENTENCIA_STARTUP EXPRESION |
+   IN | SENTENCIA_STARTUP IN |
+   OUT | SENTENCIA_STARTUP OUT |
+   SLEEP | SENTENCIA_STARTUP SLEEP |
+   FOR | SENTENCIA_STARTUP FOR |
+   OPERADORES_CONTRACCION | SENTENCIA_STARTUP OPERADORES_CONTRACCION 
+;
+
+DECLARACION ::= 
+    res_def TIPO_DATO:dato Identificador:id sig_punto_coma
+            {: //vamos a validar cuando aparecen estas expresiones
+                    System.out.println("tipo: "+ dato + " identificador: "+ id + " valor null ");
+                     var_identificador.add(id);
+                     var_tipo_dato.add(dato);
+                     var_valor.add(null);
+                     System.out.println(var_identificador.size());
+            :}
+     | res_def TIPO_DATO:dato Identificador:id asi_asignacion VALOR:val sig_punto_coma  
+            {: //vamos a validar cuando aparecen estas expresiones
+                    System.out.println("tipo: "+ dato + " identificador: "+ id + " valor "+val);
+                     var_identificador.add(id);
+                     var_tipo_dato.add(dato);
+                     var_valor.add(val);        
+                     System.out.println(var_identificador.size());
+            :}    
+            | error sig_punto_coma   
+            {: //vamos a validar cuando aparecen estas expresiones
+                    System.err.println("ERROR Sintactico, Falto un punto y coma");
+            :}
+
+;
+
+PIN ::= 
+    res_pin par_abre Numero coma Identificador par_cierra sig_punto_coma |
+    res_pin par_abre Numero coma Identificador par_cierra
+    {:System.out.println("Error punto y coma ASDKASHJDHJKADHJASBDSJKHBJKHASBDSKJ");:}  
+;
+
+
+
+DISPLAY ::=
+    res_display par_abre DISPLAY_PARAMS par_cierra sig_punto_coma
+;
+
+DISPLAY_PARAMS ::=
+    Numero | Numero coma DISPLAY_PARAMS
+;
+
+TYPE ::=
+    res_type par_abre Identificador coma TYPE_IO par_cierra sig_punto_coma |
+    res_type par_abre Identificador par_cierra sig_punto_coma
+;
+
+TYPE_IO ::=
+    res_input | res_output
+;
+
+SCALE ::=
+    res_scale par_abre Identificador coma Numero coma Numero par_cierra sig_punto_coma
+;
+
+VOLT ::=
+    res_volt par_abre Identificador coma Numero par_cierra sig_punto_coma |
+    res_volt par_abre Identificador coma Numero coma Numero par_cierra sig_punto_coma
+;
+
+MAX_VOLT ::=
+    res_max_volt par_abre Identificador par_cierra sig_punto_coma |
+    res_max_volt par_abre Numero par_cierra sig_punto_coma
+;
+
+WAIT ::=
+    res_wait par_abre CONDICION par_cierra sig_punto_coma 
+;
+
+CONDICION ::=
+    VALOR OPERADOR_CONDICIONAL VALOR | par_abre CONDICION par_cierra |
+    log_not Identificador | log_not Identificador OPERADOR_CONDICIONAL CONDICION
+    | VALOR | res_false | res_true
+;
+
+OPERADOR_CONDICIONAL ::=
+     log_xor | log_and | log_or | rel_diferente | rel_igual | rel_mayor_igual | rel_mayor | rel_menor_igual | rel_menor
+;
+
+MODE ::=
+    res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma |
+    res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma |
+    res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma 
+;
+
+TIPO_DATO ::= 
+    tip_tinyint:tip{:RESULT = tip;:} | 
+    tip_int:tip {:RESULT = tip;:}| 
+    tip_boolean:tip {:RESULT = tip;:}| 
+    tip_float:tip {:RESULT = tip;:}| 
+    tip_double:tip {:RESULT = tip;:}| 
+    tip_char:tip{:RESULT = tip;:}
+;
+
+VALOR ::=
+    Numero:val {:RESULT = val;:}|
+    Identificador:val {:RESULT = val;:}|
+    cadena_caracter:val {:RESULT = val;:}
+    
+;
+
+VALOR_NUMERICO ::=
+    Numero | Identificador
+;
+
+PARAMETRO ::=
+    res_def TIPO_DATO Identificador | PARAMETRO coma res_def TIPO_DATO Identificador
+;
+
+ IF ::=
+    res_if par_abre CONDICION par_cierra llave_abre
+        SENTENCIA_STARTUP
+    llave_cierra
+    |
+    res_if par_abre CONDICION par_cierra llave_abre
+        SENTENCIA_STARTUP
+    llave_cierra 
+    res_else 
+    llave_abre
+        SENTENCIA_STARTUP
+    llave_cierra
+ ;
+
+ SWITCH ::=
+    res_switch par_abre Identificador par_cierra llave_abre
+        SWITCH_ENTRADAS
+    llave_cierra|
+    res_switch par_abre Identificador par_cierra llave_abre
+        SWITCH_ENTRADAS
+        res_default
+    llave_cierra
+;
+SWITCH_ENTRADAS ::=
+    rel_menor CASO rel_mayor sim_dos_puntos SENTENCIA_STARTUP | 
+    SWITCH_ENTRADAS rel_menor CASO rel_mayor sim_dos_puntos SENTENCIA_STARTUP
+;
+CASO ::=
+    Numero | cadena_caracter | res_true | res_false 
+;
+
+WHILE ::=
+    res_while par_abre CONDICION par_cierra llave_abre
+        SENTENCIA_STARTUP
+    llave_cierra
+;
+
+DOWHILE ::=
+    res_do llave_abre
+        SENTENCIA_STARTUP
+    llave_cierra res_while par_abre CONDICION par_cierra sig_punto_coma
+;
+
+EXPRESION ::=
+    Identificador asi_asignacion OPERACION sig_punto_coma
+    |
+    Identificador asi_asignacion IN
+ 
+;
+
+OPERACION ::=
+    VALOR OPERADOR VALOR | par_abre OPERACION par_cierra |
+    OPERACION OPERACION_PROC | VALOR
+;
+OPERACION_PROC ::=
+    VALOR OPERADOR
+;
+
+OPERADOR ::=
+    OPERADOR_CONDICIONAL| ari_division | ari_resta | ari_suma | ari_multiplicacion 
+;
+
+IN ::=
+    res_in par_abre VALOR_NUMERICO par_cierra sig_punto_coma
+;
+
+OUT ::=
+    res_out par_abre Identificador coma VALOR_NUMERICO par_cierra sig_punto_coma |
+    res_out par_abre Identificador coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma |
+    res_out par_abre res_display coma cadena_caracter par_cierra sig_punto_coma 
+;
+
+SLEEP ::=
+    res_sleep par_abre VALOR_NUMERICO par_cierra sig_punto_coma
+;
+FOR ::=
+    res_for par_abre tip_int Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma INCREMENTO_FOR par_cierra llave_abre SENTENCIA_STARTUP llave_cierra |
+    res_for par_abre Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma INCREMENTO_FOR par_cierra llave_abre SENTENCIA_STARTUP llave_cierra
+;
+INCREMENTO_FOR ::=
+    Identificador ari_suma asi_asignacion VALOR_NUMERICO |
+    Identificador ari_resta asi_asignacion VALOR_NUMERICO |
+
+;
+OPERADORES_CONTRACCION ::=
+    Identificador ari_suma asi_asignacion VALOR_NUMERICO sig_punto_coma |
+    Identificador ari_resta asi_asignacion VALOR_NUMERICO sig_punto_coma |
+    Identificador ari_resta ari_resta sig_punto_coma |
+    Identificador ari_suma ari_suma sig_punto_coma |
+    Identificador ari_division asi_asignacion VALOR_NUMERICO sig_punto_coma |
+    Identificador ari_multiplicacion asi_asignacion VALOR_NUMERICO sig_punto_coma 
+;
