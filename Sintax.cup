@@ -111,7 +111,7 @@ start with INICIO;
 
 INICIO ::= 
     res_name Identificador sig_punto_coma 
-    ESTRUCTURA_BASICA  
+    ESTRUCTURA_BASICA  |
     res_name Identificador  
     ESTRUCTURA_BASICA  
         {:
@@ -135,13 +135,8 @@ INICIO ::=
         {:
             err_msj.add("Error Sintáctico en la línea "+(s.right+1)+" | Se esperaba un identificador despues de la palabra reservada name");
             err_linea.add(s.right+1);
-        :}| 
-    
-        {:
-            err_msj.add("Error Sintáctico en la línea "+(s.right+1)+" | Se esperaba la palabra reservada name antes del identificador");
-            err_linea.add(s.right+1);
-        :}    
-        | error sig_punto_coma
+        :} 
+        
 ;
 
 ESTRUCTURA_BASICA ::=
