@@ -192,7 +192,6 @@ STARTUP ::=
     res_start sig_punto_coma
         SENTENCIA_STARTUP
     res_end sig_punto_coma 
-    | error sig_punto_coma
 ;
 
 SENTENCIA_CONFIG ::=
