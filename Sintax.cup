@@ -570,7 +570,7 @@ DISPLAY_PARAMS ::=
     Numero coma Numero Numero{:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba una coma entre cada parámetro");
         //-err_linea.add(Ç);
-    :}|
+    :}
 ;
 
 TYPE ::=
@@ -614,7 +614,7 @@ TYPE ::=
     res_type par_abre Identificador coma TYPE_IO coma Numero par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaban sólo dos parámetros dentro del método type");
         //-err_linea.add(Ç);
-    :} |
+    :} 
 ;
 
 TYPE_IO ::=
@@ -757,7 +757,7 @@ MAX_VOLT ::=
     res_max_volt asi_asignacion par_abre VALOR_NUMERICO par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor numérico encerrado entre paréntesis, no se admite asignación");
         //-err_linea.add(Ç);
-    :} |
+    :} 
 ;
 
 WAIT ::=
