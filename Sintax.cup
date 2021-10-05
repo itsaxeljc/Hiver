@@ -105,7 +105,7 @@ Numero_incorrecto1,Numero_incorrecto2,Identificador_no_valido,Error_simbo_punto,
 non terminal INICIO, ESTRUCTURA_BASICA,DECLARACION, 
 FUNCIONES, FUNCION, CONFIG, STARTUP,SENTENCIA_STARTUP,SENTENCIA_CONFIG, TIPO_DATO, PARAMETRO , PIN, DISPLAY, DISPLAY_PARAMS,
 TYPE, TYPE_IO, SCALE,DOWHILE,EXPRESION, OPERACION,IF,CASO,WHILE,SWITCH,SWITCH_ENTRADAS,VOLT, MAX_VOLT, WAIT, CONDICION, MODE, 
-VALOR_NUMERICO ,OPERADORES_CONTRACCION,INCREMENTO_FOR,FOR,OUT,SLEEP,OPERACION_PROC, OPERADOR,VALOR, OPERADOR_CONDICIONAL,RETURN,IN;
+VALOR_NUMERICO ,OPERACION_CONTRACCION,INCREMENTO,FOR,OUT,SLEEP,OPERACION_PROC, OPERADOR,VALOR, OPERADOR_CONDICIONAL,RETURN,IN,OPERADOR_ARITMETICO,TIPO_DATO_FOR;
 
 start with INICIO;
 
@@ -115,27 +115,32 @@ INICIO ::=
     res_name Identificador  
     ESTRUCTURA_BASICA  
         {:
-            err_msj.add("Error Sintáctico en la línea "+(s.right+1)+" | Se esperaba un punto y coma");
-            err_linea.add(s.right+1);
+            err_msj.add("Error Sintáctico en la línea "+"Linea"+" | Se esperaba un punto y coma");
+            //-err_linea.add(Ç);
         :}|
     res_name sig_punto_coma  
     ESTRUCTURA_BASICA  
         {:
-            err_msj.add("Error Sintáctico en la línea "+(s.right+1)+" | Se esperaba un identificador antes del punto y coma");
-            err_linea.add(s.right+1);
+            err_msj.add("Error Sintáctico en la línea "+"Linea"+" | Se esperaba un identificador antes del punto y coma");
+            //-err_linea.add(Ç);
         :}|
     Identificador sig_punto_coma  
     ESTRUCTURA_BASICA  
         {:
-            err_msj.add("Error Sintáctico en la línea "+(s.right+1)+" | Se esperaba la palabra reservada name antes del identificador");
-            err_linea.add(s.right+1);
+            err_msj.add("Error Sintáctico en la línea "+"Linea"+" | Se esperaba la palabra reservada name antes del identificador");
+            //-err_linea.add(Ç);
         :}|
     res_name 
     ESTRUCTURA_BASICA  
         {:
-            err_msj.add("Error Sintáctico en la línea "+(s.right+1)+" | Se esperaba un identificador despues de la palabra reservada name");
-            err_linea.add(s.right+1);
-        :} 
+            err_msj.add("Error Sintáctico en la línea "+"Linea"+" | Se esperaba un identificador despues de la palabra reservada name");
+            //-err_linea.add(Ç);
+        :} |
+     ESTRUCTURA_BASICA
+        {:
+            err_msj.add("Error Sintáctico en la línea "+"Linea"+" | Se esperaba la instrucción name");
+            //-err_linea.add(Ç);
+        :}    
         
 ;
 
@@ -349,7 +354,7 @@ SENTENCIA_STARTUP ::=
    OUT | SENTENCIA_STARTUP OUT |
    SLEEP | SENTENCIA_STARTUP SLEEP |
    FOR | SENTENCIA_STARTUP FOR |
-   OPERADORES_CONTRACCION | SENTENCIA_STARTUP OPERADORES_CONTRACCION 
+   OPERACION_CONTRACCION | SENTENCIA_STARTUP OPERACION_CONTRACCION 
 ;
 
 DECLARACION ::= 
@@ -689,19 +694,77 @@ SLEEP ::=
     res_sleep par_abre VALOR_NUMERICO par_cierra sig_punto_coma
 ;
 FOR ::=
-    res_for par_abre tip_int Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma INCREMENTO_FOR par_cierra llave_abre SENTENCIA_STARTUP llave_cierra |
-    res_for par_abre Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma INCREMENTO_FOR par_cierra llave_abre SENTENCIA_STARTUP llave_cierra
+    res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma Identificador Incremento par_cierra llave_abre SENTENCIA_STARTUP llave_cierra |
+    res_for par_abre sig_punto_coma CONDICION sig_punto_coma Identificador Incremento par_cierra llave_abre SENTENCIA_STARTUP llave_cierra |
+    res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma OPERACION_CONTRACCION par_cierra llave_abre SENTENCIA_STARTUP llave_cierra |
+    res_for par_abre sig_punto_coma CONDICION sig_punto_coma OPERACION_CONTRACCION par_cierra llave_abre SENTENCIA_STARTUP llave_cierra
+    
 ;
-INCREMENTO_FOR ::=
-    Identificador ari_suma asi_asignacion VALOR_NUMERICO |
-    Identificador ari_resta asi_asignacion VALOR_NUMERICO |
+
+TIPO_DATO_FOR ::=
+    tip_int | tip_float | tip_double | tip_tinyint | 
+    tip_boolean 
+    {:
+        err_msj.add("Error Sintáctico en la línea "+"Linea"+" | Se esperaba un tipo de dato numérico");
+        //-err_linea.add(Ç);
+    :} |
+    tip_char 
+    {:
+        err_msj.add("Error Sintáctico en la línea "+"Linea"+" | Se esperaba un tipo de dato numérico");
+        //-err_linea.add(Ç);
+    :} |
+    tip_boolean 
+    {:
+        err_msj.add("Error Sintáctico en la línea "+"Linea"+" | Se esperaba un tipo de dato numérico");
+        //-err_linea.add(Ç);
+    :} |
+
 
 ;
-OPERADORES_CONTRACCION ::=
-    Identificador ari_suma asi_asignacion VALOR_NUMERICO sig_punto_coma |
-    Identificador ari_resta asi_asignacion VALOR_NUMERICO sig_punto_coma |
-    Identificador ari_resta ari_resta sig_punto_coma |
-    Identificador ari_suma ari_suma sig_punto_coma |
-    Identificador ari_division asi_asignacion VALOR_NUMERICO sig_punto_coma |
-    Identificador ari_multiplicacion asi_asignacion VALOR_NUMERICO sig_punto_coma 
+INCREMENTO ::=
+    ari_suma ari_suma |
+    ari_resta ari_resta |
+    error sig_punto_coma
+    {:
+        err_msj.add("Error Sintáctico en la línea "+"Linea"+" | Error en la declaración del operador de incremento");
+        //-err_linea.add(Ç);
+    :} 
+    
+
 ;
+
+OPERADOR_ARITMETICO ::=
+    ari_suma | ari_resta | ari_multiplicacion | ari_division
+;                                                                                          
+
+OPERACION_CONTRACCION ::=
+    Identificador OPERADOR_ARITMETICO asi_asignacion VALOR_NUMERICO sig_punto_coma |
+    Identificador INCREMENTO sig_punto_coma |
+
+    Identificador OPERADOR_ARITMETICO asi_asignacion VALOR_NUMERICO  
+    {:
+        err_msj.add("Error Sintáctico en la línea "+"Linea"+" | Se esperaba un punto y coma");
+        //-err_linea.add(Ç);
+    :} |
+    Identificador OPERADOR_ARITMETICO asi_asignacion sig_punto_coma
+    {:
+        err_msj.add("Error Sintáctico en la línea "+"Linea"+" | Se esperaba un valor numérico");
+        //-err_linea.add(Ç);
+    :} |
+    Identificador OPERADOR_ARITMETICO VALOR_NUMERICO sig_punto_coma
+    {:
+        err_msj.add("Error Sintáctico en la línea "+"Linea"+" | Se esperaba un signo de asignación");
+        //-err_linea.add(Ç);
+    :} |
+    OPERADOR_ARITMETICO VALOR_NUMERICO sig_punto_coma
+    {:
+        err_msj.add("Error Sintáctico en la línea "+"Linea"+" | Se esperaba un identificador antes del operador aritmetico");
+        //-err_linea.add(Ç);
+    :}    
+    | error sig_punto_coma 
+    {:
+        err_msj.add("Error Sintáctico en la línea "+"Linea"+" | Se esperaba una acción u operación");
+        //-err_linea.add(Ç);
+    :}
+;
+
