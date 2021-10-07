@@ -760,10 +760,6 @@ CONDICION ::=
     cadena_caracter OPERADOR_CONDICIONAL VALOR_NUMERICO {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba una condición válida, no se admiten cadenas");
         //-err_li nea.add(Ç);
-    :} |
-    cadena_caracter CONDICION {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba una condición válida, no se admiten cadenas");
-        //-err_li nea.add(Ç);
     :}
 ;
 
