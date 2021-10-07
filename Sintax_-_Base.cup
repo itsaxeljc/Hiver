@@ -871,7 +871,76 @@ OUT ::=
 ;
 
 SLEEP ::=
+    res_sleep par_abre VALOR_NUMERICO par_cierra sig_punto_coma |
+    res_sleep par_abre EXPRESION par_cierra sig_punto_coma |
+    res_sleep par_abre VALOR_NUMERICO par_cierra 
+    {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba un punto y coma");
+        //-err_linea.add(Ç);
+    :}|
+    res_sleep par_abre VALOR_NUMERICO sig_punto_coma
+    {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba un parentesis de cierre antes del punto y coma");
+        //-err_linea.add(Ç);
+    :}|
+    res_sleep par_abre par_cierra sig_punto_coma
+    {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor numérico o identificador como parámetro");
+        //-err_linea.add(Ç);
+    :}|
+    res_sleep VALOR_NUMERICO par_cierra sig_punto_coma
+    {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba un parentesis de apertura despues de la palabra reservada sleep");
+        //-err_linea.add(Ç);
+    :}|
     res_sleep par_abre VALOR_NUMERICO par_cierra sig_punto_coma
+    {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba un parentesis de apertura despues de la palabra reservada sleep");
+        //-err_linea.add(Ç);
+    :}|
+    res_sleep par_cierra sig_punto_coma
+    {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba un parentesis de apertura despues de la palabra reservada sleep");
+        //-err_linea.add(Ç);
+    :}|
+    res_sleep sig_punto_coma
+    {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba un parentesis de apertura despues de la palabra reservada sleep");
+        //-err_linea.add(Ç);
+    :}|
+    res_sleep par_abre par_cierra
+    {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba un parámetro");
+        //-err_linea.add(Ç);
+    :}|
+    |
+    res_sleep par_abre par_cierra
+    {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba un parámetro");
+        //-err_linea.add(Ç);
+    :}|
+    res_sleep par_abre VALOR_NUMERICO 
+    {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba un parentesis de cierre después del parámetro");
+        //-err_linea.add(Ç);
+    :}|
+    res_sleep par_cierra VALOR_NUMERICO par_abre sig_punto_coma
+    {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba un parentesis de apertura después de la palabra reservada sleep");
+        //-err_linea.add(Ç);
+    :}|
+    res_sleep par_cierra VALOR_NUMERICO par_cierra sig_punto_coma
+    {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba un parentesis de apertura después de la palabra reservada sleep");
+        //-err_linea.add(Ç);
+    :}|
+    res_sleep par_abre VALOR_NUMERICO par_abre sig_punto_coma
+    {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba un parentesis de cierre antes del punto y coma");
+        //-err_linea.add(Ç);
+    :}
+    
+    
 ;
 FOR ::=
     res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
