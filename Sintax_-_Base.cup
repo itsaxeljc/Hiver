@@ -1127,6 +1127,11 @@ OUT ::=
     {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un Identificador después del paréntesis de apertura");
         //-err_linea.add(Ç);
+    :}|
+    res_out Identificador coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma
+    {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de apertura después del out"); 
+        //-err_linea.add(Ç);
     :}
     
 
