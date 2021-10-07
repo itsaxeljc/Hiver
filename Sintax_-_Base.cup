@@ -714,14 +714,59 @@ WAIT ::=
 ;
 
 CONDICION ::=
-    VALOR OPERADOR_CONDICIONAL VALOR | par_abre CONDICION par_cierra |
+    VALOR_NUMERICO OPERADOR_CONDICIONAL VALOR_NUMERICO | par_abre CONDICION par_cierra |
     log_not Identificador | log_not Identificador OPERADOR_CONDICIONAL CONDICION
-    | VALOR | res_false | res_true |
-    VALOR OPERADOR_CONDICIONAL {:
+    | VALOR_NUMERICO | res_false | res_true |
+    VALOR_NUMERICO OPERADOR_CONDICIONAL {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor después del operador condicional");
         //-err_linea.add(Ç);
+    :} | 
+    res_false CONDICION {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba a cada condición separada por paréntesis y con un operardor condicional entre ambas");
+        //-err_linea.add(Ç);
+    :} |
+    res_true CONDICION {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba a cada condición separada por paréntesis y con un operardor condicional entre ambas");
+        //-err_linea.add(Ç);
+    :} |
+    VALOR_NUMERICO VALOR_NUMERICO {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba una condición, imposible comparar valores");
+        //-err_linea.add(Ç);
+    :} |
+    log_not OPERADOR_CONDICIONAL VALOR_NUMERICO {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba un identificador después de símbolo de negación lógica");
+        //-err_linea.add(Ç);
+    :} | 
+    OPERADOR_CONDICIONAL {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor antes y después del operador condicional");
+        //-err_linea.add(Ç);
+    :} |
+    OPERADOR_CONDICIONAL VALOR_NUMERICO {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor antes del operador condicional");
+        //-err_linea.add(Ç);
+    :} |
+    VALOR_NUMERICO OPERADOR_CONDICIONAL OPERADOR_CONDICIONAL VALOR_NUMERICO {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba un solo operador condicional");
+        //-err_li nea.add(Ç);
+    :} |
+    cadena_caracter {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba una condición válida, no se admiten cadenas");
+        //-err_li nea.add(Ç);
+    :} |
+    cadena_caracter OPERADOR_CONDICIONAL cadena_caracter {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba una condición válida, no se admiten cadenas");
+        //-err_li nea.add(Ç);
+    :} | 
+    cadena_caracter OPERADOR_CONDICIONAL VALOR_NUMERICO {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba una condición válida, no se admiten cadenas");
+        //-err_li nea.add(Ç);
+    :} |
+    cadena_caracter CONDICION {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba una condición válida, no se admiten cadenas");
+        //-err_li nea.add(Ç);
     :}
 ;
+
 
 OPERADOR_CONDICIONAL ::=
      log_xor | log_and | log_or | rel_diferente | rel_igual | rel_mayor_igual | rel_mayor | rel_menor_igual | rel_menor
