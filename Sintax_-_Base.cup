@@ -914,7 +914,12 @@ VALOR_NUMERICO ::=
 ;
 
 PARAMETRO ::=
-    res_def TIPO_DATO Identificador | PARAMETRO coma res_def TIPO_DATO Identificador
+    DECLARACION | 
+    PARAMETRO coma DECLARACION |
+    PARAMETRO DECLARACION {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaban parámetros separados por coma");
+        //-err_linea.add(Ç);
+    :} 
 ;
 
  IF ::=
@@ -928,7 +933,73 @@ PARAMETRO ::=
     res_else 
     llave_abre
         SENTENCIA_STARTUP
-    llave_cierra
+    llave_cierra |
+    res_if CONDICION par_cierra llave_abre
+        SENTENCIA_STARTUP
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura antes de la condición");
+        //-err_linea.add(Ç);
+    :} |
+    res_if par_abre CONDICION llave_abre
+        SENTENCIA_STARTUP
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de la condición");
+        //-err_linea.add(Ç);
+    :} |
+    res_if par_abre CONDICION par_cierra 
+        SENTENCIA_STARTUP
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba llave de apertura antes del bloque de código de if");
+        //-err_linea.add(Ç);
+    :} |
+    res_if CONDICION par_cierra llave_abre
+        SENTENCIA_STARTUP
+    llave_cierra 
+    res_else 
+    llave_abre
+        SENTENCIA_STARTUP
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura antes de la condición");
+        //-err_linea.add(Ç);
+    :} |
+    res_if par_abre CONDICION llave_abre
+        SENTENCIA_STARTUP
+    llave_cierra 
+    res_else 
+    llave_abre
+        SENTENCIA_STARTUP
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de la condición");
+        //-err_linea.add(Ç);
+    :} |
+    res_if par_abre CONDICION par_cierra
+        SENTENCIA_STARTUP
+    llave_cierra 
+    res_else 
+    llave_abre
+        SENTENCIA_STARTUP
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba llave de apertura antes del bloque de código de if");
+        //-err_linea.add(Ç);
+    :} |
+    res_if par_abre CONDICION par_cierra llave_abre
+        SENTENCIA_STARTUP
+    llave_cierra 
+    res_else 
+        SENTENCIA_STARTUP
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba llave de apertura antes del bloque de código de else");
+        //-err_linea.add(Ç);
+    :} |
+    res_if par_abre CONDICION par_cierra llave_abre
+        SENTENCIA_STARTUP
+    llave_cierra 
+    llave_abre
+        SENTENCIA_STARTUP
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba else del bloque de código de else");
+        //-err_linea.add(Ç);
+    :}
  ;
 
  SWITCH ::=
