@@ -756,7 +756,7 @@ WAIT ::=
     res_wait par_abre VALOR_NUMERICO par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba condición como parámetro único del método sleep");
         //-err_linea.add(Ç);
-    :} |
+    :} NO--|
     res_wait CONDICION par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura después de la palabra reservada wait");
         //-err_linea.add(Ç);
@@ -768,7 +768,7 @@ WAIT ::=
     res_wait CONDICION sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba condición del método wait entre paréntesis");
         //-err_linea.add(Ç);
-    :} |
+    :} NO-- |
     res_wait VALOR_NUMERICO sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba condición como parámetro único del método wait entre paréntesis");
         //-err_linea.add(Ç);
@@ -776,11 +776,11 @@ WAIT ::=
     res_wait par_abre cadena_caracter par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba condición como parámetro único del método wait entre paréntesis");
         //-err_linea.add(Ç);
-    :} |
+    :} NO--|
     res_wait par_abre Identificador par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba condición como parámetro único del método wait entre paréntesis");
         //-err_linea.add(Ç);
-    :}
+    :} NO--
 ;
 
 CONDICION ::=
