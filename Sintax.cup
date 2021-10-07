@@ -136,7 +136,6 @@ INICIO ::=
             err_msj.add("Error Sintáctico en la línea "+(s.right+1)+" | Se esperaba un identificador despues de la palabra reservada name");
             //-err_linea.add(Ç);
         :} 
-        
 ;
 
 ESTRUCTURA_BASICA ::=
@@ -254,8 +253,17 @@ FUNCION ::=
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba llave de apertura después de los parámetros de la función");
         //-err_linea.add(Ç);
+    :} |
+    res_function TIPO_DATO Identificador par_abre PARAMETRO par_cierra 
+            SENTENCIA_FUNCION{:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba que el bloque de código de la función estuviera encerrado entre llaves");
+        //-err_linea.add(Ç);
+    :} |
+    res_function TIPO_DATO Identificador par_abre PARAMETRO par_cierra llave_abre
+            SENTENCIA_FUNCION{:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba que el bloque de código de la función terminara con llave de cierre");
+        //-err_linea.add(Ç);
     :}
-    
 ;
 
 RETURN ::=
