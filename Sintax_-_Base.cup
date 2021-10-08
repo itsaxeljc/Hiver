@@ -1009,8 +1009,86 @@ PARAMETRO ::=
     res_switch par_abre Identificador par_cierra llave_abre
         SWITCH_ENTRADAS
         res_default
-    llave_cierra
+    llave_cierra |
+    res_switch Identificador par_cierra llave_abre
+        SWITCH_ENTRADAS
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura después de la palabra reservada switch");
+        //-err_linea.add(Ç);
+    :} |
+    res_switch par_abre Identificador llave_abre
+        SWITCH_ENTRADAS
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de la condición");
+        //-err_linea.add(Ç);
+    :} |
+    res_switch Identificador llave_abre
+        SWITCH_ENTRADAS
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaban paréntesis encerrando identificador");
+        //-err_linea.add(Ç);
+    :} | 
+    res_switch par_abre par_cierra llave_abre
+        SWITCH_ENTRADAS
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador a evaluar encerrado entre paréntesis");
+        //-err_linea.add(Ç);
+    :} | 
+    res_switch par_abre Numero par_cierra llave_abre
+        SWITCH_ENTRADAS
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador a evaluar encerrado entre paréntesis");
+        //-err_linea.add(Ç);
+    :} |
+    res_switch par_abre cadena_caracter par_cierra llave_abre
+        SWITCH_ENTRADAS
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador a evaluar encerrado entre paréntesis");
+        //-err_linea.add(Ç);
+    :} |
+    res_switch par_abre res_true par_cierra llave_abre
+        SWITCH_ENTRADAS
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador a evaluar encerrado entre paréntesis");
+        //-err_linea.add(Ç);
+    :} |
+    res_switch par_abre res_false par_cierra llave_abre
+        SWITCH_ENTRADAS
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador a evaluar encerrado entre paréntesis");
+        //-err_linea.add(Ç);
+    :} |
+    res_switch par_abre EXPRESION par_cierra llave_abre
+        SWITCH_ENTRADAS
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador a evaluar encerrado entre paréntesis");
+        //-err_linea.add(Ç);
+    :} |
+    res_switch par_abre PARAMETRO par_cierra llave_abre
+        SWITCH_ENTRADAS
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador a evaluar encerrado entre paréntesis");
+        //-err_linea.add(Ç);
+    :} | 
+    res_switch par_abre Identificador par_cierra
+        SWITCH_ENTRADAS
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba llave de apertura antes del bloque de entradas de la estructura switch");
+        //-err_linea.add(Ç);
+    :} |
+    res_switch par_abre Identificador par_cierra llave_abre
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaban entradas dentro de la estructura switch");
+        //-err_linea.add(Ç);
+    :} |
+    res_switch par_abre Identificador par_cierra llave_abre
+        SENTENCIA_FUNCION
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaban entradas validas dentro de la estructura switch");
+        //-err_linea.add(Ç);
+    :} 
 ;
+
 SWITCH_ENTRADAS ::=
     rel_menor CASO rel_mayor sim_dos_puntos SENTENCIA_STARTUP | 
     SWITCH_ENTRADAS rel_menor CASO rel_mayor sim_dos_puntos SENTENCIA_STARTUP
