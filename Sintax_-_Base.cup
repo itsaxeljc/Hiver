@@ -2019,9 +2019,8 @@ SLEEP ::=
         //-err_linea.add(Ç);
         errores_gramatica(335);
     :}
-    
-    
 ;
+
 FOR ::=
     res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
     llave_abre 
