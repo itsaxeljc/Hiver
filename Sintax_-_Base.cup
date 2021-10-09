@@ -52,6 +52,131 @@ action code
         case 71:
             err_gramatica.add(" res_pin par_abre Numero coma Identificador par_cierra <p color=\"#FF0042\">sig_punto_coma</p>");
             break;
+        //GRAMATICAS FUNCTION
+        case 41:
+            err_gramatica.add("res_name Identificador <span color=\"#FF0042\">sig_punto_coma</span><br>ESTRUCTURA_BASICA");
+            break;
+        case 42:
+            err_gramatica.add("res_name <span color=\"#FF0042\">Identificador</span> sig_punto_coma<br>ESTRUCTURA_BASICA");
+            break;
+        case 43:
+            err_gramatica.add("<span color=\"#FF0042\">res_name</span> Identificador sig_punto_coma<br>ESTRUCTURA_BASICA");
+            break;
+        case 44:
+            err_gramatica.add("res_name <span color=\"#FF0042\">Identificador sig_punto_coma</span><br>ESTRUCTURA_BASICA");
+            break;
+        case 45:
+            err_gramatica.add("res_function <span color=\"#FF0042\">TIPO_DATO</span> Identificador par_abre PARAMETRO par_cierra llave_abre <br>SENTENCIA_FUNCION <br>llave_cierra");
+            break;
+        case 46:
+            err_gramatica.add("res_function TIPO_DATO <span color=\"#FF0042\">Identificador</span> par_abre PARAMETRO par_cierra llave_abre <br>SENTENCIA_FUNCION <br>llave_cierra");
+            break;
+        case 47:
+            err_gramatica.add("res_function <span color=\"#FF0042\">TIPO_DATO Identificador</span> par_abre PARAMETRO par_cierra llave_abre <br>SENTENCIA_FUNCION <br>llave_cierra");
+            break;
+        case 48:
+            err_gramatica.add("res_function TIPO_DATO Identificador <span color=\"#FF0042\">par_abre</span> PARAMETRO par_cierra llave_abre <br>SENTENCIA_FUNCION <br>llave_cierra");
+            break;
+        case 49:
+            err_gramatica.add("res_function TIPO_DATO Identificador par_abre PARAMETRO <span color=\"#FF0042\">par_cierra</span> llave_abre <br>SENTENCIA_FUNCION <br>llave_cierra");
+            break;
+        case 401:
+            err_gramatica.add("res_function TIPO_DATO Identificador <span color=\"#FF0042\">par_abre</span> PARAMETRO <span color=\"#FF0042\">par_cierra</span> llave_abre <br>SENTENCIA_FUNCION <br>llave_cierra");
+            break;
+        case 402:
+            err_gramatica.add("<span color=\"#FF0042\">res_function</span> TIPO_DATO Identificador par_abre PARAMETRO par_cierra llave_abre <br>SENTENCIA_FUNCION <br>llave_cierra");
+            break;
+        case 403:
+            err_gramatica.add("<span color=\"#FF0042\">res_function TIPO_DATO</span> Identificador par_abre PARAMETRO par_cierra llave_abre <br>SENTENCIA_FUNCION <br>llave_cierra");
+            break;
+        case 404:
+            err_gramatica.add("res_function TIPO_DATO Identificador par_abre PARAMETRO par_cierra <span color=\"#FF0042\">llave_abre</span> <br>SENTENCIA_FUNCION <br>llave_cierra");
+            break;
+        //GRAMATICAS STARTUP
+        case 405:
+            err_gramatica.add("res_start <span color=\"#FF0042\">sig_punto_coma</span><br>SENTENCIA_STARTUP<br>res_end <span color=\"#FF0042\">sig_punto_coma</span>");
+            break;
+        case 406:
+            err_gramatica.add("res_start sig_punto_coma<br>SENTENCIA_STARTUP<br>res_end <span color=\"#FF0042\">sig_punto_coma</span>");
+            break;
+        case 407:
+            err_gramatica.add("<span color=\"#FF0042\">res_start</span> sig_punto_coma<br>SENTENCIA_STARTUP<br>res_end sig_punto_coma");
+            break;
+        //GRAMATICAS DISPLAY
+        case 408:
+            err_gramatica.add("res_display par_abre DISPLAY_PARAMS par_cierra <span color=\"#FF0042\">sig_punto_coma</span>");
+            break;
+        case 409:
+            err_gramatica.add("res_display par_abre <span color=\"#FF0042\">DISPLAY_PARAMS</span> par_cierra sig_punto_coma");
+            break;
+        case 410:
+            err_gramatica.add("res_display <span color=\"#FF0042\">par_abre</span> DISPLAY_PARAMS par_cierra sig_punto_coma");
+            break;
+        case 411:
+            err_gramatica.add("res_display par_abre DISPLAY_PARAMS <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
+            break;
+        //GRAMATICAS TYPE_IO
+        case 412:
+            err_gramatica.add("res_type par_abre Identificador coma <span color=\"#FF0042\">TYPE_IO</span> par_cierra sig_punto_coma");
+            break;
+        //GRAMATICAS MAX_VOLT
+        case 413:
+            err_gramatica.add("res_max_volt par_abre Identificador par_cierra <span color=\"#FF0042\">sig_punto_coma</span>");
+            break;
+        case 414:
+            err_gramatica.add("res_max_volt par_abre Numero par_cierra <span color=\"#FF0042\">sig_punto_coma</span>");
+            break;
+        case 415:
+            err_gramatica.add("res_max_volt <span color=\"#FF0042\">par_abre</span> Identificador par_cierra sig_punto_coma");
+            break;
+        case 416:
+            err_gramatica.add("res_max_volt par_abre Identificador <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
+            break;
+        case 417:
+            err_gramatica.add("res_max_volt <span color=\"#FF0042\">par_abre</span> Numero par_cierra sig_punto_coma");
+            break;
+        case 418:
+            err_gramatica.add("res_max_volt par_abre Numero <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
+            break;
+        case 419:
+            err_gramatica.add("res_max_volt par_abre <span color=\"#FF0042\">Numero</span> par_cierra sig_punto_coma");
+            break;
+        case 420:
+            err_gramatica.add("res_max_volt <span color=\"#FF0042\">par_abre Numero par_cierra sig_punto_coma</span>");
+            break;
+        //GRAMATICAS OPERADOR CONDICIONAL
+        case 421:
+            err_gramatica.add("CONDICION ::=<br>VALOR_NUMERICO <span color=\"#FF0042\">OPERADOR_CONDICIONAL</span> VALOR_NUMERICO | <br> log_not Identificador <span color=\"#FF0042\">OPERADOR_CONDICIONAL</span> CONDICION");
+            break;
+        //GRAMATICAS IF
+        case 422:
+            err_gramatica.add(" IF ::=<br>res_if <span color=\"#FF0042\">par_abre</span> CONDICION par_cierra llave_abre<br>SENTENCIA_STARTUP<br>llave_cierra");
+            break;
+        case 423:
+            err_gramatica.add(" IF ::=<br>res_if par_abre CONDICION <span color=\"#FF0042\">par_cierra</span> llave_abre<br>SENTENCIA_STARTUP<br>llave_cierra");
+            break;
+        case 424:
+            err_gramatica.add(" IF ::=<br>res_if par_abre CONDICION par_cierra <span color=\"#FF0042\">llave_abre</span><br>SENTENCIA_STARTUP<br>llave_cierra");
+            break;
+        case 425:
+            err_gramatica.add(" IF ::=<br>res_if <span color=\"#FF0042\">par_abre</span> CONDICION par_cierra llave_abre<br>SENTENCIA_STARTUP<br>llave_cierra res_else llave_abre<br>SENTENCIA_STARTUP<br>llave_cierra");
+            break;
+        case 426:
+            err_gramatica.add(" IF ::=<br>res_if par_abre CONDICION <span color=\"#FF0042\">par_cierra</span> llave_abre<br>SENTENCIA_STARTUP<br>llave_cierra res_else llave_abre<br>SENTENCIA_STARTUP<br>llave_cierra");
+            break;
+        case 427:
+            err_gramatica.add(" IF ::=<br>res_if par_abre CONDICION par_cierra <span color=\"#FF0042\">llave_abre</span><br>SENTENCIA_STARTUP<br>llave_cierra res_else llave_abre<br>SENTENCIA_STARTUP<br>llave_cierra");
+            break;
+        case 428:
+            err_gramatica.add(" IF ::=<br>res_if par_abre CONDICION par_cierra llave_abre<br>SENTENCIA_STARTUP<br>llave_cierra res_else <span color=\"#FF0042\">llave_abre</span><br>SENTENCIA_STARTUP<br>llave_cierra");
+            break;
+        case 429:
+            err_gramatica.add(" IF ::=<br>res_if par_abre CONDICION par_cierra llave_abre<br>SENTENCIA_STARTUP<br>llave_cierra <span color=\"#FF0042\">res_else</span> llave_abre<br>SENTENCIA_STARTUP<br>llave_cierra");
+            break;
+        //GRAMATICAS CASO
+        case 430:
+            err_gramatica.add("SWITCH_ENTRADAS ::=<br>rel_menor <span color=\"#FF0042\">CASO</span>rel_mayor sim_dos_puntos SENTENCIA_STARTUP res_exit");
+            break;
         }
            
     }
@@ -137,25 +262,28 @@ INICIO ::=
         {:
             err_msj.add("Error Sintáctico en la línea # | Se esperaba un punto y coma");
             //-err_linea.add(Ç);
-            errores_gramatica(2);
+            errores_gramatica(41);
         :}|
     res_name sig_punto_coma  
     ESTRUCTURA_BASICA  
         {:
             err_msj.add("Error Sintáctico en la línea # | Se esperaba un identificador antes del punto y coma");
             //-err_linea.add(Ç);
+            errores_gramatica(42);
         :}|
     Identificador sig_punto_coma  
     ESTRUCTURA_BASICA  
         {:
             err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada name antes del identificador");
             //-err_linea.add(Ç);
+            errores_gramatica(43);
         :}|
     res_name 
     ESTRUCTURA_BASICA  
         {:
             err_msj.add("Error Sintáctico en la línea # | Se esperaba un identificador despues de la palabra reservada name");
             //-err_linea.add(Ç);
+            errores_gramatica(44);
         :} 
 ;
 
@@ -220,60 +348,72 @@ FUNCION ::=
     llave_cierra |
     res_function res_void Identificador par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
+    llave_cierra | 
+    res_function res_void Identificador par_abre par_cierra llave_abre
+            SENTENCIA_FUNCION
     llave_cierra |
     res_function Identificador par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba la especificación del tipo de dato de retorno después de function");
         //-err_linea.add(Ç);
+        errores_gramatica(45);
     :} |
     res_function TIPO_DATO par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION 
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un identificador para la función después del tipo de dato a retorno");
         //-err_linea.add(Ç);
+        errores_gramatica(46);
     :} |
     res_function par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un tipo de dato retorno y identificador para la función");
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba un tipo de dato retorno e identificador para la función");
         //-err_linea.add(Ç);
+        errores_gramatica(47);
     :} | 
     res_function TIPO_DATO Identificador PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura después del identificador de la función");
         //-err_linea.add(Ç);
+        errores_gramatica(48);
     :} |
     res_function TIPO_DATO Identificador par_abre PARAMETRO llave_abre
             SENTENCIA_FUNCION
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de los parámetros de la función");
         //-err_linea.add(Ç);
+        errores_gramatica(49);
     :} |
     res_function TIPO_DATO Identificador PARAMETRO llave_abre
             SENTENCIA_FUNCION
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaban paretesis de apertura y cierre en la especificación de parámetros de la función");
         //-err_linea.add(Ç);
+        errores_gramatica(401);
     :} |
     TIPO_DATO Identificador par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada function antes del tipo de dato de retorno");
         //-err_linea.add(Ç);
+        errores_gramatica(402);
     :} |
     Identificador par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada function y el tipo de dato de retorno antes del identificador de la función");
         //-err_linea.add(Ç);
+        errores_gramatica(403);
     :} |
     res_function TIPO_DATO Identificador par_abre PARAMETRO par_cierra 
             SENTENCIA_FUNCION
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba llave de apertura después de los parámetros de la función");
         //-err_linea.add(Ç);
+        errores_gramatica(404);
     :}
 ;
 
@@ -312,18 +452,21 @@ STARTUP ::=
     res_end {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba punto y coma después de las palabras reservadas start y end");
         //-err_linea.add(Ç);
+        errores_gramatica(405);
     :} |
     res_start sig_punto_coma
         SENTENCIA_STARTUP
     res_end {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba punto y coma después de la palabra reservada end");
         //-err_linea.add(Ç);
+        errores_gramatica(406);
     :} |
     res_start
         SENTENCIA_STARTUP
     res_end sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba punto y coma después de la palabra reservada start");
         //-err_linea.add(Ç);
+        errores_gramatica(407);
     :} 
 ;
 
@@ -485,18 +628,22 @@ DISPLAY ::=
     res_display par_abre DISPLAY_PARAMS par_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final del método display");
         //-err_linea.add(Ç);
+        errores_gramatica(408);
     :}  | 
     res_display par_abre par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba número(s) de pin para display como parámetros");
         //-err_linea.add(Ç);
+        errores_gramatica(409);
     :} |
     res_display DISPLAY_PARAMS par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura después de la palabra reservada display");
         //-err_linea.add(Ç);
+        errores_gramatica(410);
     :} |
     res_display par_abre DISPLAY_PARAMS sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de los parámetros del método display");
         //-err_linea.add(Ç);
+        errores_gramatica(411);
     :}
 ;
 
@@ -579,10 +726,12 @@ TYPE_IO ::=
     res_input res_output {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un solo parámetro input/output");
         //-err_linea.add(Ç);
+        errores_gramatica(412);
     :} |
     res_output res_input {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un solo parámetro input/output");
         //-err_linea.add(Ç);
+        errores_gramatica(412);
     :} 
 ;
 
@@ -681,38 +830,47 @@ MAX_VOLT ::=
     res_max_volt par_abre Identificador par_cierra  {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final del método max_volt");
         //-err_linea.add(Ç);
+        errores_gramatica(413);
     :} |
     res_max_volt par_abre Numero par_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final del método max_volt");
         //-err_linea.add(Ç);
+        errores_gramatica(414);
     :} |
     res_max_volt Identificador par_cierra sig_punto_coma  {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura después de la palabra reservada max_volt");
         //-err_linea.add(Ç);
+        errores_gramatica(415);
     :} | 
     res_max_volt par_abre Identificador sig_punto_coma  {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después del parámetro del método max_volt");
         //-err_linea.add(Ç);
+        errores_gramatica(416);
     :} | 
     res_max_volt Numero par_cierra sig_punto_coma  {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura después de la palabra reservada max_volt");
         //-err_linea.add(Ç);
+        errores_gramatica(417);
     :} | 
     res_max_volt par_abre Numero sig_punto_coma  {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después del parámetro del método max_volt");
         //-err_linea.add(Ç);
+        errores_gramatica(418);
     :} |
     res_max_volt par_abre cadena_caracter par_cierra sig_punto_coma  {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor numérico como parámetro único del método max_volt");
         //-err_linea.add(Ç);
+        errores_gramatica(419);
     :} |
     res_max_volt asi_asignacion VALOR_NUMERICO sig_punto_coma{:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor numérico encerrado entre paréntesis como parámetro único");
         //-err_linea.add(Ç);
+        errores_gramatica(420);
     :} |
     res_max_volt asi_asignacion par_abre VALOR_NUMERICO par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor numérico encerrado entre paréntesis, no se admite asignación");
-        //-err_linea.add(Ç); 
+        //-err_linea.add(Ç);
+        errores_gramatica(420);
     :} 
 ;
 
@@ -788,9 +946,11 @@ OPERADOR_CONDICIONAL ::=
      coma {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un operador condicional");
         //-err_li nea.add(Ç);
+        errores_gramatica(421);
     :} | asi_asignacion {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un operador condicional");
         //-err_li nea.add(Ç);
+        errores_gramatica(421);
     :}
 ;
 
@@ -958,18 +1118,21 @@ PARAMETRO ::=
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura antes de la condición");
         //-err_linea.add(Ç);
+        errores_gramatica(422);
     :} |
     res_if par_abre CONDICION llave_abre
         SENTENCIA_STARTUP
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de la condición");
         //-err_linea.add(Ç);
+        errores_gramatica(423);
     :} |
     res_if par_abre CONDICION par_cierra 
         SENTENCIA_STARTUP
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba llave de apertura antes del bloque de código de if");
         //-err_linea.add(Ç);
+        errores_gramatica(424);
     :} |
     res_if CONDICION par_cierra llave_abre
         SENTENCIA_STARTUP
@@ -980,6 +1143,7 @@ PARAMETRO ::=
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura antes de la condición");
         //-err_linea.add(Ç);
+        errores_gramatica(425);
     :} |
     res_if par_abre CONDICION llave_abre
         SENTENCIA_STARTUP
@@ -990,6 +1154,7 @@ PARAMETRO ::=
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de la condición");
         //-err_linea.add(Ç);
+        errores_gramatica(426);
     :} |
     res_if par_abre CONDICION par_cierra
         SENTENCIA_STARTUP
@@ -1000,6 +1165,7 @@ PARAMETRO ::=
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba llave de apertura antes del bloque de código de if");
         //-err_linea.add(Ç);
+        errores_gramatica(427);
     :} |
     res_if par_abre CONDICION par_cierra llave_abre
         SENTENCIA_STARTUP
@@ -1009,6 +1175,7 @@ PARAMETRO ::=
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba llave de apertura antes del bloque de código de else");
         //-err_linea.add(Ç);
+        errores_gramatica(428);
     :} |
     res_if par_abre CONDICION par_cierra llave_abre
         SENTENCIA_STARTUP
@@ -1016,8 +1183,9 @@ PARAMETRO ::=
     llave_abre
         SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba else del bloque de código de else");
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba else antes del bloque de código de else");
         //-err_linea.add(Ç);
+        errores_gramatica(429);
     :}
  ;
 
@@ -1293,30 +1461,37 @@ CASO ::=
     Numero Numero {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un solo número, cadena o valor booleano");
         //-err_linea.add(Ç);
+        errores_gramatica(430);
     :} | 
     Numero coma Numero {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un solo número, cadena o valor booleano");
         //-err_linea.add(Ç);
+        errores_gramatica(430);
     :} |
     cadena_caracter ari_suma cadena_caracter {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un solo número, cadena o valor booleano");
         //-err_linea.add(Ç);
+        errores_gramatica(430);
     :} |
     Numero ari_suma cadena_caracter {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un solo número, cadena o valor booleano");
         //-err_linea.add(Ç);
+        errores_gramatica(430);
     :} |
     Numero ari_suma Numero {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un solo número, cadena o valor booleano");
         //-err_linea.add(Ç);
+        errores_gramatica(430);
     :} |
     cadena_caracter coma cadena_caracter {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un solo número, cadena o valor booleano");
         //-err_linea.add(Ç);
+        errores_gramatica(430);
     :} |
     Numero coma Identificador {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un solo número, cadena o valor booleano");
         //-err_linea.add(Ç);
+        errores_gramatica(430);
     :} 
 ;
 
