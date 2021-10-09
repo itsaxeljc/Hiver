@@ -45,12 +45,25 @@ action code
     public void errores_gramatica (int error){ 
         /*Pedro Id: 3
           Brad Id:  7
-          Jacobo:   4    
+          Jacobo:   4   
+          Dalia: 2 
         */
         switch (error)
         {
         case 71:
-            err_gramatica.add(" res_pin par_abre Numero coma Identificador par_cierra <p color=\"#FF0042\">sig_punto_coma</p>");
+            err_gramatica.add("res_pin par_abre Numero coma Identificador par_cierra <p color=\"#FF0042\">sig_punto_coma</p>");
+            break;
+        case 41:
+            err_gramatica.add("res_name Identificador <p color=\"#FF0042\">sig_punto_coma</p><br>ESTRUCTURA_BASICA");
+            break;
+        case 42:
+            err_gramatica.add("res_name <p color=\"#FF0042\">Identificador</p> sig_punto_coma<br>ESTRUCTURA_BASICA");
+            break;
+        case 43:
+            err_gramatica.add("<p color=\"#FF0042\">res_name</p> Identificador sig_punto_coma<br>ESTRUCTURA_BASICA");
+            break;
+        case 44:
+            err_gramatica.add("res_name <p color=\"#FF0042\">Identificador sig_punto_coma</p><br>ESTRUCTURA_BASICA");
             break;
         }
            
@@ -137,25 +150,28 @@ INICIO ::=
         {:
             err_msj.add("Error Sintáctico en la línea # | Se esperaba un punto y coma");
             //-err_linea.add(Ç);
-            errores_gramatica(2);
+            errores_gramatica(41);
         :}|
     res_name sig_punto_coma  
     ESTRUCTURA_BASICA  
         {:
             err_msj.add("Error Sintáctico en la línea # | Se esperaba un identificador antes del punto y coma");
             //-err_linea.add(Ç);
+            errores_gramatica(42);
         :}|
     Identificador sig_punto_coma  
     ESTRUCTURA_BASICA  
         {:
             err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada name antes del identificador");
             //-err_linea.add(Ç);
+            errores_gramatica(43);
         :}|
     res_name 
     ESTRUCTURA_BASICA  
         {:
             err_msj.add("Error Sintáctico en la línea # | Se esperaba un identificador despues de la palabra reservada name");
             //-err_linea.add(Ç);
+            errores_gramatica(44);
         :} 
 ;
 
