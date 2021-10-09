@@ -92,6 +92,9 @@ action code
         case 404:
             err_gramatica.add("res_function TIPO_DATO Identificador par_abre PARAMETRO par_cierra <p color=\"#FF0042\">llave_abre</p> <br>SENTENCIA_FUNCION <br>llave_cierra");
             break;
+        case 405:
+            err_gramatica.add("res_function TIPO_DATO Identificador par_abre PARAMETRO par_cierra <p color=\"#FF0042\">llave_abre</p> <br>SENTENCIA_FUNCION <br>llave_cierra");
+            break;
         }
            
     }
@@ -262,6 +265,9 @@ FUNCION ::=
             SENTENCIA_FUNCION
     llave_cierra |
     res_function res_void Identificador par_abre PARAMETRO par_cierra llave_abre
+            SENTENCIA_FUNCION
+    llave_cierra | 
+    res_function res_void Identificador par_abre par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra |
     res_function Identificador par_abre PARAMETRO par_cierra llave_abre
