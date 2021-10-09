@@ -1834,25 +1834,30 @@ OPERACION_CONTRACCION ::=
     {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un punto y coma");
         //-err_linea.add(Ç);
+        errores_gramatica(31);
     :} |
     Identificador OPERADOR_ARITMETICO asi_asignacion sig_punto_coma
     {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor numérico");
         //-err_linea.add(Ç);
+        errores_gramatica(32);
     :} |
     Identificador OPERADOR_ARITMETICO VALOR_NUMERICO sig_punto_coma
     {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un signo de asignación");
         //-err_linea.add(Ç);
+        errores_gramatica(33);
     :} |
     OPERADOR_ARITMETICO VALOR_NUMERICO sig_punto_coma
     {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un identificador antes del operador aritmetico");
         //-err_linea.add(Ç);
-    :}    
+        errores_gramatica(34);
+    :}  
     | error sig_punto_coma 
     {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba una acción u operación");
         //-err_linea.add(Ç);
+        errores_gramatica(35);
     :}
 ;
