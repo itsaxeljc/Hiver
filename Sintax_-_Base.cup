@@ -1819,6 +1819,7 @@ INCREMENTO ::=
     {:
         err_msj.add("Error Sintáctico en la línea # | Error en la declaración del operador de incremento");
         //-err_linea.add(Ç);
+        errores_gramatica(36);
     :} 
 ;
 
@@ -1848,7 +1849,7 @@ OPERACION_CONTRACCION ::=
         //-err_linea.add(Ç);
         errores_gramatica(33);
     :} |
-    OPERADOR_ARITMETICO VALOR_NUMERICO sig_punto_coma
+    OPERADOR_ARITMETICO asi_asignacion VALOR_NUMERICO sig_punto_coma
     {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un identificador antes del operador aritmetico");
         //-err_linea.add(Ç);
