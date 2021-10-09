@@ -65,6 +65,33 @@ action code
         case 44:
             err_gramatica.add("res_name <p color=\"#FF0042\">Identificador sig_punto_coma</p><br>ESTRUCTURA_BASICA");
             break;
+        case 45:
+            err_gramatica.add("res_function <p color=\"#FF0042\">TIPO_DATO</p> Identificador par_abre PARAMETRO par_cierra llave_abre <br>SENTENCIA_FUNCION <br>llave_cierra");
+            break;
+        case 46:
+            err_gramatica.add("res_function TIPO_DATO <p color=\"#FF0042\">Identificador</p> par_abre PARAMETRO par_cierra llave_abre <br>SENTENCIA_FUNCION <br>llave_cierra");
+            break;
+        case 47:
+            err_gramatica.add("res_function <p color=\"#FF0042\">TIPO_DATO Identificador</p> par_abre PARAMETRO par_cierra llave_abre <br>SENTENCIA_FUNCION <br>llave_cierra");
+            break;
+        case 48:
+            err_gramatica.add("res_function TIPO_DATO Identificador <p color=\"#FF0042\">par_abre</p> PARAMETRO par_cierra llave_abre <br>SENTENCIA_FUNCION <br>llave_cierra");
+            break;
+        case 49:
+            err_gramatica.add("res_function TIPO_DATO Identificador par_abre PARAMETRO <p color=\"#FF0042\">par_cierra</p> llave_abre <br>SENTENCIA_FUNCION <br>llave_cierra");
+            break;
+        case 401:
+            err_gramatica.add("res_function TIPO_DATO Identificador <p color=\"#FF0042\">par_abre</p> PARAMETRO <p color=\"#FF0042\">par_cierra</p> llave_abre <br>SENTENCIA_FUNCION <br>llave_cierra");
+            break;
+        case 402:
+            err_gramatica.add("<p color=\"#FF0042\">res_function</p> TIPO_DATO Identificador par_abre PARAMETRO par_cierra llave_abre <br>SENTENCIA_FUNCION <br>llave_cierra");
+            break;
+        case 403:
+            err_gramatica.add("<p color=\"#FF0042\">res_function TIPO_DATO</p> Identificador par_abre PARAMETRO par_cierra llave_abre <br>SENTENCIA_FUNCION <br>llave_cierra");
+            break;
+        case 404:
+            err_gramatica.add("res_function TIPO_DATO Identificador par_abre PARAMETRO par_cierra <p color=\"#FF0042\">llave_abre</p> <br>SENTENCIA_FUNCION <br>llave_cierra");
+            break;
         }
            
     }
@@ -242,54 +269,63 @@ FUNCION ::=
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba la especificación del tipo de dato de retorno después de function");
         //-err_linea.add(Ç);
+        errores_gramatica(45);
     :} |
     res_function TIPO_DATO par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION 
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un identificador para la función después del tipo de dato a retorno");
         //-err_linea.add(Ç);
+        errores_gramatica(46);
     :} |
     res_function par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un tipo de dato retorno y identificador para la función");
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba un tipo de dato retorno e identificador para la función");
         //-err_linea.add(Ç);
+        errores_gramatica(47);
     :} | 
     res_function TIPO_DATO Identificador PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura después del identificador de la función");
         //-err_linea.add(Ç);
+        errores_gramatica(48);
     :} |
     res_function TIPO_DATO Identificador par_abre PARAMETRO llave_abre
             SENTENCIA_FUNCION
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de los parámetros de la función");
         //-err_linea.add(Ç);
+        errores_gramatica(49);
     :} |
     res_function TIPO_DATO Identificador PARAMETRO llave_abre
             SENTENCIA_FUNCION
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaban paretesis de apertura y cierre en la especificación de parámetros de la función");
         //-err_linea.add(Ç);
+        errores_gramatica(401);
     :} |
     TIPO_DATO Identificador par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada function antes del tipo de dato de retorno");
         //-err_linea.add(Ç);
+        errores_gramatica(402);
     :} |
     Identificador par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada function y el tipo de dato de retorno antes del identificador de la función");
         //-err_linea.add(Ç);
+        errores_gramatica(403);
     :} |
     res_function TIPO_DATO Identificador par_abre PARAMETRO par_cierra 
             SENTENCIA_FUNCION
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba llave de apertura después de los parámetros de la función");
         //-err_linea.add(Ç);
+        errores_gramatica(404);
     :}
 ;
 
