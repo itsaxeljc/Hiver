@@ -105,6 +105,7 @@ action code
             err_gramatica.add("<p color=\"#FF0042\">res_start</p> sig_punto_coma<br>SENTENCIA_STARTUP<br>res_end sig_punto_coma");
             break;
         }
+        
            
     }
 
@@ -1431,56 +1432,7 @@ DOWHILE ::=
     {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un punto y coma");
         //-err_linea.add(Ç);
-    :}|
-    res_do llave_abre
-        SENTENCIA_STARTUP
-    llave_cierra res_while par_abre CONDICION  sig_punto_coma
-    {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de cierre");
-        //-err_linea.add(Ç);
-    :}|
-    res_do llave_abre
-        SENTENCIA_STARTUP
-    llave_cierra res_while par_abre  par_cierra sig_punto_coma
-    {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un condición dentro del while");
-        //-err_linea.add(Ç);
-    :}|
-    res_do llave_abre
-        SENTENCIA_STARTUP
-    llave_cierra res_while CONDICION par_cierra sig_punto_coma
-    {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de apertura");
-        //-err_linea.add(Ç);
-    :}|
-    res_do llave_abre
-        SENTENCIA_STARTUP
-    llave_cierra  par_abre CONDICION par_cierra sig_punto_coma
-    {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada while");
-        //-err_linea.add(Ç);
-    :}|
-    res_do llave_abre
-        SENTENCIA_STARTUP
-    res_while par_abre CONDICION par_cierra sig_punto_coma
-    {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba una llave de cierre antes del while");
-        //-err_linea.add(Ç);
-    :}|
-    res_do llave_abre
-    llave_cierra res_while par_abre CONDICION par_cierra sig_punto_coma
-    {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba como minimo una instrucción dentro de las llaves del do while");
-        //-err_linea.add(Ç);
-    :}|
-    res_do 
-       SENTENCIA_STARTUP
-    llave_cierra res_while par_abre CONDICION par_cierra sig_punto_coma
-    {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba una llave de apertura despues de la palabra do");
-        //-err_linea.add(Ç);
     :}
-
 ;
 
 EXPRESION ::=
