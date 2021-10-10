@@ -61,11 +61,11 @@ public class pnlTablaSimbolos extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Identificador", "Tipo de dato", "Valor inicial"
+                "Identificador", "Rol", "Ambito", "Tipo", "Linea Inicio", "Linea Fin"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
