@@ -63,8 +63,8 @@ action code
         var_idSimb.add(identificador);
         var_rollSimb.add(roll);
         var_tipoSimb.add(tipo);
-        var_lStartSimb.add(lStart);
-        var_lEndSimb.add(lEnd);
+        var_lStartSimb.add(linStart);
+        var_lEndSimb.add(linEnd);
     }
 
     public void errores_gramatica (int error){ 
