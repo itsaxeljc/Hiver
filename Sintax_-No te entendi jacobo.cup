@@ -59,10 +59,10 @@ action code
     public ArrayList var_lStartSimb = new ArrayList();
     public ArrayList var_lEndSimb = new ArrayList();
 
-    public void rollist(String identificador, String roll, String tipo, small linStart, small linEnd) {
-        var_idSimb.add(identificador);
+    public void rollist(Object identificador, String roll, Object tipo, short linStart, short linEnd) {
+        var_idSimb.add((String)identificador);
         var_rollSimb.add(roll);
-        var_tipoSimb.add(tipo);
+        var_tipoSimb.add((String)tipo);
         var_lStartSimb.add(linStart);
         var_lEndSimb.add(linEnd);
     }
