@@ -970,7 +970,7 @@ public class CompilerComp extends javax.swing.JFrame {
     private void execMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_execMouseClicked
         p1.textPane.setText("");
         pnlSalida.textPane.setText("");
-
+        //para saber sí se sube a git
         recuperartokens();
         analisisSintacttico();
         llenarSimbolosDiamicos();
