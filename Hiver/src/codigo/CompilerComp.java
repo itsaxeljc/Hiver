@@ -216,7 +216,7 @@ public class CompilerComp extends javax.swing.JFrame {
         LCHAR = new LinkedList<>();
         LBOL = new LinkedList<>();
         DefaultTableModel variables;
-        variables = (DefaultTableModel) pts.tblVariables.getModel();
+        variables = (DefaultTableModel) ptd.tblDinSim.getModel();
         for(int i = 0; i < variables.getRowCount(); i++){
             switch(variables.getValueAt(i, 1).toString()){
                 case "int":
@@ -240,7 +240,7 @@ public class CompilerComp extends javax.swing.JFrame {
 
     void llenarVariable() {         // llenar la tabla de variables
         DefaultTableModel variables;
-        variables = (DefaultTableModel) pts.tblVariables.getModel();
+        variables = (DefaultTableModel) ptd.tblDinSim.getModel();
         int varLenght = variables.getRowCount();
         for (int i = varLenght - 1; i >= 0; i--) {
             variables.removeRow(i);
@@ -278,7 +278,7 @@ public class CompilerComp extends javax.swing.JFrame {
         var_valor = new ArrayList();
     }
 
-    void llenarSimbolosDiamicos() {
+    /*void llenarSimbolosDiamicos() {
 
         DefaultTableModel m;
         DefaultTableModel tok;
@@ -378,7 +378,7 @@ public class CompilerComp extends javax.swing.JFrame {
 
             tok.addRow(o);
         }
-    }
+    }*/
 
     
 
@@ -949,12 +949,16 @@ public class CompilerComp extends javax.swing.JFrame {
         //para saber sí se sube a git
         recuperartokens();
         analisisSintacttico();
-        llenarSimbolosDiamicos();
+        llenarTablaSimbolos();
 
         //agregamo las clases de los analizadores que se crean con jflex y cup
 
     }//GEN-LAST:event_execMouseClicked
 
+    private void llenarTablaSimbolos(){
+        
+    }
+    
     private void ini() {
         undoKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK);
         redoKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_Y, KeyEvent.CTRL_DOWN_MASK);
