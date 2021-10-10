@@ -15,6 +15,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -169,6 +170,7 @@ public class CompilerComp extends javax.swing.JFrame {
             Sintax parser = new Sintax(scan);
             parser.parse();
 
+            var_idSem = parser.getvar_idSemantico();
             var_identificador = parser.getvar_identificador();
             var_tipo_dato = parser.getvar_tipo_dato();
             var_valor = parser.getvar_valor();
@@ -177,8 +179,62 @@ public class CompilerComp extends javax.swing.JFrame {
 
             pnlSalida.textPane.setText(pnlSalida.textPane.getText() + "----------Analisis finalizado----------");
             llenarVariable();
+            
+            GuardarDatosEnLista();
         } catch (Exception ex) {
             ex.printStackTrace();
+        }
+        
+        //Comienza analisis semantico
+        String erroresSem = "";
+        for(int i = 0; i < var_idSem.size(); i++){
+            int encontrado = -1;
+            encontrado = LTINT.indexOf(var_idSem.get(i).toString());
+            encontrado = (encontrado == -1) ? LENT.indexOf(var_idSem.get(i).toString()) : 1;
+            encontrado = (encontrado == -1) ? LFLO.indexOf(var_idSem.get(i).toString()) : 1;
+            encontrado = (encontrado == -1) ? LDOU.indexOf(var_idSem.get(i).toString()) : 1;
+            encontrado = (encontrado == -1) ? LCHAR.indexOf(var_idSem.get(i).toString()) : 1;
+            encontrado = (encontrado == -1) ? LBOL.indexOf(var_idSem.get(i).toString()) : 1;
+            if (encontrado == -1) {
+                erroresSem += "\nError semantico con identificador '" + var_idSem.get(i).toString() + "': no se ha declarado";
+            }
+        }
+        pnlSalida.textPane.setText(pnlSalida.textPane.getText()+erroresSem);
+        pnlSalida.textPane.setText(pnlSalida.textPane.getText() + "\n----------Analisis Semantico finalizado----------");
+        var_identificador = new ArrayList();
+        var_tipo_dato = new ArrayList();
+        var_valor = new ArrayList();
+        
+    }
+    
+    void GuardarDatosEnLista(){
+        //Crear linkedlist para meter todas las variables que tengamos en nuestra tabla de simbolos
+        LTINT = new LinkedList<>();
+        LENT = new LinkedList<>();
+        LFLO = new LinkedList<>();
+        LDOU = new LinkedList<>();
+        LCHAR = new LinkedList<>();
+        LBOL = new LinkedList<>();
+        DefaultTableModel variables;
+        variables = (DefaultTableModel) pts.tblVariables.getModel();
+        for(int i = 0; i < variables.getRowCount(); i++){
+            switch(variables.getValueAt(i, 1).toString()){
+                case "int":
+                    LENT.add(variables.getValueAt(i, 0).toString());
+                    break;
+                case "char":
+                    LCHAR.add(variables.getValueAt(i, 0).toString());
+                    break;
+                case "float":
+                    LFLO.add(variables.getValueAt(i, 0).toString());
+                    break;
+                case "boolean":
+                    LBOL.add(variables.getValueAt(i, 0).toString());
+                    break;
+                case "double":
+                    LDOU.add(variables.getValueAt(i, 0).toString());
+                    break;
+            }
         }
     }
 
@@ -1325,7 +1381,16 @@ public class CompilerComp extends javax.swing.JFrame {
             }
         });
     }
-
+    // ANALIZADOR SEMANTICO
+    public LinkedList <String> LTINT;
+    public LinkedList <String> LENT;
+    public LinkedList <String> LFLO;
+    public LinkedList <String> LDOU;
+    public LinkedList <String> LCHAR;
+    public LinkedList <String> LBOL;
+    public LinkedList <String> LPIN;
+    //
+    public ArrayList var_idSem;
     public ArrayList linea;
     public ArrayList token;
     public ArrayList lexema;
