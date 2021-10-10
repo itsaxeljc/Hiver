@@ -1,0 +1,45 @@
+nam temperaturacontrol; //Se define el nombre del archivo
+
+//Inicia área de configuración inicial (Definir pines a usar)
+config[
+     
+	//DEFINICIÓN DE DISPLAY Y PINES
+	//El display necesitará los pines 1 y 2
+	display( 1.2.8 ); 
+	//El pin 8, tendrá el alias de termo
+       pin(8termo); 
+	//Se define al pin 8 como un pin de entrada
+       type(termo,input); 
+	//Se define el voltaje de entrada para dicho pin 
+       5volt(termo,3.5); 
+	//El pin 3, tendrá el alias de alarm
+	pin(3,alarm); 
+	//El pin 3, será de tipo salida
+	type(alarm,output); 
+	//Se define voltaje entrada para pin 3
+	volt(alarm,2.5); 
+	//El pin 4 con alias servomot1
+	pin(4,       servomot15); 
+	//Se define el voltaje entrada del pin 4 y su anchura como 3er parámetro
+       volt(servomot1,3.5,2 ); 
+      //Definimos variable global temperature
+	def floate temperature.2;
+}
+//Inicio bloque de instrucciones
+start; 
+	//Obtenemos los datos de entrada del pin con alias termo
+	temperature==in(termo);
+	//Si la temperatura es mayor a 30°
+	if(temperature>=30 ){ 
+	//Enviamos un voltaje de 3.3v al pin alarm, y lanza alarma
+		out(alarm,3.3 ); 
+	//Enviamos un voltaje de 5v al servomot1 con un ancho de 2ms
+		out(servomot1,5,2 ); 
+	  //Mandamos a display la temperatura y un mensaje de alerta
+		out(display,temperature+3434ALERTA343');
+}
+wait(temperature=>=20 ); 
+sleep(20); 
+end;
+//ejecutar el código
+.

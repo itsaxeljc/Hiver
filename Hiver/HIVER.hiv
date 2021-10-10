@@ -1,0 +1,50 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil Monospaced;\f1\fnil Consolas;\f2\fnil Tipograf\'eda;}
+{\colortbl\red0\green0\blue0;\red255\green255\blue255;}
+
+\li0\ri0\fi0\f2\fs48\i0\b0\ul0\cf1 nam temperaturacontrol; //Se define el nombre del archivo\par
+\par
+//Inicia \'e1rea de configuraci\'f3n inicial (Definir pines a usar)\par
+config[\par
+     \par
+\tab //DEFINICI\'d3N DE DISPLAY Y PINES\par
+\tab //El display necesitar\'e1 los pines 1 y 2\par
+\tab display( 1.2.8 ); \par
+\tab //El pin 8, tendr\'e1 el alias de termo\par
+       pin(8termo); \par
+\tab //Se define al pin 8 como un pin de entrada\par
+       type(termo,input); \par
+\tab //Se define el voltaje de entrada para dicho pin \par
+       5volt(termo,3.5); \par
+\tab //El pin 3, tendr\'e1 el alias de alarm\par
+\tab pin(3,alarm); \par
+\tab //El pin 3, ser\'e1 de tipo salida\par
+\tab type(alarm,output); \par
+\tab //Se define voltaje entrada para pin 3\par
+\tab volt(alarm,2.5); \par
+\tab //El pin 4 con alias servomot1\par
+\tab pin(4,       servomot15); \par
+\tab //Se define el voltaje entrada del pin 4 y su anchura como 3er par\'e1metro\par
+       volt(servomot1,3.5,2 ); \par
+      //Definimos variable global temperature\par
+\tab def floate temperature.2;\par
+\}\par
+//Inicio bloque de instrucciones\par
+start; \par
+\tab //Obtenemos los datos de entrada del pin con alias termo\par
+\tab temperature==in(termo);\par
+\tab //Si la temperatura es mayor a 30\'b0\par
+\tab if(temperature>=30 )\{ \par
+\tab //Enviamos un voltaje de 3.3v al pin alarm, y lanza alarma\par
+\tab\tab out(alarm,3.3 ); \par
+\tab //Enviamos un voltaje de 5v al servomot1 con un ancho de 2ms\par
+\tab\tab out(servomot1,5,2 ); \par
+\tab   //Mandamos a display la temperatura y un mensaje de alerta\par
+\tab\tab out(display,temperature+3434ALERTA343');\par
+\}\par
+wait(temperature=>=20 ); \par
+sleep(20); \par
+end;\par
+//ejecutar el c\'f3digo\par
+.\par
+}
