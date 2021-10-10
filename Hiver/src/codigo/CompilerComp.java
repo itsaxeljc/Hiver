@@ -378,33 +378,9 @@ public class CompilerComp extends javax.swing.JFrame {
 
             tok.addRow(o);
         }
-        imprimirErrores();
     }
 
-    void imprimirErrores() {
-        DefaultTableModel err;
-
-        err = (DefaultTableModel) ptd.tblDinErr.getModel();
-        int rowCount = err.getRowCount();
-        for (int i = rowCount - 1; i >= 0; i--) {
-            err.removeRow(i);
-
-        }
-        Object lin[] = linea.toArray();
-        Object toke[] = token.toArray();
-        Object lex[] = lexema.toArray();
-        Object erro[] = error.toArray();
-
-        for (int i = 0; i < token.size(); i++) {
-            if (((int) erro[i]) == 1) {
-                Object o[] = new Object[3];
-                o[0] = lin[i];
-                o[1] = lex[i];
-                o[2] = "Cadena no valida";
-                err.addRow(o);
-            }
-        }
-    }
+    
 
     private void lineNumbers() {
         try {
@@ -974,7 +950,6 @@ public class CompilerComp extends javax.swing.JFrame {
         recuperartokens();
         analisisSintacttico();
         llenarSimbolosDiamicos();
-        imprimirErrores();
 
         //agregamo las clases de los analizadores que se crean con jflex y cup
 

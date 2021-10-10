@@ -33,15 +33,6 @@ public class pnlTablaDinamica extends javax.swing.JPanel {
         header.setOpaque(false);
         header.setBackground(new Color(51,51,61));
         header.setForeground(Color.WHITE);
-        tblDinErr.setIntercellSpacing(new Dimension(0,0));
-        tblDinErr.setOpaque(false);
-        ((DefaultTableCellRenderer)tblDinErr.getDefaultRenderer(Object.class)).setOpaque(false);
-        scrollDinErr.setOpaque(false);
-        scrollDinErr.getViewport().setOpaque(false);
-        JTableHeader header2 = tblDinErr.getTableHeader();
-        header2.setOpaque(false);
-        header2.setBackground(new Color(51,51,61));
-        header2.setForeground(Color.WHITE);
     }
 
     /**
@@ -53,36 +44,16 @@ public class pnlTablaDinamica extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        scrollDinErr = new javax.swing.JScrollPane();
-        tblDinErr = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
         scrollDinSim = new javax.swing.JScrollPane();
         tblDinSim = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(101, 101, 117));
         setPreferredSize(new java.awt.Dimension(1390, 438));
 
-        tblDinErr.setBackground(new java.awt.Color(101, 101, 117));
-        tblDinErr.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
-        tblDinErr.setForeground(new java.awt.Color(255, 255, 255));
-        tblDinErr.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "No. Línea", "Lexema", "Tipo de error"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        scrollDinErr.setViewportView(tblDinErr);
+        jLabel2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Tabla de variables");
 
         tblDinSim.setBackground(new java.awt.Color(101, 101, 117));
         tblDinSim.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
@@ -92,11 +63,11 @@ public class pnlTablaDinamica extends javax.swing.JPanel {
 
             },
             new String [] {
-                "No. Línea", "Lexema", "Comp. Léxico", "Invocaciones"
+                "Nombre", "Tipo", "Valor", "Ubicación", "Ámbito"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -105,14 +76,6 @@ public class pnlTablaDinamica extends javax.swing.JPanel {
         });
         scrollDinSim.setViewportView(tblDinSim);
 
-        jLabel2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Tabla dinámica de identificadores");
-
-        jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Tabla dinámica de errores");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,36 +83,25 @@ public class pnlTablaDinamica extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(59, 59, 59)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(scrollDinSim, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
-                        .addComponent(scrollDinErr, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(scrollDinSim, javax.swing.GroupLayout.PREFERRED_SIZE, 1295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollDinSim, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(scrollDinErr, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(scrollDinSim, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane scrollDinErr;
     private javax.swing.JScrollPane scrollDinSim;
-    public javax.swing.JTable tblDinErr;
     public javax.swing.JTable tblDinSim;
     // End of variables declaration//GEN-END:variables
 }
