@@ -24,6 +24,14 @@ parser code
     public ArrayList getvar_err_msj() { return action_obj.err_msj; }
     public ArrayList getvar_err_gramatica() { return action_obj.err_gramatica; }
     public ArrayList getvar_idSemantico() { return action_obj.var_idSem; }
+    
+            //ArrayList Para llenar la tabla de Simbolos
+    public ArrayList getvar_idSimb() { return action_obj.var_idSimb; }
+    public ArrayList getvar_rollSimb() { return action_obj.var_rollSimb; }
+    public ArrayList getvar_tipoSimb() { return action_obj.var_tipoSimb; }
+    public ArrayList getvar_lStartSimb() { return action_obj.var_lStartSimb; }
+    public ArrayList getvar_lEndSimb() { return action_obj.var_lEndSimb; }
+
 
 :};
 action code
