@@ -179,16 +179,16 @@ action code
             break;
         //GRAMATICAS OPERACION_CONTRACCION
         case 31:
-            err_gramatica.add("OPERACION_CONTRACCION ::= Identificador OPERADOR_ARITMETICO asi_asignacion VALOR_NUMERICO <span color=\"#FF0042\">sig_punto_coma<span color=\"#FF0042\">");
+            err_gramatica.add("OPERACION_CONTRACCION ::= Identificador OPERADOR_ARITMETICO asi_asignacion VALOR_NUMERICO <span color=\"#FF0042\">sig_punto_coma</span>");
             break;
         case 32:
-            err_gramatica.add("OPERACION_CONTRACCION ::= Identificador OPERADOR_ARITMETICO asi_asignacion <span color=\"#FF0042\">VALOR_NUMERICO<span color=\"#FF0042\"> sig_punto_coma");
+            err_gramatica.add("OPERACION_CONTRACCION ::= Identificador OPERADOR_ARITMETICO asi_asignacion <span color=\"#FF0042\">VALOR_NUMERICO</span> sig_punto_coma");
             break;
         case 33:
-            err_gramatica.add("OPERACION_CONTRACCION ::= cIdentificador OPERADOR_ARITMETICO <span color=\"#FF0042\">asi_asignacion<span color=\"#FF0042\"> VALOR_NUMERICO sig_punto_coma");
+            err_gramatica.add("OPERACION_CONTRACCION ::= cIdentificador OPERADOR_ARITMETICO <span color=\"#FF0042\">asi_asignacion</span> VALOR_NUMERICO sig_punto_coma");
             break;
         case 34:
-            err_gramatica.add("OPERACION_CONTRACCION ::= <span color=\"#FF0042\">Identificador <span color=\"#FF0042\">OPERADOR_ARITMETICO asi_asignacion VALOR_NUMERICO sig_punto_coma");
+            err_gramatica.add("OPERACION_CONTRACCION ::= <span color=\"#FF0042\">Identificador </span>OPERADOR_ARITMETICO asi_asignacion VALOR_NUMERICO sig_punto_coma");
             break;
         case 35:
             err_gramatica.add("OPERACION_CONTRACCION ::= Identificador OPERADOR_ARITMETICO asi_asignacion VALOR_NUMERICO sig_punto_coma");
@@ -198,141 +198,147 @@ action code
             break;
         // GRAMATICAS TIPO_DATO_FOR
         case 37:
-            err_gramatica.add("TIPO_DATO_FOR ::= tip_int | tip_float | tip_double | tip_tinyint | <span color=\"#FF0042\">tip_boolean<span color=\"#FF0042\"> ");
+            err_gramatica.add("TIPO_DATO_FOR ::= tip_int | tip_float | tip_double | tip_tinyint | <span color=\"#FF0042\">tip_boolean</span> ");
             break;
         case 38:
-            err_gramatica.add("TIPO_DATO_FOR ::= tip_int | tip_float | tip_double | tip_tinyint | <span color=\"#FF0042\">tip_char<span color=\"#FF0042\"> ");
+            err_gramatica.add("TIPO_DATO_FOR ::= tip_int | tip_float | tip_double | tip_tinyint | <span color=\"#FF0042\">tip_char</span> ");
             break;
         // GRAMATICAS FOR
         case 39:
-            err_gramatica.add("FOR ::= FOR ::= res_for <span color=\"#FF0042\">par_abre<span color=\"#FF0042\"> TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
+            err_gramatica.add("FOR ::= FOR ::= res_for <span color=\"#FF0042\">par_abre</span> TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
                 "llave_abre<br>"+ 
                 "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+ 
                 "llave_cierra"); 
             break;
         case 310:
-            err_gramatica.add("FOR ::= res_for par_abre <span color=\"#FF0042\">TIPO_DATO_FOR<span color=\"#FF0042\"> Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
+            err_gramatica.add("FOR ::= res_for par_abre <span color=\"#FF0042\">TIPO_DATO_FOR</span> Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
                 "llave_abre<br>"+ 
                 "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+ 
                 "llave_cierra"); 
             break;
         case 311:
-            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR <span color=\"#FF0042\">Identificador<span color=\"#FF0042\"> asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
+            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR <span color=\"#FF0042\">Identificador</span> asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
                 "llave_abre<br>"+ 
                 "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+ 
                 "llave_cierra"); 
             break;
         case 312:
-            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR Identificador <span color=\"#FF0042\">asi_asignacion<span color=\"#FF0042\"> VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
+            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR Identificador <span color=\"#FF0042\">asi_asignacion</span> VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
                 "llave_abre<br>"+ 
                 "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+ 
                 "llave_cierra"); 
             break;
         case 313:
-            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion <span color=\"#FF0042\">VALOR_NUMERICO<span color=\"#FF0042\"> sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
+            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion <span color=\"#FF0042\">VALOR_NUMERICO</span> sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
                 "llave_abre<br>"+ 
                 "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+ 
                 "llave_cierra"); 
             break;
         case 314:
-            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO <span color=\"#FF0042\">sig_punto_coma<span color=\"#FF0042\"> CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
+            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO <span color=\"#FF0042\">sig_punto_coma</span> CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
                 "llave_abre<br>"+ 
                 "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+ 
                 "llave_cierra"); 
             break;
         case 315:
-            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma <span color=\"#FF0042\">CONDICION<span color=\"#FF0042\"> sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
+            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma <span color=\"#FF0042\">CONDICION</span> sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
                 "llave_abre<br>"+ 
                 "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+ 
                 "llave_cierra"); 
             break;
         case 316:
-            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma <span color=\"#FF0042\">METODO_INCREMENTO<span color=\"#FF0042\"> par_cierra<br>"+ 
+            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma <span color=\"#FF0042\">METODO_INCREMENTO</span> par_cierra<br>"+ 
                 "llave_abre<br>"+ 
                 "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+ 
                 "llave_cierra"); 
             break;
+        case 336:
+            err_gramatica.add("FOR ::= res_for <span color=\"#FF0042\">res_def</span"> par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
+                "llave_abre<br>"+ 
+                "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+ 
+                "llave_cierra"); 
+            break;    
         case 317:
-            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO <span color=\"#FF0042\">par_cierra<span color=\"#FF0042\"><br>"+ 
+            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO <span color=\"#FF0042\">par_cierra</span><br>"+ 
                 "llave_abre<br>"+ 
                 "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+ 
                 "llave_cierra"); 
             break;
         case 318:
             err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
-                "<span color=\"#FF0042\">llave_abre<span color=\"#FF0042\"><br>"+ 
+                "<span color=\"#FF0042\">llave_abre</span><br>"+ 
                 "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+ 
                 "llave_cierra"); 
             break;
         case 319:
             err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
                 "llave_abre<br>"+ 
-                "&nbsp&nbsp&nbsp&nbsp <span color=\"#FF0042\">SENTENCIA_STARTUP<span color=\"#FF0042\"><br>"+ 
+                "&nbsp&nbsp&nbsp&nbsp <span color=\"#FF0042\">SENTENCIA_STARTUP</span><br>"+ 
                 "llave_cierra"); 
             break;
         case 320:
-            err_gramatica.add("FOR ::= res_for par_abre sig_punto_coma <span color=\"#FF0042\">CONDICION<span color=\"#FF0042\"> sig_punto_coma METODO_INCREMENTO par_cierra<br>"+
+            err_gramatica.add("FOR ::= res_for par_abre sig_punto_coma <span color=\"#FF0042\">CONDICION</span> sig_punto_coma METODO_INCREMENTO par_cierra<br>"+
             "llave_abre<br>"+ 
             "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+
             "llave_cierra"); 
             break;
         case 321:
-            err_gramatica.add("FOR ::= res_for par_abre sig_punto_coma CONDICION sig_punto_coma <span color=\"#FF0042\">METODO_INCREMENTO<span color=\"#FF0042\"> par_cierra<br>"+
+            err_gramatica.add("FOR ::= res_for par_abre sig_punto_coma CONDICION sig_punto_coma <span color=\"#FF0042\">METODO_INCREMENTO</span> par_cierra<br>"+
             "llave_abre<br>"+ 
             "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+
             "llave_cierra"); 
             break;
         case 322:
-            err_gramatica.add("FOR ::= res_for par_abre sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO <span color=\"#FF0042\">par_cierra<span color=\"#FF0042\"><br>"+
+            err_gramatica.add("FOR ::= res_for par_abre sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO <span color=\"#FF0042\">par_cierra</span><br>"+
             "llave_abre<br>"+ 
             "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+
             "llave_cierra"); 
             break;
         case 323:
             err_gramatica.add("FOR ::= res_for par_abre sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+
-            "<span color=\"#FF0042\">llave_abre<span color=\"#FF0042\"><br>"+ 
+            "<span color=\"#FF0042\">llave_abre</span><br>"+ 
             "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+
             "llave_cierra"); 
             break; 
         case 324:
             err_gramatica.add("FOR ::= res_for par_abre sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+
             "llave_abre<br>"+ 
-            "&nbsp&nbsp&nbsp&nbsp <span color=\"#FF0042\">SENTENCIA_STARTUP<span color=\"#FF0042\"><br>"+
+            "&nbsp&nbsp&nbsp&nbsp <span color=\"#FF0042\">SENTENCIA_STARTUP</span><br>"+
             "llave_cierra"); 
             break;   
         //GRAMATICA SLEEP    
         case 325:
-            err_gramatica.add("SLEEP ::= res_sleep par_abre VALOR_NUMERICO par_cierra <span color=\"#FF0042\">sig_punto_coma<span color=\"#FF0042\">"); 
+            err_gramatica.add("SLEEP ::= res_sleep par_abre VALOR_NUMERICO par_cierra <span color=\"#FF0042\">sig_punto_coma</span>"); 
             break; 
         case 326:
-            err_gramatica.add("SLEEP ::= res_sleep par_abre VALOR_NUMERICO <span color=\"#FF0042\">par_cierra<span color=\"#FF0042\"> sig_punto_coma"); 
+            err_gramatica.add("SLEEP ::= res_sleep par_abre VALOR_NUMERICO <span color=\"#FF0042\">par_cierra</span> sig_punto_coma"); 
             break; 
         case 327:
-            err_gramatica.add("SLEEP ::= res_sleep par_abre <span color=\"#FF0042\">VALOR_NUMERICO<span color=\"#FF0042\"> par_cierra sig_punto_coma"); 
+            err_gramatica.add("SLEEP ::= res_sleep par_abre <span color=\"#FF0042\">VALOR_NUMERICO</span> par_cierra sig_punto_coma"); 
             break; 
         case 328:
-            err_gramatica.add("SLEEP ::= res_sleep <span color=\"#FF0042\">par_abre<span color=\"#FF0042\"> VALOR_NUMERICO par_cierra sig_punto_coma"); 
+            err_gramatica.add("SLEEP ::= res_sleep <span color=\"#FF0042\">par_abre</span> VALOR_NUMERICO par_cierra sig_punto_coma"); 
             break; 
         case 329:
-            err_gramatica.add("SLEEP ::= res_sleep <span color=\"#FF0042\">par_abre<span color=\"#FF0042\"> VALOR_NUMERICO par_cierra sig_punto_coma"); 
+            err_gramatica.add("SLEEP ::= res_sleep <span color=\"#FF0042\">par_abre</span> VALOR_NUMERICO par_cierra sig_punto_coma"); 
             break; 
         case 330:
-            err_gramatica.add("SLEEP ::= res_sleep <span color=\"#FF0042\">par_abre<span color=\"#FF0042\"> VALOR_NUMERICO par_cierra sig_punto_coma"); 
+            err_gramatica.add("SLEEP ::= res_sleep <span color=\"#FF0042\">par_abre</span> VALOR_NUMERICO par_cierra sig_punto_coma"); 
             break;     
         case 331:
-            err_gramatica.add("SLEEP ::= res_sleep par_abre <span color=\"#FF0042\">(VALOR_NUMERICO | EXPRESION)<span color=\"#FF0042\"> par_cierra sig_punto_coma"); 
+            err_gramatica.add("SLEEP ::= res_sleep par_abre <span color=\"#FF0042\">(VALOR_NUMERICO | EXPRESION)</span> par_cierra sig_punto_coma"); 
             break; 
         case 332:
-            err_gramatica.add("SLEEP ::= res_sleep par_abre VALOR_NUMERICO <span color=\"#FF0042\">par_cierra<span color=\"#FF0042\"> sig_punto_coma"); 
+            err_gramatica.add("SLEEP ::= res_sleep par_abre VALOR_NUMERICO <span color=\"#FF0042\">par_cierra</span> sig_punto_coma"); 
             break; 
         case 333:
-            err_gramatica.add("SLEEP ::= res_sleep par_abre <span color=\"#FF0042\">VALOR_NUMERICO<span color=\"#FF0042\"> par_cierra sig_punto_coma"); 
+            err_gramatica.add("SLEEP ::= res_sleep par_abre <span color=\"#FF0042\">VALOR_NUMERICO</span> par_cierra sig_punto_coma"); 
             break;     
         case 334:
-            err_gramatica.add("SLEEP ::= res_sleep par_abre <span color=\"#FF0042\">VALOR_NUMERICO<span color=\"#FF0042\"> par_cierra sig_punto_coma"); 
+            err_gramatica.add("SLEEP ::= res_sleep par_abre <span color=\"#FF0042\">VALOR_NUMERICO</span> par_cierra sig_punto_coma"); 
             break; 
         case 335:
-            err_gramatica.add("SLEEP ::= res_sleep par_abre VALOR_NUMERICO <span color=\"#FF0042\">par_cierra<span color=\"#FF0042\"> sig_punto_coma"); 
+            err_gramatica.add("SLEEP ::= res_sleep par_abre VALOR_NUMERICO <span color=\"#FF0042\">par_cierra</span> sig_punto_coma"); 
             break; 
         // CASO: ERROR GENERAL
 
@@ -343,7 +349,7 @@ action code
         // GRAMÁTICA: OUT   
 
         case 744:
-            err_gramatica.add("OUT res_out par_abre Identificador coma VALOR_NUMERICO           <span color=\"#FF0042\">par_cierra sig_punto_coma</span> ");
+            err_gramatica.add("OUT res_out par_abre Identificador coma VALOR_NUMERICO <span color=\"#FF0042\">par_cierra sig_punto_coma</span> ");
             break;
         case 745:
             err_gramatica.add("OUT res_out par_abre Identificador coma VALOR_NUMERICO <span color=\"#FF0042\">par_cierra</span> sig_punto_coma ");
