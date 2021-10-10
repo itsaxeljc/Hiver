@@ -712,7 +712,7 @@ non terminal INICIO, ESTRUCTURA_BASICA,DECLARACION,
 FUNCIONES, FUNCION, CONFIG, STARTUP,SENTENCIA_STARTUP,SENTENCIA_CONFIG, TIPO_DATO, PARAMETRO , PIN, DISPLAY, DISPLAY_PARAMS,
 TYPE, TYPE_IO, SCALE,DOWHILE,EXPRESION, OPERACION,IF,CASO,WHILE,SWITCH,SWITCH_ENTRADAS,VOLT, MAX_VOLT, WAIT, CONDICION, MODE, 
 VALOR_NUMERICO ,OPERADORES_CONTRACCION,INCREMENTO_FOR,INCREMENTO,FOR,OUT,SLEEP,OPERACION_PROC, OPERADOR,VALOR,TIPO_DATO_FOR, 
-OPERADOR_CONDICIONAL,RETURN,IN,SENTENCIA_FUNCION,OPERADOR_ARITMETICO,METODO_INCREMENTO,OPERACION_CONTRACCION,OPE,TERM,FACTOR;
+OPERADOR_CONDICIONAL,RETURN,IN,SENTENCIA_FUNCION,OPERADOR_ARITMETICO,METODO_INCREMENTO,OPERACION_CONTRACCION,OPE,TERM,FACTOR,DECLARACION_PARAMETRO;
 
 
 start with INICIO;
@@ -1598,12 +1598,90 @@ VALOR_NUMERICO ::=
 ;
 
 PARAMETRO ::=
-    DECLARACION | 
-    PARAMETRO coma DECLARACION |
-    PARAMETRO DECLARACION {:
+    DECLARACION_PARAMETRO | 
+    PARAMETRO coma DECLARACION_PARAMETRO |
+    PARAMETRO DECLARACION_PARAMETRO {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaban parámetros separados por coma");
         //-err_linea.add(Ç);
         errores_gramatica(7018);
+    :} 
+;
+
+DECLARACION_PARAMETRO ::= 
+    res_def TIPO_DATO:dato Identificador:id sig_punto_coma
+    {: //vamos a validar cuando aparecen estas expresiones
+        System.out.println("tipo: "+ dato + " identificador: "+ id + " valor null ");
+        var_identificador.add(id);
+        var_tipo_dato.add(dato);
+        var_valor.add(null);
+        System.out.println(var_identificador.size());
+    :} |
+    res_def TIPO_DATO:dato Identificador:id asi_asignacion VALOR:val sig_punto_coma  
+    {: //vamos a validar cuando aparecen estas expresiones
+        System.out.println("tipo: "+ dato + " identificador: "+ id + " valor "+val);
+        var_identificador.add(id);
+        var_tipo_dato.add(dato);
+        var_valor.add(val);        
+        System.out.println(var_identificador.size());
+    :} |
+    res_def TIPO_DATO Identificador {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final de la declaración");
+        //-err_linea.add(Ç);
+    :} |
+    TIPO_DATO Identificador sig_punto_coma {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada def al inicio de la declaración");
+        //-err_linea.add(Ç);
+    :} |
+    res_def TIPO_DATO Identificador asi_asignacion VALOR {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final de la declaración");
+        //-err_linea.add(Ç);
+    :} |
+    TIPO_DATO Identificador asi_asignacion VALOR sig_punto_coma {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada def al inicio de la declaración");
+        //-err_linea.add(Ç);
+    :} |
+    res_def res_pin Identificador sig_punto_coma {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
+        //-err_linea.add(Ç);
+    :} |
+    res_def res_pin Identificador asi_asignacion VALOR sig_punto_coma {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
+        //-err_linea.add(Ç);
+    :} |
+    res_def res_pin par_abre Numero coma Identificador par_cierra sig_punto_coma {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
+        //-err_linea.add(Ç);
+    :} |
+    res_def res_display par_abre DISPLAY_PARAMS par_cierra sig_punto_coma {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método display");
+        //-err_linea.add(Ç);
+    :} |
+    res_def res_function TIPO_DATO Identificador par_abre PARAMETRO par_cierra llave_abre
+            SENTENCIA_FUNCION
+    llave_cierra{:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis para la creación de funciones");
+        //-err_linea.add(Ç);
+    :} |
+    res_def res_function res_void Identificador par_abre PARAMETRO par_cierra llave_abre
+        SENTENCIA_FUNCION
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis para la creación de funciones");
+        //-err_linea.add(Ç); :} |
+    res_def res_type par_abre Identificador coma TYPE_IO par_cierra sig_punto_coma {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método type");
+        //-err_linea.add(Ç);
+    :} |
+    res_def res_scale par_abre Identificador coma Numero coma Numero par_cierra sig_punto_coma {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método scale");
+        //-err_linea.add(Ç);
+    :} |
+    res_def res_volt par_abre Identificador coma Numero par_cierra sig_punto_coma {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método volt");
+        //-err_linea.add(Ç);
+    :} |
+    res_def res_volt par_abre Identificador coma Numero coma Numero par_cierra sig_punto_coma {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método volt");
+        //-err_linea.add(Ç);
     :} 
 ;
 IF ::=
