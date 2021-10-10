@@ -24,6 +24,10 @@ parser code
     public ArrayList getvar_err_msj() { return action_obj.err_msj; }
     public ArrayList getvar_err_gramatica() { return action_obj.err_gramatica; }
     public ArrayList getvar_idSemantico() { return action_obj.var_idSem; }
+    public ArrayList getvar_inicioConfig() { return action_obj.var_inicioConfig; }
+    public ArrayList getvar_finConfig() { return action_obj.var_finConfig; }
+    public ArrayList getvar_inicioStart() { return action_obj.var_inicioStart; }
+    public ArrayList getvar_finStart() { return action_obj.var_finStart; }
 
 :};
 action code
@@ -33,6 +37,11 @@ action code
     Stack<Display> display = new Stack<>();
     Display tmp;
 
+    // para la tabla de simbolos
+    public ArrayList var_inicioConfig = new ArrayList();
+    public ArrayList var_finConfig = new ArrayList();
+    public ArrayList var_inicioStart = new ArrayList();
+    public ArrayList var_finStart = new ArrayList();
     // para el semantico
     public ArrayList var_idSem = new ArrayList();
     // para la tabla de variables
@@ -503,15 +512,21 @@ FUNCIONES ::=
 ;
 
 FUNCION ::=
-    res_function TIPO_DATO Identificador par_abre PARAMETRO par_cierra llave_abre
+    res_function:i TIPO_DATO Identificador:id par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
-    llave_cierra |
-    res_function res_void Identificador par_abre PARAMETRO par_cierra llave_abre
+    llave_cierra:f {:
+        rollist(id,"Funcion",null,iright+1,fright+1)
+    :}|
+    res_function:i res_void Identificador:id par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
-    llave_cierra | 
-    res_function res_void Identificador par_abre par_cierra llave_abre
+    llave_cierra:f {:
+        rollist(id,"Funcion",null,iright+1,fright+1)
+    :}| 
+    res_function:i res_void Identificador:id par_abre par_cierra llave_abre
             SENTENCIA_FUNCION
-    llave_cierra |
+    llave_cierra:f {:
+        rollist(id,"Funcion",null,iright+1,fright+1)
+    :}|
     res_function Identificador par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra {:
@@ -590,9 +605,12 @@ RETURN ::=
     :} 
 ;
 CONFIG ::= 
-    res_config llave_abre 
+    res_config:i llave_abre 
         SENTENCIA_CONFIG   
-    llave_cierra | 
+    llave_cierra:f {:
+        var_inicioConfig.add(iright+1);
+        var_finConfig.add(fright+1);
+    :}| 
     res_config
         SENTENCIA_CONFIG   
     llave_cierra {:
@@ -604,9 +622,12 @@ CONFIG ::=
 ;
 
 STARTUP ::= 
-    res_start sig_punto_coma
+    res_start:i sig_punto_coma
         SENTENCIA_STARTUP
-    res_end sig_punto_coma |
+    res_end sig_punto_coma:f {:
+        var_inicioStart.add(iright+1);
+        var_finStart.add(fright+1);
+    :}|
     res_start
         SENTENCIA_STARTUP
     res_end {:
@@ -678,20 +699,22 @@ SENTENCIA_FUNCION ::=
 ;
 
 DECLARACION ::= 
-    res_def TIPO_DATO:dato Identificador:id sig_punto_coma
+    res_def:i TIPO_DATO:dato Identificador:id sig_punto_coma:f
     {: //vamos a validar cuando aparecen estas expresiones
         System.out.println("tipo: "+ dato + " identificador: "+ id + " valor null ");
         var_identificador.add(id);
         var_tipo_dato.add(dato);
         var_valor.add(null);
+        rollist(id, "Variable", dato, iright+1, fright+1);
         System.out.println(var_identificador.size());
     :} |
-    res_def TIPO_DATO:dato Identificador:id asi_asignacion VALOR:val sig_punto_coma  
+    res_def:i TIPO_DATO:dato Identificador:id asi_asignacion VALOR:val sig_punto_coma:f  
     {: //vamos a validar cuando aparecen estas expresiones
         System.out.println("tipo: "+ dato + " identificador: "+ id + " valor "+val);
         var_identificador.add(id);
         var_tipo_dato.add(dato);
-        var_valor.add(val);        
+        var_valor.add(val);  
+        rollist(id, "Variable", dato, iright+1, fright+1);
         System.out.println(var_identificador.size());
     :} |
     res_def TIPO_DATO Identificador {:
@@ -756,7 +779,10 @@ DECLARACION ::=
 ;
 
 PIN ::= 
-    res_pin par_abre Numero coma Identificador par_cierra sig_punto_coma |
+    res_pin:i par_abre Numero coma Identificador:id par_cierra 
+    sig_punto_coma:f {: 
+        rollist(id,"Pin",null,iright+1,fright+1);
+    :}|
     res_pin par_abre Numero coma Identificador par_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final del método pin");
         //-err_linea.add(Ç);
