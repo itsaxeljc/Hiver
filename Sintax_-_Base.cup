@@ -67,7 +67,7 @@ action code
     public ArrayList var_lStartSimb = new ArrayList();
     public ArrayList var_lEndSimb = new ArrayList();
 
-    public void rollist(Object identificador, String roll, Object tipo, short linStart, short linEnd) {
+    public void rollist(Object identificador, String roll, Object tipo, int linStart, int linEnd) {
         var_idSimb.add((String)identificador);
         var_rollSimb.add(roll);
         var_tipoSimb.add((String)tipo);
@@ -238,7 +238,7 @@ action code
             break;
         // GRAMATICAS FOR
         case 39:
-            err_gramatica.add("FOR ::= FOR ::= res_for <span color=\"#FF0042\">par_abre<span color=\"#FF0042\"> TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
+            err_gramatica.add("FOR ::= FOR ::= res_for <span color=\"#FF0042\">par_abre<span color=\"#FF0042\"> res_def TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
                 "llave_abre<br>"+ 
                 "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+ 
                 "llave_cierra"); 
@@ -250,55 +250,55 @@ action code
                 "llave_cierra"); 
             break;
         case 311:
-            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR <span color=\"#FF0042\">Identificador<span color=\"#FF0042\"> asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
+            err_gramatica.add("FOR ::= res_for par_abre res_def TIPO_DATO_FOR <span color=\"#FF0042\">Identificador<span color=\"#FF0042\"> asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
                 "llave_abre<br>"+ 
                 "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+ 
                 "llave_cierra"); 
             break;
         case 312:
-            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR Identificador <span color=\"#FF0042\">asi_asignacion<span color=\"#FF0042\"> VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
+            err_gramatica.add("FOR ::= res_for par_abre res_def TIPO_DATO_FOR Identificador <span color=\"#FF0042\">asi_asignacion<span color=\"#FF0042\"> VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
                 "llave_abre<br>"+ 
                 "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+ 
                 "llave_cierra"); 
             break;
         case 313:
-            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion <span color=\"#FF0042\">VALOR_NUMERICO<span color=\"#FF0042\"> sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
+            err_gramatica.add("FOR ::= res_for par_abre res_def TIPO_DATO_FOR Identificador asi_asignacion <span color=\"#FF0042\">VALOR_NUMERICO<span color=\"#FF0042\"> sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
                 "llave_abre<br>"+ 
                 "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+ 
                 "llave_cierra"); 
             break;
         case 314:
-            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO <span color=\"#FF0042\">sig_punto_coma<span color=\"#FF0042\"> CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
+            err_gramatica.add("FOR ::= res_for par_abre res_def TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO <span color=\"#FF0042\">sig_punto_coma<span color=\"#FF0042\"> CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
                 "llave_abre<br>"+ 
                 "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+ 
                 "llave_cierra"); 
             break;
         case 315:
-            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma <span color=\"#FF0042\">CONDICION<span color=\"#FF0042\"> sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
+            err_gramatica.add("FOR ::= res_for par_abre res_def TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma <span color=\"#FF0042\">CONDICION<span color=\"#FF0042\"> sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
                 "llave_abre<br>"+ 
                 "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+ 
                 "llave_cierra"); 
             break;
         case 316:
-            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma <span color=\"#FF0042\">METODO_INCREMENTO<span color=\"#FF0042\"> par_cierra<br>"+ 
+            err_gramatica.add("FOR ::= res_for par_abre res_def TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma <span color=\"#FF0042\">METODO_INCREMENTO<span color=\"#FF0042\"> par_cierra<br>"+ 
                 "llave_abre<br>"+ 
                 "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+ 
                 "llave_cierra"); 
             break;
         case 317:
-            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO <span color=\"#FF0042\">par_cierra<span color=\"#FF0042\"><br>"+ 
+            err_gramatica.add("FOR ::= res_for par_abre res_def TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO <span color=\"#FF0042\">par_cierra<span color=\"#FF0042\"><br>"+ 
                 "llave_abre<br>"+ 
                 "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+ 
                 "llave_cierra"); 
             break;
         case 318:
-            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
+            err_gramatica.add("FOR ::= res_for par_abre res_def TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
                 "<span color=\"#FF0042\">llave_abre<span color=\"#FF0042\"><br>"+ 
                 "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+ 
                 "llave_cierra"); 
             break;
         case 319:
-            err_gramatica.add("FOR ::= res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
+            err_gramatica.add("FOR ::= res_for par_abre res_def TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
                 "llave_abre<br>"+ 
                 "&nbsp&nbsp&nbsp&nbsp <span color=\"#FF0042\">SENTENCIA_STARTUP<span color=\"#FF0042\"><br>"+ 
                 "llave_cierra"); 
@@ -742,7 +742,7 @@ non terminal INICIO, ESTRUCTURA_BASICA,DECLARACION,
 FUNCIONES, FUNCION, CONFIG, STARTUP,SENTENCIA_STARTUP,SENTENCIA_CONFIG, TIPO_DATO, PARAMETRO , PIN, DISPLAY, DISPLAY_PARAMS,
 TYPE, TYPE_IO, SCALE,DOWHILE,EXPRESION, OPERACION,IF,CASO,WHILE,SWITCH,SWITCH_ENTRADAS,VOLT, MAX_VOLT, WAIT, CONDICION, MODE, 
 VALOR_NUMERICO ,OPERADORES_CONTRACCION,INCREMENTO_FOR,INCREMENTO,FOR,OUT,SLEEP,OPERACION_PROC, OPERADOR,VALOR,TIPO_DATO_FOR, 
-OPERADOR_CONDICIONAL,RETURN,IN,SENTENCIA_FUNCION,OPERADOR_ARITMETICO,METODO_INCREMENTO,OPERACION_CONTRACCION,OPE,TERM,FACTOR;
+OPERADOR_CONDICIONAL,RETURN,IN,SENTENCIA_FUNCION,OPERADOR_ARITMETICO,METODO_INCREMENTO,OPERACION_CONTRACCION,OPE,TERM,FACTOR,DECLARACION_PARAMETRO;
 
 
 start with INICIO;
@@ -839,17 +839,17 @@ FUNCION ::=
     res_function:i TIPO_DATO Identificador:id par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra:f {:
-        rollist(id,"Funcion",null,iright+1,fright+1)
+        rollist(id,"Funcion",null,iright+1,fright+1);
     :}|
     res_function:i res_void Identificador:id par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra:f {:
-        rollist(id,"Funcion",null,iright+1,fright+1)
+        rollist(id,"Funcion",null,iright+1,fright+1);
     :}| 
     res_function:i res_void Identificador:id par_abre par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra:f {:
-        rollist(id,"Funcion",null,iright+1,fright+1)
+        rollist(id,"Funcion",null,iright+1,fright+1);
     :}|
     res_function Identificador par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
@@ -1645,14 +1645,95 @@ VALOR_NUMERICO ::=
 ;
 
 PARAMETRO ::=
-    DECLARACION | 
-    PARAMETRO coma DECLARACION |
-    PARAMETRO DECLARACION {:
+    DECLARACION_PARAMETRO | 
+    PARAMETRO coma DECLARACION_PARAMETRO |
+    PARAMETRO DECLARACION_PARAMETRO {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaban parámetros separados por coma");
         //-err_linea.add(Ç);
         errores_gramatica(7018);
     :} 
 ;
+
+DECLARACION_PARAMETRO ::= 
+    res_def:i TIPO_DATO:dato Identificador:id sig_punto_coma:f
+    {: //vamos a validar cuando aparecen estas expresiones
+        System.out.println("tipo: "+ dato + " identificador: "+ id + " valor null ");
+        var_identificador.add(id);
+        var_tipo_dato.add(dato);
+        var_valor.add(null);
+        rollist(id, "Parámetro", dato, iright+1, fright+1);
+        System.out.println(var_identificador.size());
+    :} |
+    res_def:i TIPO_DATO:dato Identificador:id asi_asignacion VALOR:val sig_punto_coma:f  
+    {: //vamos a validar cuando aparecen estas expresiones
+        System.out.println("tipo: "+ dato + " identificador: "+ id + " valor "+val);
+        var_identificador.add(id);
+        var_tipo_dato.add(dato);
+        var_valor.add(val);        
+        rollist(id, "Parámetro", dato, iright+1, fright+1);
+        System.out.println(var_identificador.size());
+    :} |
+    res_def TIPO_DATO Identificador {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final de la declaración");
+        //-err_linea.add(Ç);
+    :} |
+    TIPO_DATO Identificador sig_punto_coma {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada def al inicio de la declaración");
+        //-err_linea.add(Ç);
+    :} |
+    res_def TIPO_DATO Identificador asi_asignacion VALOR {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final de la declaración");
+        //-err_linea.add(Ç);
+    :} |
+    TIPO_DATO Identificador asi_asignacion VALOR sig_punto_coma {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada def al inicio de la declaración");
+        //-err_linea.add(Ç);
+    :} |
+    res_def res_pin Identificador sig_punto_coma {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
+        //-err_linea.add(Ç);
+    :} |
+    res_def res_pin Identificador asi_asignacion VALOR sig_punto_coma {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
+        //-err_linea.add(Ç);
+    :} |
+    res_def res_pin par_abre Numero coma Identificador par_cierra sig_punto_coma {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
+        //-err_linea.add(Ç);
+    :} |
+    res_def res_display par_abre DISPLAY_PARAMS par_cierra sig_punto_coma {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método display");
+        //-err_linea.add(Ç);
+    :} |
+    res_def res_function TIPO_DATO Identificador par_abre PARAMETRO par_cierra llave_abre
+            SENTENCIA_FUNCION
+    llave_cierra{:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis para la creación de funciones");
+        //-err_linea.add(Ç);
+    :} |
+    res_def res_function res_void Identificador par_abre PARAMETRO par_cierra llave_abre
+        SENTENCIA_FUNCION
+    llave_cierra {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis para la creación de funciones");
+        //-err_linea.add(Ç); :} |
+    res_def res_type par_abre Identificador coma TYPE_IO par_cierra sig_punto_coma {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método type");
+        //-err_linea.add(Ç);
+    :} |
+    res_def res_scale par_abre Identificador coma Numero coma Numero par_cierra sig_punto_coma {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método scale");
+        //-err_linea.add(Ç);
+    :} |
+    res_def res_volt par_abre Identificador coma Numero par_cierra sig_punto_coma {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método volt");
+        //-err_linea.add(Ç);
+    :} |
+    res_def res_volt par_abre Identificador coma Numero coma Numero par_cierra sig_punto_coma {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método volt");
+        //-err_linea.add(Ç);
+    :} 
+;
+
 IF ::=
     res_if par_abre CONDICION par_cierra llave_abre
         SENTENCIA_STARTUP
@@ -2467,16 +2548,17 @@ SLEEP ::=
 ;
 
 FOR ::=
-    res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
+    res_for par_abre res_def:i TIPO_DATO_FOR:dato Identificador:id asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
     llave_abre 
         SENTENCIA_STARTUP 
-    llave_cierra |
+    llave_cierra {:
+        rollist(id,"Parámetro",dato,iright+1,iright+1);
+    :} |
     res_for par_abre sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
     llave_abre 
         SENTENCIA_STARTUP 
     llave_cierra |
-
-    res_for TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
+    res_for res_def TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
     llave_abre 
         SENTENCIA_STARTUP 
     llave_cierra
@@ -2494,7 +2576,7 @@ FOR ::=
         //-err_linea.add(Ç);
         errores_gramatica(310);
     :}|  
-    res_for par_abre TIPO_DATO_FOR asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
+    res_for par_abre res_def TIPO_DATO_FOR asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
     llave_abre 
         SENTENCIA_STARTUP 
     llave_cierra
@@ -2503,7 +2585,7 @@ FOR ::=
         //-err_linea.add(Ç);
         errores_gramatica(311);
     :} |
-    res_for par_abre TIPO_DATO_FOR Identificador VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
+    res_for par_abre res_def TIPO_DATO_FOR Identificador VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
     llave_abre 
         SENTENCIA_STARTUP 
     llave_cierra
@@ -2512,7 +2594,7 @@ FOR ::=
         //-err_linea.add(Ç);
         errores_gramatica(312);
     :}|
-    res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
+    res_for par_abre res_def TIPO_DATO_FOR Identificador asi_asignacion sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
     llave_abre 
         SENTENCIA_STARTUP 
     llave_cierra
@@ -2521,7 +2603,7 @@ FOR ::=
         //-err_linea.add(Ç);
         errores_gramatica(313);
     :}|
-    res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
+    res_for par_abre res_def TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
     llave_abre 
         SENTENCIA_STARTUP 
     llave_cierra
@@ -2539,7 +2621,7 @@ FOR ::=
         //-err_linea.add(Ç);
         errores_gramatica(315);
     :}|
-    res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma par_cierra 
+    res_for par_abre res_def TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma par_cierra 
     llave_abre 
         SENTENCIA_STARTUP 
     llave_cierra
@@ -2548,7 +2630,7 @@ FOR ::=
         //-err_linea.add(Ç);
         errores_gramatica(316);
     :}|
-    res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO 
+    res_for par_abre res_def TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO 
     llave_abre 
         SENTENCIA_STARTUP 
     llave_cierra
@@ -2557,7 +2639,7 @@ FOR ::=
         //-err_linea.add(Ç);
         errores_gramatica(317);
     :}|
-    res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_abre 
+    res_for par_abre res_def TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_abre 
     
         SENTENCIA_STARTUP 
     llave_cierra
@@ -2566,7 +2648,7 @@ FOR ::=
         //-err_linea.add(Ç);
         errores_gramatica(318);
     :}|
-    res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_abre 
+    res_for par_abre res_def TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_abre 
     llave_abre
     llave_cierra
     {:
@@ -2617,6 +2699,15 @@ FOR ::=
         err_msj.add("Error Sintáctico en la línea # | Se esperaba minimo una instrucción dentro de las llaves del for");
         //-err_linea.add(Ç);
         errores_gramatica(324);
+    :}|
+    res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
+    llave_abre 
+        SENTENCIA_STARTUP 
+    llave_cierra
+    {:
+        err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra def antes del tipo de dato");
+        //-err_linea.add(Ç);
+        errores_gramatica(336);
     :}
 
 ;
@@ -2625,7 +2716,10 @@ METODO_INCREMENTO ::=
 ;
 
 TIPO_DATO_FOR ::=
-    tip_int | tip_float | tip_double | tip_tinyint | 
+    tip_int:tipf{:RESULT = tipf;:} | 
+    tip_float:tipf{:RESULT = tipf;:} | 
+    tip_double:tipf{:RESULT = tipf;:} | 
+    tip_tinyint:tipf{:RESULT = tipf;:} | 
     tip_boolean 
     {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba un tipo de dato numérico");
