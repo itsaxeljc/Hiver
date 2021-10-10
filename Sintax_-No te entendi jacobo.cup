@@ -173,31 +173,6 @@ action code
         case 421:
             err_gramatica.add("CONDICION ::=<br>VALOR_NUMERICO <span color=\"#FF0042\">OPERADOR_CONDICIONAL</span> VALOR_NUMERICO | <br> log_not Identificador <span color=\"#FF0042\">OPERADOR_CONDICIONAL</span> CONDICION");
             break;
-        //GRAMATICAS IF
-        case 422:
-            err_gramatica.add(" IF ::=<br>res_if <span color=\"#FF0042\">par_abre</span> CONDICION par_cierra llave_abre<br>SENTENCIA_STARTUP<br>llave_cierra");
-            break;
-        case 423:
-            err_gramatica.add(" IF ::=<br>res_if par_abre CONDICION <span color=\"#FF0042\">par_cierra</span> llave_abre<br>SENTENCIA_STARTUP<br>llave_cierra");
-            break;
-        case 424:
-            err_gramatica.add(" IF ::=<br>res_if par_abre CONDICION par_cierra <span color=\"#FF0042\">llave_abre</span><br>SENTENCIA_STARTUP<br>llave_cierra");
-            break;
-        case 425:
-            err_gramatica.add(" IF ::=<br>res_if <span color=\"#FF0042\">par_abre</span> CONDICION par_cierra llave_abre<br>SENTENCIA_STARTUP<br>llave_cierra res_else llave_abre<br>SENTENCIA_STARTUP<br>llave_cierra");
-            break;
-        case 426:
-            err_gramatica.add(" IF ::=<br>res_if par_abre CONDICION <span color=\"#FF0042\">par_cierra</span> llave_abre<br>SENTENCIA_STARTUP<br>llave_cierra res_else llave_abre<br>SENTENCIA_STARTUP<br>llave_cierra");
-            break;
-        case 427:
-            err_gramatica.add(" IF ::=<br>res_if par_abre CONDICION par_cierra <span color=\"#FF0042\">llave_abre</span><br>SENTENCIA_STARTUP<br>llave_cierra res_else llave_abre<br>SENTENCIA_STARTUP<br>llave_cierra");
-            break;
-        case 428:
-            err_gramatica.add(" IF ::=<br>res_if par_abre CONDICION par_cierra llave_abre<br>SENTENCIA_STARTUP<br>llave_cierra res_else <span color=\"#FF0042\">llave_abre</span><br>SENTENCIA_STARTUP<br>llave_cierra");
-            break;
-        case 429:
-            err_gramatica.add(" IF ::=<br>res_if par_abre CONDICION par_cierra llave_abre<br>SENTENCIA_STARTUP<br>llave_cierra <span color=\"#FF0042\">res_else</span> llave_abre<br>SENTENCIA_STARTUP<br>llave_cierra");
-            break;
         //GRAMATICAS CASO
         case 430:
             err_gramatica.add("SWITCH_ENTRADAS ::=<br>rel_menor <span color=\"#FF0042\">CASO</span>rel_mayor sim_dos_puntos SENTENCIA_STARTUP res_exit");
@@ -2520,7 +2495,7 @@ SLEEP ::=
 ;
 
 FOR ::=
-    res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
+    res_for par_abre res_def TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
     llave_abre 
         SENTENCIA_STARTUP 
     llave_cierra |
