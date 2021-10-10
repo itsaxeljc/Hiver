@@ -24,6 +24,12 @@ parser code
     public ArrayList getvar_err_msj() { return action_obj.err_msj; }
     public ArrayList getvar_err_gramatica() { return action_obj.err_gramatica; }
     public ArrayList getvar_idSemantico() { return action_obj.var_idSem; }
+                //ArrayList Para llenar la tabla de Simbolos
+    public ArrayList getvar_idSimb() { return action_obj.var_idSimb; }
+    public ArrayList getvar_rollSimb() { return action_obj.var_rollSimb; }
+    public ArrayList getvar_tipoSimb() { return action_obj.var_tipoSimb; }
+    public ArrayList getvar_lStartSimb() { return action_obj.var_lStartSimb; }
+    public ArrayList getvar_lEndSimb() { return action_obj.var_lEndSimb; }
 
 :};
 action code
@@ -44,6 +50,20 @@ action code
     public ArrayList err_lexema = new ArrayList();
     public ArrayList err_msj = new ArrayList();
     public ArrayList err_gramatica = new ArrayList();
+    // Para la tabla de Simbolos
+    public ArrayList var_idSimb = new ArrayList();
+    public ArrayList var_rollSimb = new ArrayList();
+    public ArrayList var_tipoSimb = new ArrayList();
+    public ArrayList var_lStartSimb = new ArrayList();
+    public ArrayList var_lEndSimb = new ArrayList();
+
+    public void rollist(Object identificador, String roll, Object tipo, short linStart, short linEnd) {
+        var_idSimb.add((String)identificador);
+        var_rollSimb.add(roll);
+        var_tipoSimb.add((String)tipo);
+        var_lStartSimb.add(linStart);
+        var_lEndSimb.add(linEnd);
+    }
 
     public void errores_gramatica (int error){ 
         /*Pedro Id: 3
