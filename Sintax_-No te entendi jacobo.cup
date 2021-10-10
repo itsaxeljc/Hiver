@@ -60,7 +60,7 @@ action code
     public ArrayList var_lEndSimb = new ArrayList();
 
     public void rollist(String identificador, String roll, String tipo, small linStart, small linEnd) {
-        var_idSimb.add(identificador;)
+        var_idSimb.add(identificador);
         var_rollSimb.add(roll);
         var_tipoSimb.add(tipo);
         var_lStartSimb.add(lStart);
