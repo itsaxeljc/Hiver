@@ -23,6 +23,7 @@ parser code
     public ArrayList getvar_err_linea() { return action_obj.err_linea; }
     public ArrayList getvar_err_msj() { return action_obj.err_msj; }
     public ArrayList getvar_err_gramatica() { return action_obj.err_gramatica; }
+    public ArrayList getvar_idSemantico() { return action_obj.var_idSem; }
 
 :};
 action code
@@ -32,6 +33,8 @@ action code
     Stack<Display> display = new Stack<>();
     Display tmp;
 
+    // para el semantico
+    public ArrayList var_idSem = new ArrayList();
     // para la tabla de variables
     public ArrayList var_identificador = new ArrayList();
     public ArrayList var_tipo_dato = new ArrayList();
@@ -406,7 +409,7 @@ non terminal INICIO, ESTRUCTURA_BASICA,DECLARACION,
 FUNCIONES, FUNCION, CONFIG, STARTUP,SENTENCIA_STARTUP,SENTENCIA_CONFIG, TIPO_DATO, PARAMETRO , PIN, DISPLAY, DISPLAY_PARAMS,
 TYPE, TYPE_IO, SCALE,DOWHILE,EXPRESION, OPERACION,IF,CASO,WHILE,SWITCH,SWITCH_ENTRADAS,VOLT, MAX_VOLT, WAIT, CONDICION, MODE, 
 VALOR_NUMERICO ,OPERADORES_CONTRACCION,INCREMENTO_FOR,INCREMENTO,FOR,OUT,SLEEP,OPERACION_PROC, OPERADOR,VALOR,TIPO_DATO_FOR, 
-OPERADOR_CONDICIONAL,RETURN,IN,SENTENCIA_FUNCION,OPERADOR_ARITMETICO,METODO_INCREMENTO,OPERACION_CONTRACCION;
+OPERADOR_CONDICIONAL,RETURN,IN,SENTENCIA_FUNCION,OPERADOR_ARITMETICO,METODO_INCREMENTO,OPERACION_CONTRACCION,OPE,TERM,FACTOR;;
 
 
 start with INICIO;
@@ -1746,35 +1749,32 @@ DOWHILE ::=
 ;
 
 EXPRESION ::=
-    Identificador asi_asignacion OPERACION sig_punto_coma|
-    Identificador asi_asignacion IN
+    Identificador:id asi_asignacion OPE sig_punto_coma
+    {: //Obtener variables usadas
+        var_idSem.add(id);
+    :}|
+    Identificador:id asi_asignacion IN
+    {: //Obtener variables usadas
+        var_idSem.add(id);
+    :}
 ;
 
-OPERACION ::=
-    VALOR OPERADOR VALOR | par_abre OPERACION par_cierra |
-    OPERACION OPERACION_PROC | VALOR
-    | 
-    OPERADOR VALOR
-    {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba otro valor o identificador");
-        //-err_linea.add(Ç);
+OPE ::=
+    OPE ari_suma TERM | OPE ari_resta TERM | TERM
+;
+
+TERM ::=
+    TERM ari_multiplicacion FACTOR | TERM ari_division FACTOR | FACTOR
+;
+
+FACTOR ::=
+    VALOR:id
+    {: //Obtener variable usadas
+        if(id.toString().matches("([(a-z)(A-Z)](\\w)*)")){
+            var_idSem.add(id);
+        }
     :}|
-    par_cierra OPERACION par_abre
-    {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un orden correcto en los paréntesis");
-        //-err_linea.add(Ç);
-    :}
-    |
-     par_cierra OPERACION par_cierra
-    {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un orden correcto en los paréntesis");
-        //-err_linea.add(Ç);
-    :}|
-     par_abre OPERACION par_abre
-    {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un orden correcto en los paréntesis");
-        //-err_linea.add(Ç);
-    :}   
+    par_abre OPE par_cierra | ari_resta FACTOR
 ;
 
 OPERACION_PROC ::=
