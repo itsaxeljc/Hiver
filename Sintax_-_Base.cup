@@ -1678,7 +1678,7 @@ PARAMETRO ::=
 DECLARACION_PARAMETRO ::= 
     res_def:i TIPO_DATO:dato Identificador:id
     {: //vamos a validar cuando aparecen estas expresiones
-        if(!idExiste(id+""))
+        if(!idExiste(id+"")){
             System.out.println("tipo: "+ dato + " identificador: "+ id + " valor null ");
             var_identificador.add(id);
             var_tipo_dato.add(dato);
@@ -1692,7 +1692,7 @@ DECLARACION_PARAMETRO ::=
     :} |
     res_def:i TIPO_DATO:dato Identificador:id asi_asignacion VALOR:val 
     {: //vamos a validar cuando aparecen estas expresiones
-        if(!idExiste(id+""))
+        if(!idExiste(id+"")){
             System.out.println("tipo: "+ dato + " identificador: "+ id + " valor "+val);
             var_identificador.add(id);
             var_tipo_dato.add(dato);
