@@ -174,22 +174,47 @@ public class CompilerComp extends javax.swing.JFrame {
             var_identificador = parser.getvar_identificador();
             var_tipo_dato = parser.getvar_tipo_dato();
             var_valor = parser.getvar_valor();
+            lineaInConfig = parser.getvar_inicioConfig();
+            lineaFinConfig = parser.getvar_finConfig();
+            lineaInStart = parser.getvar_inicioStart();
+            lineaFinStart = parser.getvar_finStart();
+            lineaIConfig = Integer.parseInt(lineaInConfig.get(0).toString());
+            lineaFConfig = Integer.parseInt(lineaFinConfig.get(0).toString());
+            lineaIStart = Integer.parseInt(lineaInStart.get(0).toString());
+            lineaFStart = Integer.parseInt(lineaFinStart.get(0).toString());
+            pnlSalida.textPane.setText(pnlSalida.textPane.getText() + "\n"+ lineaInConfig.get(0) + " " + lineaFinConfig.get(0) + " " + lineaInStart.get(0) + " " 
+                    + lineaFinStart.get(0) + "\n");
+            
+            // Variables tabla de simbolos
+            var_idSimb = parser.getvar_idSimb();
+            var_rollSimb = parser.getvar_rollSimb();
+            var_tipoSimb = parser.getvar_tipoSimb();
+            var_lStartSimb = parser.getvar_lStartSimb();
+            var_lEndSimb = parser.getvar_lEndSimb();
 
             System.out.println(var_identificador.get(0).toString());
 
             pnlSalida.textPane.setText(pnlSalida.textPane.getText() + "----------Analisis finalizado----------");
-            llenarVariable();
-            
+            // Llenar la tabla de simbolos y luego con esa información la de variables
+            llenarTablaSimbolos();
+            //llenarVariable();
+            // Obtener lista con los datos de las variables
             GuardarDatosEnLista();
+            analisisSemantico();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         
+    }
+    
+    void analisisSemantico(){
         //Comienza analisis semantico
         String erroresSem = "";
         for(int i = 0; i < var_idSem.size(); i++){
+            
             int encontrado = -1;
             encontrado = LTINT.indexOf(var_idSem.get(i).toString());
+            
             encontrado = (encontrado == -1) ? LENT.indexOf(var_idSem.get(i).toString()) : 1;
             encontrado = (encontrado == -1) ? LFLO.indexOf(var_idSem.get(i).toString()) : 1;
             encontrado = (encontrado == -1) ? LDOU.indexOf(var_idSem.get(i).toString()) : 1;
@@ -201,9 +226,100 @@ public class CompilerComp extends javax.swing.JFrame {
         }
         pnlSalida.textPane.setText(pnlSalida.textPane.getText()+erroresSem);
         pnlSalida.textPane.setText(pnlSalida.textPane.getText() + "\n----------Analisis Semantico finalizado----------");
-        var_identificador = new ArrayList();
+        
+        /*var_identificador = new ArrayList();
         var_tipo_dato = new ArrayList();
-        var_valor = new ArrayList();
+        var_valor = new ArrayList();*/
+    }
+    
+    void llenarTablaSimbolos(){
+        DefaultTableModel simbolos, variables;
+        simbolos = (DefaultTableModel) pts.tblVariables.getModel();
+        variables = (DefaultTableModel) ptd.tblDinSim.getModel();
+        int varLenght = simbolos.getRowCount();
+        for (int i = varLenght - 1; i >= 0; i--) {
+            simbolos.removeRow(i);
+        }
+        
+        /* VARIABLES A UTILIZAR
+        var_idSimb = parser.getvar_idSimb();
+        var_rollSimb = parser.getvar_rollSimb();
+        var_tipoSimb = parser.getvar_tipoSimb();
+        var_lStartSimb = parser.getvar_lStartSimb();
+        var_lEndSimb = parser.getvar_lEndSimb();*/
+
+        int size = var_idSimb.size();
+        boolean entro = false;
+        Object temp[] = new Object[6];
+        System.err.println("Tamaño: " + size);
+        for (int i = 0; i < size; i++) {
+            temp[0] = var_idSimb.get(i);
+            temp[1] = var_rollSimb.get(i);
+            int lineaInicio = Integer.parseInt(var_lStartSimb.get(i).toString());
+            int lineaFin = Integer.parseInt(var_lEndSimb.get(i).toString());
+            if(lineaIConfig <= lineaInicio && lineaFConfig >= lineaFin){
+                temp[2] = "GLOBAL";
+            }else{
+                temp[2] = "LOCAL";
+            }
+            temp[3] = var_tipoSimb.get(i);
+            temp[4] = var_lStartSimb.get(i);
+            temp[5] = var_lEndSimb.get(i);
+            //System.out.println(temp[0] +" " + temp[1] + " " + temp[2] + " " + temp[3] + " " + temp[4] + " " + temp[5]);
+            simbolos.addRow(temp);
+
+        }
+        // Llenar la tabla de variables
+        Object temp2[] = new Object[5];
+        
+        int numVar = 0;
+        int filas = variables.getRowCount();
+        for(int i = 0; i < filas; i++){
+            variables.removeRow(0);
+        }
+        for (int i = 0; i < size; i++) {
+            
+            temp2[0] = var_idSimb.get(i);
+            temp2[1] = var_tipoSimb.get(i);
+            
+            if(temp2[1] == null){
+                
+            }else if(var_rollSimb.get(i).toString().equals("Variable") || var_rollSimb.get(i).toString().equals("Parámetro")){
+                System.out.println("Variable " + var_rollSimb.get(i).toString() + " " + temp2[0]);
+                temp2[2] = var_valor.get(numVar);
+                numVar++;
+                int lineaInicio = Integer.parseInt(var_lStartSimb.get(i).toString());
+                int lineaFin = Integer.parseInt(var_lEndSimb.get(i).toString());
+                if(lineaIConfig <= lineaInicio && lineaFConfig >= lineaFin){
+                    temp2[4] = "GLOBAL";
+                    temp2[3] = "config";
+                }else{
+                    temp2[4] = "LOCAL";
+                    if(lineaIStart <= lineaInicio && lineaFStart >= lineaFin){
+                        temp2[3] = "start-end";
+                    }else{
+                        for (int j = 0; j < size; j++){
+                            if(var_rollSimb.get(j).toString().equals("Funcion")){
+                                int lineaInicioFunci = Integer.parseInt(var_lStartSimb.get(j).toString());
+                                int lineaFinFunci = Integer.parseInt(var_lEndSimb.get(j).toString());
+                                if(lineaInicioFunci <= lineaInicio && lineaFinFunci >= lineaFin){
+                                    temp2[3] = var_idSimb.get(j).toString();
+                                }
+                            }
+                        }
+                    }
+                }
+                variables.addRow(temp2);
+                
+                System.out.println(temp2[0] +" " + temp2[1] + " " + temp2[2] + " " + temp2[3] + " " + temp2[4]);
+            }
+        }
+        
+        /*var_idSimb = new ArrayList();
+        var_rollSimb = new ArrayList();
+        var_tipoSimb = new ArrayList();
+        var_lStartSimb = new ArrayList();
+        var_lEndSimb = new ArrayList();*/
         
     }
     
@@ -248,12 +364,13 @@ public class CompilerComp extends javax.swing.JFrame {
 
         int size = var_identificador.size();
         boolean entro = false;
-        Object temp[] = new Object[3];
+        Object temp[] = new Object[5];
         System.err.println("Tamaño: " + size);
         for (int i = 0; i < size; i++) {
             temp[0] = var_identificador.get(i);
             temp[1] = var_tipo_dato.get(i);
             temp[2] = var_valor.get(i);
+            
             if (variables.getRowCount() == 0) {
                 variables.addRow(temp);
             } else {
@@ -955,10 +1072,6 @@ public class CompilerComp extends javax.swing.JFrame {
 
     }//GEN-LAST:event_execMouseClicked
 
-    private void llenarTablaSimbolos(){
-        
-    }
-    
     private void ini() {
         undoKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK);
         redoKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_Y, KeyEvent.CTRL_DOWN_MASK);
@@ -1368,6 +1481,21 @@ public class CompilerComp extends javax.swing.JFrame {
     public LinkedList <String> LCHAR;
     public LinkedList <String> LBOL;
     public LinkedList <String> LPIN;
+    // Lineas
+    public ArrayList lineaInConfig;
+    public ArrayList lineaFinConfig;
+    public ArrayList lineaInStart;
+    public ArrayList lineaFinStart;
+    public int lineaIConfig;
+    public int lineaFConfig;
+    public int lineaIStart;
+    public int lineaFStart;
+    // Tabla de simbolos
+    public ArrayList var_idSimb;
+    public ArrayList var_rollSimb;
+    public ArrayList var_tipoSimb;
+    public ArrayList var_lStartSimb;
+    public ArrayList var_lEndSimb;
     //
     public ArrayList var_idSem;
     public ArrayList linea;
