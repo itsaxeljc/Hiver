@@ -35,6 +35,7 @@ parser code
     public ArrayList getvar_tipoSimb() { return action_obj.var_tipoSimb; }
     public ArrayList getvar_lStartSimb() { return action_obj.var_lStartSimb; }
     public ArrayList getvar_lEndSimb() { return action_obj.var_lEndSimb; }
+    public ArrayList getvar_linExp() { return action_obj.var_linExp; }
 
 :};
 action code
