@@ -66,6 +66,7 @@ action code
     public ArrayList var_tipoSimb = new ArrayList();
     public ArrayList var_lStartSimb = new ArrayList();
     public ArrayList var_lEndSimb = new ArrayList();
+    public ArrayList var_linExp = new ArrayList();
 
     public void rollist(Object identificador, String roll, Object tipo, int linStart, int linEnd) {
         var_idSimb.add((String)identificador);
@@ -2263,13 +2264,15 @@ DOWHILE ::=
 ;
 
 EXPRESION ::=
-    Identificador:id asi_asignacion OPE sig_punto_coma
+    Identificador:id asi_asignacion OPE sig_punto_coma:l
     {: //Obtener variables usadas
         var_idSem.add(id);
+        var_linExp.add(lright+1);
     :}|
     Identificador:id asi_asignacion IN
     {: //Obtener variables usadas
         var_idSem.add(id);
+        var_linExp.add(lright+1);
     :}
 ;
 
