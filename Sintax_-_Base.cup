@@ -681,10 +681,180 @@ action code
         case 7041:
             err_gramatica.add("WAIT res_wait par_abre CONDICION <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
             break;
+  // GRAMÁTICA: RETURN 
+
+            case 717:
+                err_gramatica.add("RETURN ::= res_return Identificador <span color=\"#FF0042\">sig_punto_coma</span>");
+                break;
+            case 718:
+                err_gramatica.add("RETURN ::= res_return TIPO_DATO <span color=\"#FF0042\">sig_punto_coma</span>");
+                break;            
+// GRAMÁTICA: ESTRUCTURA_BASICA
+
+            case 700:
+                err_gramatica.add("ESTRUCTURA_BASICA ::= <p color=\"#FF0042\">STARTUP_CONFIG</p>");
+                break;
+            case 701:
+                err_gramatica.add("ESTRUCTURA_BASICA ::= <p color=\"#FF0042\">CONFIG</p>");
+                break;   
+            case 702:
+                err_gramatica.add("ESTRUCTURA_BASICA ::= <p color=\"#FF0042\">STARTUP</p>");
+                break;   
+            case 703:
+                err_gramatica.add("ESTRUCTURA_BASICA ::= <p color=\"#FF0042\">FUNCIONES</p>");
+                break;   
+            case 704:
+                err_gramatica.add("ESTRUCTURA_BASICA ::= <p color=\"#FF0042\">FUNCIONES CONFIG</p>");
+                break;           
+            case 705:
+                err_gramatica.add("ESTRUCTURA_BASICA ::= <p color=\"#FF0042\">FUNCIONES STARTUP</p>");
+                break;
+            case 706:
+                err_gramatica.add("ESTRUCTURA_BASICA ::= <p color=\"#FF0042\">STARTUP FUNCIONES</p>");
+                break;  
+   // GRAMÁTICA: CONFIG 
+            case 21: 
+                err_gramatica.add("CONFIG ::= res_config <span color=\"#FF0042\">llave_abre </span> SENTENCIA_CONFIG llave_cierra ");
+                break;               
+// GRAMÁTICA: DECLARACIÓN
+
+            case 719:
+                err_gramatica.add("DECLARACION ::= res_def TIPO_DATO Identificador VALOR <span color=\"#FF0042\">sig_punto_coma</span> ");
+                break;
+            case 720:
+                err_gramatica.add("DECLARACION ::= <span color=\"#FF0042\">res_def</span> TIPO_DATO Identificador sig_punto_coma");
+                break;    
+            case 721:
+                err_gramatica.add("DECLARACION ::= res_def TIPO_DATO Identificador asi_asignacion VALOR <span color=\"#FF0042\">sig_punto_coma</span>");
+                break;  
+            case 722:      
+                err_gramatica.add("DECLARACION ::= <span color=\"#FF0042\">res_def</span> TIPO_DATO Identificador asi_asignacion VALOR sig_punto_coma");
+                break;
+            case 723:
+                err_gramatica.add("DECLARACION ::=  res_def res_pin <span color=\"#FF0042\">par_abre Numero coma Identificador par_cierra</span> sig_punto_coma");
+                break; 
+            case 724:
+                err_gramatica.add("DECLARACION ::= res_def res_pin <span color=\"#FF0042\">Identificador</span> asi_asignacion VALOR sig_punto_coma");
+                break; 
+            case 725:
+                err_gramatica.add("DECLARACION ::= res_def res_pin par_abre Numero coma <span color=\"#FF0042\">Identificador</span> par_cierra sig_punto_coma");
+                break; 
+            case 726:
+                err_gramatica.add("DECLARACION ::= res_def res_display par_abre <span color=\"#FF0042\">DISPLAY_PARAMS</span> par_cierra sig_punto_coma");
+                break;
+            case 727:
+                err_gramatica.add("DECLARACION ::= res_def res_function <span color=\"#FF0042\">TIPO_DATO Identificador</span></span> par_abre PARAMETRO par_cierra llave_abre SENTENCIA_FUNCION  llave_cierra");
+                break;
+            case 728:
+                err_gramatica.add("DECLARACION ::= res_def res_function res_void <span color=\"#FF0042\">Identificador</span> par_abre PARAMETRO par_cierra llave_abre SENTENCIA_FUNCION    llave_cierra");
+                break;
+            case 729:
+                err_gramatica.add("DECLARACION ::= res_def res_type par_abre <span color=\"#FF0042\">Identificador coma TYPE_IO</span> par_cierra sig_punto_coma");
+                break;
+            case 730:
+                err_gramatica.add("DECLARACION ::= res_def res_scale par_abre <span color=\"#FF0042\">Identificador coma Numero coma Numero</span> par_cierra sig_punto_coma");
+                break;
+            case 731:
+                err_gramatica.add("DECLARACION ::= res_def res_volt par_abre <span color=\"#FF0042\">Identificador coma Numero</span> par_cierra sig_punto_coma");
+                break;
+            case 732:
+                err_gramatica.add("DECLARACION ::= res_def res_volt par_abre <span color=\"#FF0042\">Identificador coma Numero coma Numero</span> par_cierra sig_punto_coma");
+                break;
+    //GRAMATICA: PIN 
+            case 22:
+            err_gramatica.add("PIN ::= res_pin par_abre Numero coma Identificador par_cierra <span color=\"#FF0042\">sig_punto_coma</span>");
+            break;
+            case 23:  
+            err_gramatica.add("PIN ::= res_pin par_abre <span color=\"#FF0042\">Numero coma</span> Identificador par_cierra sig_punto_coma");
+            break;
+            case 24:
+            err_gramatica.add("PIN ::= res_pin par_abre Numero <span color=\"#FF0042\"> coma Identificador </span> par_cierra sig_punto_coma");
+            break;
+            case 25:
+            err_gramatica.add("PIN ::= res_pin par_abre <span color=\"#FF0042\"> Numero coma Identificador </span>par_cierra sig_punto_coma");
+            break;
+            case 26:
+            err_gramatica.add("PIN ::= res_pin <span color=\"#FF0042\">par_abre</span> Numero coma Identificador par_cierra sig_punto_coma");
+            break;
+            case 27:
+            err_gramatica.add("PIN ::= res_pin par_abre Numero coma Identificador <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
+            break;
+ // GRAMÁTICA: DISPLAY_PARAMS
+
+            case 733:
+                err_gramatica.add("DISPLAY_PARAMS ::= Numero coma <span color=\"#FF0042\">Numero</span>");
+                break;
+            case 734:
+                err_gramatica.add("DISPLAY_PARAMS ::= Numero <span color=\"#FF0042\">coma</span> DISPLAY_PARAMS");
+                break;    
+            case 735:
+                err_gramatica.add("DISPLAY_PARAMS ::= Numero coma<span color=\"#FF0042\"> Numero</span> coma <span color=\"#FF0042\"> Numero</span> coma <span color=\"#FF0042\"> Numero</span>");
+                break;
+            case 736:
+                err_gramatica.add("DISPLAY_PARAMS ::= Numero coma <span color=\"#FF0042\"> Numero</span> coma Numero");
+                break;   
+//GRAMATICA: TYPE 
+            case 28:
+            err_gramatica.add("TYPE ::= res_type par_abre Identificador coma TYPE_IO par_cierra <span color=\"#FF0042\">sig_punto_coma</span>");
+            break;
+            case 29:
+            err_gramatica.add("TYPE ::= res_type <span color=\"#FF0042\">par_abre</span> Identificador coma TYPE_IO par_cierra sig_punto_coma");
+            break;
+            case 201:
+            err_gramatica.add("TYPE ::= res_type par_abre Identificador coma TYPE_IO <span color=\"#FF0042\"> par_cierra</span> sig_punto_coma");
+            break;
+            case 202:
+            err_gramatica.add("TYPE ::= res_type <span color=\"#FF0042\">par_abre</span> Identificador coma TYPE_IO <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
+            break;
+            case 203:
+            err_gramatica.add("TYPE ::= res_type par_abre Identificador <span color=\"#FF0042\">coma</span> TYPE_IO par_cierra sig_punto_coma");
+            break;
+            case 204:
+            err_gramatica.add("TYPE ::= res_type par_abre <span color=\"#FF0042\">Identificador coma</span> TYPE_IO par_cierra sig_punto_coma");
+            break;
+            case 205:
+            err_gramatica.add("TYPE ::= res_type par_abre Identificador coma <span color=\"#FF0042\">TYPE_IO</span> par_cierra sig_punto_coma");
+            break;
+            case 206:
+            err_gramatica.add("TYPE ::= res_type par_abre <span color=\"#FF0042\">Identificador coma TYPE_IO </span> par_cierra sig_punto_coma");
+            break;
+            case 207:
+            err_gramatica.add("TYPE ::= res_type par_abre <span color=\"#FF0042\">Identificador</span> coma TYPE_IO par_cierra sig_punto_coma");
+            break;
+            case 208:
+            err_gramatica.add("TYPE ::= res_type par_abre Identificador coma <span color=\"#FF0042\"> TYPE_IO par_cierra</span> sig_punto_coma");
+            break;   
+            // GRAMÁTICA: SCALE
+            case 737:
+            err_gramatica.add("SCALE ::= res_scale par_abre Identificador coma Numero coma Numero par_cierra <span color=\"#FF0042\">sig_punto_coma</span>");
+            break; 
+            case 738:
+            err_gramatica.add("SCALE ::= res_scale par_abre <span color=\"#FF0042\">Identificador</span> coma Numero coma Numero par_cierra sig_punto_coma");
+            break; 
+            case 739:
+            err_gramatica.add("SCALE ::= res_scale par_abre Identificador <span color=\"#FF0042\">coma Numero coma Numero</span> par_cierra sig_punto_coma");
+            break; 
+            case 740:
+            err_gramatica.add("SCALE ::= es_scale par_abre <span color=\"#FF0042\"> Numero coma Numero coma</span> Identificador par_cierra sig_punto_coma");
+            break;
+            case 741:
+            err_gramatica.add("SCALE ::= res_scale par_abre <span color=\"#FF0042\"> Numero coma </span>  Identificador par_cierra sig_punto_coma");
+            break; 
+            case 742:
+            err_gramatica.add("SCALE ::= res_scale <span color=\"#FF0042\"> par_abre </span> Identificador coma Numero coma Numero par_cierra sig_punto_coma");
+            break; 
+            case 743:
+            err_gramatica.add("SCALE ::= res_scale par_abre Identificador coma Numero coma Numero <span color=\"#FF0042\"> par_cierra </span> sig_punto_coma");
+            break;                        
+
         case 9999:
             err_gramatica.add(null);
             break;
+        case 10:// este es el id para los errores semanticos de Jon
+                err_gramatica.add(null);
+                break;    
         }
+        
            
     }
 
@@ -813,41 +983,49 @@ ESTRUCTURA_BASICA ::=
     {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba que bloque CONFIG se situara antes del bloque START-END");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(700);
     :} |
     CONFIG 
     {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba el bloque START-END después del bloque CONFIG");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(701);
      :} |
     STARTUP
     {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba el bloque CONFIG antes del bloque START-END");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(702);
     :} |
     FUNCIONES
     {:
        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban los bloques CONFIG y START-END");
        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+       errores_gramatica(703);
     :} |
     FUNCIONES CONFIG
     {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba el bloque START-END después del bloque CONFIG");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(704);
     :} |
     CONFIG FUNCIONES
     {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba el bloque START-END después del bloque CONFIG");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(705);
     :} |
     FUNCIONES STARTUP
     {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba el bloque CONFIG antes del bloque START-END");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(706);
     :} |
     STARTUP FUNCIONES
     {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba el bloque CONFIG antes del bloque START-END");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+         errores_gramatica(706);
     :} 
 ;
 
@@ -942,10 +1120,12 @@ RETURN ::=
     res_return Identificador {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; después de identificador");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(717);
     :} |
     res_return TIPO_DATO {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; después del tipo de dato");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(718);
     :} | 
     error sig_punto_coma
     {:
@@ -966,6 +1146,7 @@ CONFIG ::=
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba llave de apertura al inicio del bloque config");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(21);
     :} 
     | error sig_punto_coma
     | error llave_cierra
@@ -1066,6 +1247,7 @@ DECLARACION ::=
         }else{
             err_msj.add("Error Semantico en la línea " + (fright+1) + " variable " + id + " ya declarada");
             err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+            errores_gramatica(10);
         }
     :} |
     res_def:i TIPO_DATO:dato Identificador:id asi_asignacion VALOR:val sig_punto_coma:f  
@@ -1080,66 +1262,82 @@ DECLARACION ::=
         }else{
             err_msj.add("Error Semantico en la línea " + (fright+1) + " variable " + id + " ya declarada");
             err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+            errores_gramatica(10);
         }
     :} |
     res_def TIPO_DATO Identificador {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final de la declaración");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(719);
     :} |
     TIPO_DATO Identificador sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba la palabra reservada def al inicio de la declaración");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(720);
     :} |
     res_def TIPO_DATO Identificador asi_asignacion VALOR {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final de la declaración");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(721);
     :} |
     TIPO_DATO Identificador asi_asignacion VALOR sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba la palabra reservada def al inicio de la declaración");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(722);
     :} |
     res_def res_pin Identificador sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(723);
     :} |
     res_def res_pin Identificador asi_asignacion VALOR sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(724);
     :} |
     res_def res_pin par_abre Numero coma Identificador par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(725);
     :} |
     res_def res_display par_abre DISPLAY_PARAMS par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método display");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(726);
     :} |
     res_def res_function TIPO_DATO Identificador par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra{:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis para la creación de funciones");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(728);
     :} |
     res_def res_function res_void Identificador par_abre PARAMETRO par_cierra llave_abre
         SENTENCIA_FUNCION
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis para la creación de funciones");
-        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)); :} |
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)); 
+        errores_gramatica(728);
+        :} |
     res_def res_type par_abre Identificador coma TYPE_IO par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método type");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(729);
     :} |
     res_def res_scale par_abre Identificador coma Numero coma Numero par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método scale");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(730);
     :} |
     res_def res_volt par_abre Identificador coma Numero par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método volt");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(731);
     :} |
     res_def res_volt par_abre Identificador coma Numero coma Numero par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método volt");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(732);
     :} 
 ;
 
@@ -1151,26 +1349,32 @@ PIN ::=
     res_pin par_abre Numero coma Identificador par_cierra {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final del método pin");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(22);
     :}  |
     res_pin par_abre Identificador par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba número de pin antes de identificador");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(23);
     :}  |
     res_pin par_abre Numero par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador de pin después del número de pin");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(24);
     :} |
     res_pin par_abre Identificador coma Numero par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba número de pin como primer parámetro del método pin");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(25);
     :} |
     res_pin Numero coma Identificador par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de apertura después de la palabra reservada pin");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(26);
     :} |
     res_pin Numero par_abre coma Identificador sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de cierre después de los parámetros del método pin");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(27);
     :}
 ;
 
@@ -1204,26 +1408,32 @@ DISPLAY_PARAMS ::=
     Numero coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un valor entero después de la coma");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(733);
     :}|
     Numero DISPLAY_PARAMS {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una coma entre cada parámetro");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(734);
     :}|
     Numero coma coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un valor entero después de cada coma");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(735);
     :}|
     Numero coma coma coma{:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un valor entero después de cada coma");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(736);
     :}|
     Numero coma coma coma coma{:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un valor entero después de cada coma");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(736);
     :}|
     Numero coma coma Numero{:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un valor entero después de cada coma");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(736);
     :}|
     error sig_punto_coma
     {:
@@ -1238,42 +1448,52 @@ TYPE ::=
     res_type par_abre Identificador coma TYPE_IO par_cierra {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final del método type");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(28);
     :}|
     res_type Identificador coma TYPE_IO par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de apertura después la palabra reservada type");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(29);
     :}|
     res_type par_abre Identificador coma TYPE_IO sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de cierre después de los parámetros del método type");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(201);
     :}|
     res_type Identificador coma TYPE_IO sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban paréntesis encerrando los parámetros del método type");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(202);
     :}| 
     res_type par_abre Identificador TYPE_IO  par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba coma separando los parámetros del método type");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(203);
     :}| 
     res_type par_abre TYPE_IO par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador como primer parámetro del método type");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(204);
     :}| 
     res_type par_abre Identificador coma VALOR_NUMERICO par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba INPUT o OUTPUT como segundo parámetro del método type");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(205);
     :}| 
     res_type par_abre par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un identificador y INPUT o OUTPUT como parámetros del método type");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(206);
     :}| 
     res_type par_abre Numero coma TYPE_IO par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador como primer parámetro del método type");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(207);
     :} |
     res_type par_abre Identificador coma TYPE_IO coma Numero par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban sólo dos parámetros dentro del método type");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(208);
     :} 
 ;
 
@@ -1303,30 +1523,37 @@ SCALE ::=
     res_scale par_abre Identificador coma Numero coma Numero par_cierra {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final del método scale");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(737);
     :} |
     res_scale par_abre Numero coma Numero par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador del pin como primer parámetro del método scale");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(738);
     :} | 
     res_scale par_abre Identificador coma Numero par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban dos parámetros numéricos después del identificador del pin");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(739);
     :} | 
     res_scale par_abre Numero coma Numero coma Identificador par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador del pin como primer parámetro del método scale");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(740);
     :} |
     res_scale par_abre Numero coma Identificador par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador del pin como primer parámetro del método scale");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(741);
     :} |
     res_scale Identificador coma Numero coma Numero par_cierra sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de apertura después de la palabra reservada scale");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(742);
     :} |
     res_scale par_abre Identificador coma Numero coma Numero sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de cierre después de los parámetros del método scale");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(743);
     :}
 ;
 
@@ -1744,6 +1971,7 @@ DECLARACION_PARAMETRO ::=
         }else{
             err_msj.add("Error Semantico en la línea " + (iright+1) + " variable " + id + " ya declarada");
             err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+            errores_gramatica(10);
         }
     :} |
     res_def:i TIPO_DATO:dato Identificador:id asi_asignacion VALOR:val 
@@ -1758,6 +1986,7 @@ DECLARACION_PARAMETRO ::=
         }else{
             err_msj.add("Error Semantico en la línea " + (iright+1) + " variable " + id + " ya declarada");
             err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+            errores_gramatica(10);
         }
     :}  |
     TIPO_DATO Identificador {:
