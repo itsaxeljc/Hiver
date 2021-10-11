@@ -681,6 +681,9 @@ action code
         case 7041:
             err_gramatica.add("WAIT res_wait par_abre CONDICION <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
             break;
+        case 9999:
+            err_gramatica.add(null);
+            break;
         }
            
     }
@@ -793,6 +796,7 @@ INICIO ::=
     {:
        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+       errores_gramatica(9999);
     :}
 ;
 
@@ -947,6 +951,7 @@ RETURN ::=
     {:
        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+       errores_gramatica(9999);
     :}
 ;
 CONFIG ::= 
@@ -1008,6 +1013,7 @@ SENTENCIA_CONFIG ::=
     {:
        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+       errores_gramatica(9999);
     :}
 ;
 
@@ -1223,6 +1229,7 @@ DISPLAY_PARAMS ::=
     {:
        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+       errores_gramatica(9999);
     :}
 ;
 
@@ -1287,6 +1294,7 @@ TYPE_IO ::=
     {:
        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+       errores_gramatica(9999);
     :}
 ;
 
@@ -1517,6 +1525,7 @@ CONDICION ::=
     {:
        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+       errores_gramatica(9999);
     :}
 ;
 
@@ -1697,6 +1706,7 @@ VALOR ::=
     {:
        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+       errores_gramatica(9999);
     :}
     
 ;
@@ -1717,6 +1727,7 @@ PARAMETRO ::=
     {:
        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+       errores_gramatica(9999);
     :}
 ;
 
@@ -2400,6 +2411,7 @@ OPERADOR ::=
     {:
        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+       errores_gramatica(9999);
     :}
 ;
 
@@ -2832,6 +2844,7 @@ TIPO_DATO_FOR ::=
     {:
        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+       errores_gramatica(9999);
     :}
 ;
 INCREMENTO ::=
@@ -2841,6 +2854,7 @@ INCREMENTO ::=
     {:
        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+       errores_gramatica(9999);
     :}
 ;
 
@@ -2850,6 +2864,7 @@ OPERADOR_ARITMETICO ::=
     {:
        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+       errores_gramatica(9999);
     :}
 ;                                                                                          
 
@@ -2886,5 +2901,6 @@ OPERACION_CONTRACCION ::=
     {:
        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+       errores_gramatica(9999);
     :}
 ;
