@@ -75,6 +75,15 @@ action code
         var_lEndSimb.add(linEnd);
     }
 
+    public boolean idExiste(String a) {// comprobar id si existen en la tabla de simbolo
+        for (int i = 0; i < var_identificador.size(); i++) {
+            if (var_identificador.get(i).equals(a)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void errores_gramatica (int error){ 
         /*Pedro Id: 3
           Brad Id:  7
@@ -1025,21 +1034,31 @@ SENTENCIA_FUNCION ::=
 DECLARACION ::= 
     res_def:i TIPO_DATO:dato Identificador:id sig_punto_coma:f
     {: //vamos a validar cuando aparecen estas expresiones
-        System.out.println("tipo: "+ dato + " identificador: "+ id + " valor null ");
-        var_identificador.add(id);
-        var_tipo_dato.add(dato);
-        var_valor.add(null);
-        rollist(id, "Variable", dato, iright+1, fright+1);
-        System.out.println(var_identificador.size());
+        if(!idExiste(id+"")){
+            System.out.println("tipo: "+ dato + " identificador: "+ id + " valor null ");
+            var_identificador.add(id);
+            var_tipo_dato.add(dato);
+            var_valor.add(null);
+            rollist(id, "Variable", dato, iright+1, fright+1);
+            System.out.println(var_identificador.size());
+        }else{
+            err_msj.add("Error Semantico en la línea " + (fright+1) + " variable " + id + " ya declarada");
+            //-err_linea.add(Ç);
+        }
     :} |
     res_def:i TIPO_DATO:dato Identificador:id asi_asignacion VALOR:val sig_punto_coma:f  
     {: //vamos a validar cuando aparecen estas expresiones
-        System.out.println("tipo: "+ dato + " identificador: "+ id + " valor "+val);
-        var_identificador.add(id);
-        var_tipo_dato.add(dato);
-        var_valor.add(val);  
-        rollist(id, "Variable", dato, iright+1, fright+1);
-        System.out.println(var_identificador.size());
+        if(!idExiste(id+"")){
+            System.out.println("tipo: "+ dato + " identificador: "+ id + " valor null ");
+            var_identificador.add(id);
+            var_tipo_dato.add(dato);
+            var_valor.add(val);
+            rollist(id, "Variable", dato, iright+1, fright+1);
+            System.out.println(var_identificador.size());
+        }else{
+            err_msj.add("Error Semantico en la línea " + (fright+1) + " variable " + id + " ya declarada");
+            //-err_linea.add(Ç);
+        }
     :} |
     res_def TIPO_DATO Identificador {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final de la declaración");
