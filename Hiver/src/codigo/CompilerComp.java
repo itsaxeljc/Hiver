@@ -182,8 +182,9 @@ public class CompilerComp extends javax.swing.JFrame {
             lineaFConfig = Integer.parseInt(lineaFinConfig.get(0).toString());
             lineaIStart = Integer.parseInt(lineaInStart.get(0).toString());
             lineaFStart = Integer.parseInt(lineaFinStart.get(0).toString());
+            /* Mostrar la tabla en texto
             pnlSalida.textPane.setText(pnlSalida.textPane.getText() + "\n"+ lineaInConfig.get(0) + " " + lineaFinConfig.get(0) + " " + lineaInStart.get(0) + " " 
-                    + lineaFinStart.get(0) + "\n");
+                    + lineaFinStart.get(0) + "\n");*/
             
             // Variables tabla de simbolos
             var_idSimb = parser.getvar_idSimb();
@@ -191,6 +192,7 @@ public class CompilerComp extends javax.swing.JFrame {
             var_tipoSimb = parser.getvar_tipoSimb();
             var_lStartSimb = parser.getvar_lStartSimb();
             var_lEndSimb = parser.getvar_lEndSimb();
+            var_linExp = parser.getvar_linExp();
 
             System.out.println(var_identificador.get(0).toString());
 
@@ -213,20 +215,155 @@ public class CompilerComp extends javax.swing.JFrame {
         for(int i = 0; i < var_idSem.size(); i++){
             
             int encontrado = -1;
-            encontrado = LTINT.indexOf(var_idSem.get(i).toString());
+            String valorId = var_idSem.get(i).toString();
+            encontrado = LTINT.indexOf(valorId);
             
-            encontrado = (encontrado == -1) ? LENT.indexOf(var_idSem.get(i).toString()) : 1;
-            encontrado = (encontrado == -1) ? LFLO.indexOf(var_idSem.get(i).toString()) : 1;
-            encontrado = (encontrado == -1) ? LDOU.indexOf(var_idSem.get(i).toString()) : 1;
-            encontrado = (encontrado == -1) ? LCHAR.indexOf(var_idSem.get(i).toString()) : 1;
-            encontrado = (encontrado == -1) ? LBOL.indexOf(var_idSem.get(i).toString()) : 1;
-            if (encontrado == -1) {
-                erroresSem += "\nError semantico con identificador '" + var_idSem.get(i).toString() + "': no se ha declarado";
+            encontrado = (encontrado == -1) ? LENT.indexOf(valorId) : 1;
+            encontrado = (encontrado == -1) ? LFLO.indexOf(valorId) : 1;
+            encontrado = (encontrado == -1) ? LDOU.indexOf(valorId) : 1;
+            encontrado = (encontrado == -1) ? LCHAR.indexOf(valorId) : 1;
+            encontrado = (encontrado == -1) ? LBOL.indexOf(valorId) : 1;
+            if (encontrado == -1 && !valorId.matches("[+*-/]") && !valorId.matches("[0-9].*") && !valorId.matches("['].*[']")) {
+                erroresSem += "\nError linea " + var_linExp.get(i).toString() + ", identificador '" + var_idSem.get(i).toString() + "': no se ha declarado";
             }
         }
         pnlSalida.textPane.setText(pnlSalida.textPane.getText()+erroresSem);
         pnlSalida.textPane.setText(pnlSalida.textPane.getText() + "\n----------Analisis Semantico finalizado----------");
+        DefaultTableModel variables;
+        variables = (DefaultTableModel) ptd.tblDinSim.getModel();
+        listaExpre = new ArrayList<List<String>>();
+        for(int i =0; i<= 3; i++){
+            listaExpre.add(new ArrayList<>());
+        }
+        //System.out.println(listaExpre.get(0).get(0));
+        //pnlSalida.textPane.setText(pnlSalida.textPane.getText() + "\nDespues entrar lista");
         
+        // Crear la lista de todos los valores que hubo en las expresiones
+        for(int i = 0; i < var_idSem.size(); i++){
+            //pnlSalida.textPane.setText(pnlSalida.textPane.getText() + "\nDespues del for1");
+            listaExpre.get(0).add(var_linExp.get(i).toString());
+            listaExpre.get(1).add(var_idSem.get(i).toString());
+            if(listaExpre.get(1).get(i).matches("[+*-/]")){
+                listaExpre.get(2).add("config");
+                listaExpre.get(3).add(listaExpre.get(1).get(i).toString());
+            }else if(listaExpre.get(1).get(i).matches("[0-9]*")){
+                listaExpre.get(2).add("config");
+                listaExpre.get(3).add("int");
+            }else if(listaExpre.get(1).get(i).matches("[0-9]+[.][0-9]*")){
+                listaExpre.get(2).add("config");
+                listaExpre.get(3).add("float");
+            }else if(listaExpre.get(1).get(i).matches("['].*[']")){
+                listaExpre.get(2).add("config");
+                listaExpre.get(3).add("char");
+            }else{
+                for(int j = 0; j < variables.getRowCount(); j++){
+                    String ident = variables.getValueAt(j, 0).toString();
+                    if(listaExpre.get(1).get(i).equals(ident)){
+                        String ubicacion = variables.getValueAt(j, 3).toString();
+                        listaExpre.get(2).add(ubicacion);
+                        String tipo = variables.getValueAt(j, 1).toString();
+                        listaExpre.get(3).add(tipo);
+                    }
+                }
+            }
+        }
+        //pnlSalida.textPane.setText(pnlSalida.textPane.getText() + "\nAntes del for");
+        for(int i = 0; i < var_idSem.size(); i++){
+            System.out.println(listaExpre.get(0).get(i) + " | " + listaExpre.get(1).get(i) + " | " + listaExpre.get(2).get(i)+ " | " + listaExpre.get(3).get(i));
+        }
+        
+        // Errores semanticos para que las variables coincidan en ambito y en tipo
+        int lineaAnt = Integer.parseInt(listaExpre.get(0).get(0));
+        int lineaAct, numVari = 1;
+        String datoIzq, datoDer, nombreVar, ubiIzq, ubiDer, tipoIzq, tipoDer, errorExpre;
+        errorExpre = "";
+        for(int i = 1; i < listaExpre.get(0).size(); i++){
+            lineaAct = Integer.parseInt(listaExpre.get(0).get(i));
+            if(lineaAnt != lineaAct || (i + 1) == listaExpre.get(0).size()){
+                if(!((i + 1) == listaExpre.get(0).size())){
+                    i--;
+                }
+                if(numVari>1){
+                    datoIzq = listaExpre.get(1).get(i);
+                    ubiIzq = listaExpre.get(2).get(i);
+                    tipoIzq = listaExpre.get(3).get(i);
+                    for(int j = 1; j < numVari; j++){
+                        datoDer = listaExpre.get(1).get(i-j);
+                        ubiDer = listaExpre.get(2).get(i-j);
+                        tipoDer = listaExpre.get(3).get(i-j);
+                        
+                        // Chequeo de ubicaciones
+                        if(ubiIzq.equals("config")){
+                            if(!ubiDer.equals("config")){
+                                errorExpre += "Error en linea: " + lineaAnt + " el valor " + datoDer + " pertenece al ambito " + ubiDer + "\n";
+                            }
+                        }else if(!ubiIzq.equals(ubiDer) && !ubiDer.equals("config")){
+                            errorExpre += "Error en linea: " + lineaAnt + " el valor " + datoDer + " pertenece al ambito " + ubiDer + "\n";
+                        }
+                        
+                        // Chequeo de tipos
+                        switch(tipoIzq){
+                            case "tinyint":
+                                if(tipoDer.equals("int")){
+                                    errorExpre += "Error en linea: " + lineaAnt + " el valor " + datoDer + " es entero y puede haber perdida de datos\n";
+                                }else if(tipoDer.matches("[+/*-]")){
+                                    
+                                }else if(!tipoDer.equals("tinyint")){
+                                    errorExpre += "Error en linea: " + lineaAnt + " el valor " + datoDer + " no es de tipo tinyint\n";
+                                }
+                                break;
+                            case "int":
+                                if(tipoDer.matches("[+/*-]")){
+                                    
+                                }else if(!tipoDer.equals("int")){
+                                    errorExpre += "Error en linea: " + lineaAnt + " el valor " + datoDer + " no es de tipo entero\n";
+                                }
+                                break;
+                            case "char":
+                                if(tipoDer.matches("[+]")){
+                                    
+                                }else if(tipoDer.matches("[*/-]")){
+                                    errorExpre += "Error en linea: " + lineaAnt + " el valor " + datoDer + " no se permite en operaciones con char\n";
+                                }else if(tipoDer.equals("boolean")){
+                                    errorExpre += "Error en linea: " + lineaAnt + " el valor " + datoDer + ":boolean no puede convertirse a char\n";
+                                }
+                                break;
+                            case "float":
+                                if(tipoDer.equals("double")){
+                                    errorExpre += "Error en linea: " + lineaAnt + " el valor " + datoDer + " es double y puede haber perdida de precision\n";
+                                }else if(tipoDer.equals("char")){
+                                    errorExpre += "Error en linea: " + lineaAnt + " el valor " + datoDer + ":char no puede convertirse a float\n";
+                                }else if(tipoDer.equals("boolean")){
+                                    errorExpre += "Error en linea: " + lineaAnt + " el valor " + datoDer + ":boolean no puede convertirse a float\n";
+                                }
+                                break;
+                            case "boolean":
+                                if(tipoDer.matches("[+/*-]")){
+                                    errorExpre += "Error en linea: " + lineaAnt + " no puedes usar operadores con booleanos\n";
+                                }else if(!tipoDer.equals("boolean")){
+                                    errorExpre += "Error en linea: " + lineaAnt + " el valor " + datoDer + " no es de tipo boleano\n";
+                                }
+                                break;
+                            case "double":
+                                if(tipoDer.equals("char")){
+                                    errorExpre += "Error en linea: " + lineaAnt + " el valor " + datoDer + ":char no puede convertirse a double\n";
+                                }else if(tipoDer.equals("boolean")){
+                                    errorExpre += "Error en linea: " + lineaAnt + " el valor " + datoDer + ":boolean no puede convertirse a double\n";
+                                }
+                                break;
+                        }
+                    }
+                }
+                i++;
+                numVari = 1;
+                lineaAnt = lineaAct;
+            }else{
+                numVari++;
+            }
+            
+        }
+        System.out.println(errorExpre);
+        //pnlSalida.textPane.setText(pnlSalida.textPane.getText() + "\nDespues del for");
         /*var_identificador = new ArrayList();
         var_tipo_dato = new ArrayList();
         var_valor = new ArrayList();*/
@@ -285,7 +422,7 @@ public class CompilerComp extends javax.swing.JFrame {
             if(temp2[1] == null){
                 
             }else if(var_rollSimb.get(i).toString().equals("Variable") || var_rollSimb.get(i).toString().equals("Parámetro")){
-                System.out.println("Variable " + var_rollSimb.get(i).toString() + " " + temp2[0]);
+                //System.out.println("Variable " + var_rollSimb.get(i).toString() + " " + temp2[0]);
                 temp2[2] = var_valor.get(numVar);
                 numVar++;
                 int lineaInicio = Integer.parseInt(var_lStartSimb.get(i).toString());
@@ -311,7 +448,7 @@ public class CompilerComp extends javax.swing.JFrame {
                 }
                 variables.addRow(temp2);
                 
-                System.out.println(temp2[0] +" " + temp2[1] + " " + temp2[2] + " " + temp2[3] + " " + temp2[4]);
+                //System.out.println(temp2[0] +" " + temp2[1] + " " + temp2[2] + " " + temp2[3] + " " + temp2[4]);
             }
         }
         
@@ -335,6 +472,9 @@ public class CompilerComp extends javax.swing.JFrame {
         variables = (DefaultTableModel) ptd.tblDinSim.getModel();
         for(int i = 0; i < variables.getRowCount(); i++){
             switch(variables.getValueAt(i, 1).toString()){
+                case "tinyint":
+                    LTINT.add(variables.getValueAt(i, 0).toString());
+                    break;
                 case "int":
                     LENT.add(variables.getValueAt(i, 0).toString());
                     break;
@@ -1066,7 +1206,8 @@ public class CompilerComp extends javax.swing.JFrame {
         //para saber sí se sube a git
         recuperartokens();
         analisisSintacttico();
-        llenarTablaSimbolos();
+        // Llenamos la tabla desde el analisis sintactico
+        // llenarTablaSimbolos();
 
         //agregamo las clases de los analizadores que se crean con jflex y cup
 
@@ -1481,6 +1622,7 @@ public class CompilerComp extends javax.swing.JFrame {
     public LinkedList <String> LCHAR;
     public LinkedList <String> LBOL;
     public LinkedList <String> LPIN;
+    public List<List<String>> listaExpre = new ArrayList<List<String>>();
     // Lineas
     public ArrayList lineaInConfig;
     public ArrayList lineaFinConfig;
@@ -1498,6 +1640,7 @@ public class CompilerComp extends javax.swing.JFrame {
     public ArrayList var_lEndSimb;
     //
     public ArrayList var_idSem;
+    public ArrayList var_linExp;
     public ArrayList linea;
     public ArrayList token;
     public ArrayList lexema;

@@ -2307,22 +2307,41 @@ EXPRESION ::=
 ;
 
 OPE ::=
-    OPE ari_suma TERM | OPE ari_resta TERM | TERM
+    OPE ari_suma:l TERM
+    {: //Obtener variables usadas
+        var_idSem.add("+");
+        var_linExp.add(lright+1);
+    :}| OPE ari_resta:l TERM
+    {: //Obtener variables usadas
+        var_idSem.add("-");
+        var_linExp.add(lright+1);
+    :}| TERM
 ;
 
 TERM ::=
-    TERM ari_multiplicacion FACTOR | TERM ari_division FACTOR | FACTOR
+    TERM ari_multiplicacion:l FACTOR
+    {: //Obtener variables usadas
+        var_idSem.add("*");
+        var_linExp.add(lright+1);
+    :}| TERM ari_division:l FACTOR
+    {: //Obtener variables usadas
+        var_idSem.add("/");
+        var_linExp.add(lright+1);
+    :}| FACTOR
 ;
 
 FACTOR ::=
     VALOR:id
     {: //Obtener variable usadas
-        if(id.toString().matches("([(a-z)(A-Z)](\\w)*)")){
+        //if(id.toString().matches("([(a-z)(A-Z)](\\w)*)")){
             var_idSem.add(id);
             var_linExp.add(idright+1);
-        }
+        //}
     :}|
-    par_abre OPE par_cierra | ari_resta FACTOR
+    par_abre OPE par_cierra | ari_resta:l FACTOR{: //Obtener variables usadas
+        var_idSem.add("-");
+        var_linExp.add(lright+1);
+    :}
 ;
 
 OPERACION_PROC ::=
