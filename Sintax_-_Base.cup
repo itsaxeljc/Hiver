@@ -9,7 +9,7 @@ parser code
     
     
     public void syntax_error(Symbol s){
-       pnlSalida.textPane.setText(pnlSalida.textPane.getText()+"Error sintáctico en la línea #: "+ s.value+"\n");
+       pnlSalida.textPane.setText(pnlSalida.textPane.getText()+"Error sintáctico en la línea "+(s.right +1)+": "+ s.value+"\n");
        System.out.println("Error R de sintaxis: "+ s.value +" en la Linea "+(s.right+1) );
     }
     public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
@@ -753,29 +753,29 @@ INICIO ::=
     res_name Identificador  
     ESTRUCTURA_BASICA  
         {:
-            err_msj.add("Error Sintáctico en la línea # | Se esperaba un punto y coma");
-            //-err_linea.add(Ç);
+            err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un punto y coma");
+            err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
             errores_gramatica(41);
         :}|
     res_name sig_punto_coma  
     ESTRUCTURA_BASICA  
         {:
-            err_msj.add("Error Sintáctico en la línea # | Se esperaba un identificador antes del punto y coma");
-            //-err_linea.add(Ç);
+            err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un identificador antes del punto y coma");
+            err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
             errores_gramatica(42);
         :}|
     Identificador sig_punto_coma  
     ESTRUCTURA_BASICA  
         {:
-            err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada name antes del identificador");
-            //-err_linea.add(Ç);
+            err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba la palabra reservada name antes del identificador");
+            err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
             errores_gramatica(43);
         :}|
     res_name 
     ESTRUCTURA_BASICA  
         {:
-            err_msj.add("Error Sintáctico en la línea # | Se esperaba un identificador despues de la palabra reservada name");
-            //-err_linea.add(Ç);
+            err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un identificador despues de la palabra reservada name");
+            err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
             errores_gramatica(44);
         :} 
 ;
@@ -791,43 +791,43 @@ ESTRUCTURA_BASICA ::=
     CONFIG STARTUP |
     STARTUP CONFIG 
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba que bloque CONFIG se situara antes del bloque START-END");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba que bloque CONFIG se situara antes del bloque START-END");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     CONFIG 
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba el bloque START-END después del bloque CONFIG");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba el bloque START-END después del bloque CONFIG");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
      :} |
     STARTUP
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba el bloque CONFIG antes del bloque START-END");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba el bloque CONFIG antes del bloque START-END");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     FUNCIONES
     {:
-       err_msj.add("Error Sintáctico en la línea # | Se esperaban los bloques CONFIG y START-END");
-       //-err_linea.add(Ç);
+       err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban los bloques CONFIG y START-END");
+       err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     FUNCIONES CONFIG
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba el bloque START-END después del bloque CONFIG");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba el bloque START-END después del bloque CONFIG");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     CONFIG FUNCIONES
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba el bloque START-END después del bloque CONFIG");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba el bloque START-END después del bloque CONFIG");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     FUNCIONES STARTUP
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba el bloque CONFIG antes del bloque START-END");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba el bloque CONFIG antes del bloque START-END");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     STARTUP FUNCIONES
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba el bloque CONFIG antes del bloque START-END");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba el bloque CONFIG antes del bloque START-END");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} 
 ;
 
@@ -854,64 +854,64 @@ FUNCION ::=
     res_function Identificador par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba la especificación del tipo de dato de retorno después de function");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba la especificación del tipo de dato de retorno después de function");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(45);
     :} |
     res_function TIPO_DATO par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION 
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un identificador para la función después del tipo de dato a retorno");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un identificador para la función después del tipo de dato a retorno");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(46);
     :} |
     res_function par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un tipo de dato retorno e identificador para la función");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un tipo de dato retorno e identificador para la función");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(47);
     :} | 
     res_function TIPO_DATO Identificador PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura después del identificador de la función");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de apertura después del identificador de la función");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(48);
     :} |
     res_function TIPO_DATO Identificador par_abre PARAMETRO llave_abre
             SENTENCIA_FUNCION
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de los parámetros de la función");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de cierre después de los parámetros de la función");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(49);
     :} |
     res_function TIPO_DATO Identificador PARAMETRO llave_abre
             SENTENCIA_FUNCION
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban paretesis de apertura y cierre en la especificación de parámetros de la función");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban paretesis de apertura y cierre en la especificación de parámetros de la función");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(401);
     :} |
     TIPO_DATO Identificador par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada function antes del tipo de dato de retorno");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba la palabra reservada function antes del tipo de dato de retorno");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(402);
     :} |
     Identificador par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada function y el tipo de dato de retorno antes del identificador de la función");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba la palabra reservada function y el tipo de dato de retorno antes del identificador de la función");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(403);
     :} |
     res_function TIPO_DATO Identificador par_abre PARAMETRO par_cierra 
             SENTENCIA_FUNCION
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba llave de apertura después de los parámetros de la función");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba llave de apertura después de los parámetros de la función");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(404);
     :}
 ;
@@ -920,12 +920,12 @@ RETURN ::=
     res_return Identificador sig_punto_coma | 
     res_return sig_punto_coma | 
     res_return Identificador {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba ; después de identificador");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; después de identificador");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_return TIPO_DATO {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba ; después del tipo de dato");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; después del tipo de dato");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} 
 ;
 CONFIG ::= 
@@ -938,8 +938,8 @@ CONFIG ::=
     res_config
         SENTENCIA_CONFIG   
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba llave de apertura al inicio del bloque config");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba llave de apertura al inicio del bloque config");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} 
     | error sig_punto_coma
     | error llave_cierra
@@ -955,22 +955,22 @@ STARTUP ::=
     res_start
         SENTENCIA_STARTUP
     res_end {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba punto y coma después de las palabras reservadas start y end");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba punto y coma después de las palabras reservadas start y end");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(405);
     :} |
     res_start sig_punto_coma
         SENTENCIA_STARTUP
     res_end {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba punto y coma después de la palabra reservada end");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba punto y coma después de la palabra reservada end");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(406);
     :} |
     res_start
         SENTENCIA_STARTUP
     res_end sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba punto y coma después de la palabra reservada start");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba punto y coma después de la palabra reservada start");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(407);
     :} 
 ;
@@ -1042,63 +1042,63 @@ DECLARACION ::=
         System.out.println(var_identificador.size());
     :} |
     res_def TIPO_DATO Identificador {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final de la declaración");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final de la declaración");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     TIPO_DATO Identificador sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada def al inicio de la declaración");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba la palabra reservada def al inicio de la declaración");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def TIPO_DATO Identificador asi_asignacion VALOR {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final de la declaración");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final de la declaración");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     TIPO_DATO Identificador asi_asignacion VALOR sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada def al inicio de la declaración");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba la palabra reservada def al inicio de la declaración");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_pin Identificador sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_pin Identificador asi_asignacion VALOR sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_pin par_abre Numero coma Identificador par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_display par_abre DISPLAY_PARAMS par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método display");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método display");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_function TIPO_DATO Identificador par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra{:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis para la creación de funciones");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis para la creación de funciones");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_function res_void Identificador par_abre PARAMETRO par_cierra llave_abre
         SENTENCIA_FUNCION
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis para la creación de funciones");
-        //-err_linea.add(Ç); :} |
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis para la creación de funciones");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)); :} |
     res_def res_type par_abre Identificador coma TYPE_IO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método type");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método type");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_scale par_abre Identificador coma Numero coma Numero par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método scale");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método scale");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_volt par_abre Identificador coma Numero par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_volt par_abre Identificador coma Numero coma Numero par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} 
 ;
 
@@ -1108,51 +1108,51 @@ PIN ::=
         rollist(id,"Pin",null,iright+1,fright+1);
     :}|
     res_pin par_abre Numero coma Identificador par_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final del método pin");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final del método pin");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}  |
     res_pin par_abre Identificador par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba número de pin antes de identificador");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba número de pin antes de identificador");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}  |
     res_pin par_abre Numero par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador de pin después del número de pin");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador de pin después del número de pin");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_pin par_abre Identificador coma Numero par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba número de pin como primer parámetro del método pin");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba número de pin como primer parámetro del método pin");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_pin Numero coma Identificador par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura después de la palabra reservada pin");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de apertura después de la palabra reservada pin");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_pin Numero par_abre coma Identificador sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de los parámetros del método pin");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de cierre después de los parámetros del método pin");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}
 ;
 
 DISPLAY ::=
     res_display par_abre DISPLAY_PARAMS par_cierra sig_punto_coma |
     res_display par_abre DISPLAY_PARAMS par_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final del método display");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final del método display");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(408);
     :}  | 
     res_display par_abre par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba número(s) de pin para display como parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba número(s) de pin para display como parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(409);
     :} |
     res_display DISPLAY_PARAMS par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura después de la palabra reservada display");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de apertura después de la palabra reservada display");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(410);
     :} |
     res_display par_abre DISPLAY_PARAMS sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de los parámetros del método display");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de cierre después de los parámetros del método display");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(411);
     :}
 ;
@@ -1161,72 +1161,72 @@ DISPLAY_PARAMS ::=
     Numero | 
     Numero coma DISPLAY_PARAMS|
     Numero coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor entero después de la coma");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un valor entero después de la coma");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}|
     Numero DISPLAY_PARAMS {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba una coma entre cada parámetro");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una coma entre cada parámetro");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}|
     Numero coma coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor entero después de cada coma");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un valor entero después de cada coma");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}|
     Numero coma coma coma{:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor entero después de cada coma");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un valor entero después de cada coma");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}|
     Numero coma coma coma coma{:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor entero después de cada coma");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un valor entero después de cada coma");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}|
     Numero coma coma Numero{:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor entero después de cada coma");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un valor entero después de cada coma");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}
 ;
 
 TYPE ::=
     res_type par_abre Identificador coma TYPE_IO par_cierra sig_punto_coma |
     res_type par_abre Identificador coma TYPE_IO par_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final del método type");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final del método type");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}|
     res_type Identificador coma TYPE_IO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura después la palabra reservada type");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de apertura después la palabra reservada type");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}|
     res_type par_abre Identificador coma TYPE_IO sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de los parámetros del método type");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de cierre después de los parámetros del método type");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}|
     res_type Identificador coma TYPE_IO sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban paréntesis encerrando los parámetros del método type");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban paréntesis encerrando los parámetros del método type");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}| 
     res_type par_abre Identificador TYPE_IO  par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba coma separando los parámetros del método type");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba coma separando los parámetros del método type");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}| 
     res_type par_abre TYPE_IO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador como primer parámetro del método type");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador como primer parámetro del método type");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}| 
     res_type par_abre Identificador coma VALOR_NUMERICO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba INPUT o OUTPUT como segundo parámetro del método type");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba INPUT o OUTPUT como segundo parámetro del método type");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}| 
     res_type par_abre par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un identificador y INPUT o OUTPUT como parámetros del método type");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un identificador y INPUT o OUTPUT como parámetros del método type");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}| 
     res_type par_abre Numero coma TYPE_IO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador como primer parámetro del método type");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador como primer parámetro del método type");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_type par_abre Identificador coma TYPE_IO coma Numero par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban sólo dos parámetros dentro del método type");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban sólo dos parámetros dentro del método type");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} 
 ;
 
@@ -1234,13 +1234,13 @@ TYPE_IO ::=
     res_input | 
     res_output |
     res_input res_output {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un solo parámetro input/output");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un solo parámetro input/output");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(412);
     :} |
     res_output res_input {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un solo parámetro input/output");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un solo parámetro input/output");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(412);
     :} 
 ;
@@ -1248,32 +1248,32 @@ TYPE_IO ::=
 SCALE ::=
     res_scale par_abre Identificador coma Numero coma Numero par_cierra sig_punto_coma |
     res_scale par_abre Identificador coma Numero coma Numero par_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final del método scale");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final del método scale");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_scale par_abre Numero coma Numero par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador del pin como primer parámetro del método scale");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador del pin como primer parámetro del método scale");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} | 
     res_scale par_abre Identificador coma Numero par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban dos parámetros numéricos después del identificador del pin");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban dos parámetros numéricos después del identificador del pin");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} | 
     res_scale par_abre Numero coma Numero coma Identificador par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador del pin como primer parámetro del método scale");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador del pin como primer parámetro del método scale");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_scale par_abre Numero coma Identificador par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador del pin como primer parámetro del método scale");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador del pin como primer parámetro del método scale");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_scale Identificador coma Numero coma Numero par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura después de la palabra reservada scale");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de apertura después de la palabra reservada scale");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_scale par_abre Identificador coma Numero coma Numero sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de los parámetros del método scale");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de cierre después de los parámetros del método scale");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}
 ;
 
@@ -1281,56 +1281,56 @@ VOLT ::=
     res_volt par_abre Identificador coma Numero par_cierra sig_punto_coma |
     res_volt par_abre Identificador coma Numero coma Numero par_cierra sig_punto_coma |
     res_volt par_abre Identificador coma Numero par_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final del método volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final del método volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_volt par_abre Identificador coma Numero coma Numero par_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final del método volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final del método volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_volt par_abre Numero coma Identificador par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador como primer parámetro del método volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador como primer parámetro del método volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_volt par_abre Numero coma Identificador coma Numero par_cierra sig_punto_coma  {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador como primer parámetro del método volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador como primer parámetro del método volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_volt par_abre Numero coma Numero coma Identificador par_cierra sig_punto_coma  {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador como primer parámetro del método volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador como primer parámetro del método volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_volt par_abre Identificador Numero par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba , entre los parámetros del método volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba , entre los parámetros del método volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_volt par_abre Identificador coma Numero Numero par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba , entre los parámetros del método volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba , entre los parámetros del método volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_volt par_abre Identificador Numero coma Numero par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba , entre los parámetros del método volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba , entre los parámetros del método volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_volt par_abre Identificador Numero Numero par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba , entre los parámetros del método volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba , entre los parámetros del método volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_volt Identificador coma Numero par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura después de la palabra reservada volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de apertura después de la palabra reservada volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_volt par_abre Identificador coma Numero sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de los parámetros del método volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de cierre después de los parámetros del método volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_volt Identificador coma Numero coma Numero par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura después de la palabra reservada volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de apertura después de la palabra reservada volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} | 
     res_volt par_abre Identificador coma Numero coma Numero sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de los parámetros del método volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de cierre después de los parámetros del método volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}
 ;
 
@@ -1338,48 +1338,48 @@ MAX_VOLT ::=
     res_max_volt par_abre Identificador par_cierra sig_punto_coma |
     res_max_volt par_abre Numero par_cierra sig_punto_coma |
     res_max_volt par_abre Identificador par_cierra  {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final del método max_volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final del método max_volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(413);
     :} |
     res_max_volt par_abre Numero par_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final del método max_volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final del método max_volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(414);
     :} |
     res_max_volt Identificador par_cierra sig_punto_coma  {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura después de la palabra reservada max_volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de apertura después de la palabra reservada max_volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(415);
     :} | 
     res_max_volt par_abre Identificador sig_punto_coma  {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después del parámetro del método max_volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de cierre después del parámetro del método max_volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(416);
     :} | 
     res_max_volt Numero par_cierra sig_punto_coma  {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura después de la palabra reservada max_volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de apertura después de la palabra reservada max_volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(417);
     :} | 
     res_max_volt par_abre Numero sig_punto_coma  {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después del parámetro del método max_volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de cierre después del parámetro del método max_volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(418);
     :} |
     res_max_volt par_abre cadena_caracter par_cierra sig_punto_coma  {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor numérico como parámetro único del método max_volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un valor numérico como parámetro único del método max_volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(419);
     :} |
     res_max_volt asi_asignacion VALOR_NUMERICO sig_punto_coma{:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor numérico encerrado entre paréntesis como parámetro único");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un valor numérico encerrado entre paréntesis como parámetro único");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(420);
     :} |
     res_max_volt asi_asignacion par_abre VALOR_NUMERICO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor numérico encerrado entre paréntesis, no se admite asignación");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un valor numérico encerrado entre paréntesis, no se admite asignación");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(420);
     :} 
 ;
@@ -1387,18 +1387,18 @@ MAX_VOLT ::=
 WAIT ::=
     res_wait par_abre CONDICION par_cierra sig_punto_coma |
     res_wait par_abre CONDICION par_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final del método sleep");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final del método sleep");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7039);
     :}|
     res_wait CONDICION par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura después de la palabra reservada wait");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de apertura después de la palabra reservada wait");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7040);
     :} |
     res_wait par_abre CONDICION sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de la condición del método wait");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de cierre después de la condición del método wait");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7041);
     :}
 ;
@@ -1408,57 +1408,57 @@ CONDICION ::=
     log_not Identificador | log_not Identificador OPERADOR_CONDICIONAL CONDICION
     | VALOR_NUMERICO | res_false | res_true |
     VALOR_NUMERICO OPERADOR_CONDICIONAL {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor después del operador condicional");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un valor después del operador condicional");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7030);
     :} | 
     res_false CONDICION {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba a cada condición separada por paréntesis y con un operardor condicional entre ambas");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba a cada condición separada por paréntesis y con un operardor condicional entre ambas");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7031);
     :} |
     res_true CONDICION {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba a cada condición separada por paréntesis y con un operardor condicional entre ambas");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba a cada condición separada por paréntesis y con un operardor condicional entre ambas");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7032);
     :} |
     VALOR_NUMERICO VALOR_NUMERICO {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba una condición, imposible comparar valores");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una condición, imposible comparar valores");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7033);
     :} |
     log_not OPERADOR_CONDICIONAL VALOR_NUMERICO {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un identificador después de símbolo de negación lógica");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un identificador después de símbolo de negación lógica");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7034);
     :} | 
     OPERADOR_CONDICIONAL {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor antes y después del operador condicional");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un valor antes y después del operador condicional");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7035);
     :} |
     OPERADOR_CONDICIONAL VALOR_NUMERICO {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor antes del operador condicional");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un valor antes del operador condicional");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7035);
     :} |
     VALOR_NUMERICO OPERADOR_CONDICIONAL OPERADOR_CONDICIONAL VALOR_NUMERICO {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un solo operador condicional");
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un solo operador condicional");
         //-err_li nea.add(Ç);
         errores_gramatica(7036);
     :} |
     cadena_caracter {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba una condición válida, no se admiten cadenas");
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una condición válida, no se admiten cadenas");
         //-err_li nea.add(Ç);
         errores_gramatica(7037);
     :} |
     cadena_caracter OPERADOR_CONDICIONAL cadena_caracter {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba una condición válida, no se admiten cadenas");
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una condición válida, no se admiten cadenas");
         //-err_li nea.add(Ç);
         errores_gramatica(7037);
     :} | 
     cadena_caracter OPERADOR_CONDICIONAL VALOR_NUMERICO {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba una condición válida, no se admiten cadenas");
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una condición válida, no se admiten cadenas");
         //-err_li nea.add(Ç);
         errores_gramatica(7037);
     :}
@@ -1468,11 +1468,11 @@ CONDICION ::=
 OPERADOR_CONDICIONAL ::=
      log_xor | log_and | log_or | rel_diferente | rel_igual | rel_mayor_igual | rel_mayor | rel_menor_igual | rel_menor |
      coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un operador condicional");
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un operador condicional");
         //-err_li nea.add(Ç);
         errores_gramatica(421);
     :} | asi_asignacion {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un operador condicional");
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un operador condicional");
         //-err_li nea.add(Ç);
         errores_gramatica(421);
     :}
@@ -1483,143 +1483,143 @@ MODE ::=
     res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma |
     res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma |
     res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO par_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final del método mode");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final del método mode");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7019);
     :}|
     res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final del método mode");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final del método mode");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7019);
     :} |
     res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final del método mode");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final del método mode");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7019);
     :} |
     res_model par_abre VALOR_NUMERICO VALOR_NUMERICO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba coma entre parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba coma entre parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7020);
     :} |
     res_model par_abre VALOR_NUMERICO VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba coma entre parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba coma entre parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7020);
     :} | 
     res_model par_abre VALOR_NUMERICO VALOR_NUMERICO VALOR_NUMERICO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba coma entre parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba coma entre parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7020);
     :} | 
     res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO VALOR_NUMERICO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba coma entre parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba coma entre parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7021);
     :} |
     res_model par_abre VALOR_NUMERICO VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba coma entre parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba coma entre parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7021);
     :} |
     res_model par_abre VALOR_NUMERICO VALOR_NUMERICO VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba coma entre parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba coma entre parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7021);
     :} |
     res_model par_abre VALOR_NUMERICO VALOR_NUMERICO VALOR_NUMERICO VALOR_NUMERICO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba coma entre parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba coma entre parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7021);
     :} |
     res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba coma entre parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba coma entre parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7021);
     :} |
     res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO VALOR_NUMERICO VALOR_NUMERICO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba coma entre parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba coma entre parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7021);
     :} |
     res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de cierre después de parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7022);
     :} |
     res_model VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura antes de parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de apertura antes de parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7023);
     :} |
     res_model VALOR_NUMERICO coma VALOR_NUMERICO sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban paréntesis encerrando los parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban paréntesis encerrando los parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7024);
     :} |
     res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de cierre después de parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7022);
     :} |
     res_model VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura antes de parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de apertura antes de parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7023);
     :} |
     res_model VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban paréntesis encerrando los parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban paréntesis encerrando los parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7025);
     :} |
     res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de cierre después de parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     errores_gramatica(7022);
     :} |
     res_model VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura antes de parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de apertura antes de parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7023);
     :} |
     res_model VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban paréntesis encerrando los parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban paréntesis encerrando los parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7026);
     :} |
     res_model par_abre cadena_caracter coma VALOR_NUMERICO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban valores numéricos como parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban valores numéricos como parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7027);
     :} |
     res_model par_abre VALOR_NUMERICO coma cadena_caracter par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban valores numéricos como parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban valores numéricos como parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
          errores_gramatica(7027);
     :} | 
     res_model par_abre cadena_caracter coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban valores numéricos como parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban valores numéricos como parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7028);
     :} | 
     res_model par_abre VALOR_NUMERICO coma cadena_caracter coma VALOR_NUMERICO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban valores numéricos como parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban valores numéricos como parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7028);
     :} |
     res_model par_abre cadena_caracter coma VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban valores numéricos como parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban valores numéricos como parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7028);
     :} |
     res_model par_abre VALOR_NUMERICO coma cadena_caracter coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban valores numéricos como parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban valores numéricos como parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7028);
     :} |
     res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO coma cadena_caracter coma VALOR_NUMERICO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban valores numéricos como parámetros");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban valores numéricos como parámetros");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7028);
     :} 
 ;
@@ -1648,8 +1648,8 @@ PARAMETRO ::=
     DECLARACION_PARAMETRO | 
     PARAMETRO coma DECLARACION_PARAMETRO |
     PARAMETRO DECLARACION_PARAMETRO {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban parámetros separados por coma");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban parámetros separados por coma");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7018);
     :} 
 ;
@@ -1674,63 +1674,63 @@ DECLARACION_PARAMETRO ::=
         System.out.println(var_identificador.size());
     :} |
     res_def TIPO_DATO Identificador {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final de la declaración");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final de la declaración");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     TIPO_DATO Identificador sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada def al inicio de la declaración");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba la palabra reservada def al inicio de la declaración");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def TIPO_DATO Identificador asi_asignacion VALOR {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba ; al final de la declaración");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final de la declaración");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     TIPO_DATO Identificador asi_asignacion VALOR sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada def al inicio de la declaración");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba la palabra reservada def al inicio de la declaración");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_pin Identificador sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_pin Identificador asi_asignacion VALOR sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_pin par_abre Numero coma Identificador par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_display par_abre DISPLAY_PARAMS par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método display");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método display");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_function TIPO_DATO Identificador par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra{:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis para la creación de funciones");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis para la creación de funciones");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_function res_void Identificador par_abre PARAMETRO par_cierra llave_abre
         SENTENCIA_FUNCION
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis para la creación de funciones");
-        //-err_linea.add(Ç); :} |
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis para la creación de funciones");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)); :} |
     res_def res_type par_abre Identificador coma TYPE_IO par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método type");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método type");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_scale par_abre Identificador coma Numero coma Numero par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método scale");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método scale");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_volt par_abre Identificador coma Numero par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_volt par_abre Identificador coma Numero coma Numero par_cierra sig_punto_coma {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método volt");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba tipo de dato e identificador, consulte la sintaxis del método volt");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} 
 ;
 
@@ -1749,22 +1749,22 @@ IF ::=
     res_if CONDICION par_cierra llave_abre
         SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura antes de la condición");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de apertura antes de la condición");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7012);
     :} |
     res_if par_abre CONDICION llave_abre
         SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de la condición");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de cierre después de la condición");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7013);
     :} |
     res_if par_abre CONDICION par_cierra 
         SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba llave de apertura antes del bloque de código de if");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba llave de apertura antes del bloque de código de if");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7014);
     :} |
     res_if CONDICION par_cierra llave_abre
@@ -1774,8 +1774,8 @@ IF ::=
     llave_abre
         SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura antes de la condición");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de apertura antes de la condición");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7012);
     :} |
     res_if par_abre CONDICION llave_abre
@@ -1785,8 +1785,8 @@ IF ::=
     llave_abre
         SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de la condición");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de cierre después de la condición");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7013);
     :} |
     res_if par_abre CONDICION par_cierra
@@ -1796,8 +1796,8 @@ IF ::=
     llave_abre
         SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba llave de apertura antes del bloque de código de if");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba llave de apertura antes del bloque de código de if");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7014);
     :} |
     res_if par_abre CONDICION par_cierra llave_abre
@@ -1806,8 +1806,8 @@ IF ::=
     res_else 
         SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba llave de apertura antes del bloque de código de else");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba llave de apertura antes del bloque de código de else");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7015);
     :} |
     res_if par_abre CONDICION par_cierra llave_abre
@@ -1816,8 +1816,8 @@ IF ::=
     llave_abre
         SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba else del bloque de código de else");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba else del bloque de código de else");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7016);
     :}
  ;
@@ -1833,218 +1833,218 @@ IF ::=
     res_switch Identificador par_cierra llave_abre
         SWITCH_ENTRADAS
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura después de la palabra reservada switch");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de apertura después de la palabra reservada switch");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7003);
     :} |
     res_switch par_abre Identificador llave_abre
         SWITCH_ENTRADAS
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de la condición");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de cierre después de la condición");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7004);
     :} |
     res_switch Identificador llave_abre
         SWITCH_ENTRADAS
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban paréntesis encerrando identificador");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban paréntesis encerrando identificador");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7005);
     :} | 
     res_switch par_abre par_cierra llave_abre
         SWITCH_ENTRADAS
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador a evaluar encerrado entre paréntesis");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador a evaluar encerrado entre paréntesis");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7006);
     :} | 
     res_switch par_abre Numero par_cierra llave_abre
         SWITCH_ENTRADAS
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador a evaluar encerrado entre paréntesis");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador a evaluar encerrado entre paréntesis");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7006);
     :} |
     res_switch par_abre cadena_caracter par_cierra llave_abre
         SWITCH_ENTRADAS
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador a evaluar encerrado entre paréntesis");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador a evaluar encerrado entre paréntesis");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7006);
     :} |
     res_switch par_abre res_true par_cierra llave_abre
         SWITCH_ENTRADAS
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador a evaluar encerrado entre paréntesis");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador a evaluar encerrado entre paréntesis");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7006);
     :} |
     res_switch par_abre res_false par_cierra llave_abre
         SWITCH_ENTRADAS
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador a evaluar encerrado entre paréntesis");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador a evaluar encerrado entre paréntesis");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7006);
     :} |
     res_switch par_abre EXPRESION par_cierra llave_abre
         SWITCH_ENTRADAS
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador a evaluar encerrado entre paréntesis");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador a evaluar encerrado entre paréntesis");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7006);
     :} |
     res_switch par_abre PARAMETRO par_cierra llave_abre
         SWITCH_ENTRADAS
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador a evaluar encerrado entre paréntesis");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador a evaluar encerrado entre paréntesis");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7006);
     :} | 
     res_switch par_abre Identificador par_cierra
         SWITCH_ENTRADAS
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba llave de apertura antes del bloque de entradas de la estructura switch");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba llave de apertura antes del bloque de entradas de la estructura switch");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7007);
     :} |
     res_switch par_abre Identificador par_cierra llave_abre
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban entradas dentro de la estructura switch");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban entradas dentro de la estructura switch");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7008);
     :} |
     res_switch par_abre Identificador par_cierra llave_abre
         SENTENCIA_FUNCION
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban entradas validas dentro de la estructura switch");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban entradas validas dentro de la estructura switch");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7009);
     :} |
     res_switch Identificador par_cierra llave_abre
         SWITCH_ENTRADAS
         res_default sim_dos_puntos SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura después de la palabra reservada switch");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de apertura después de la palabra reservada switch");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7003);        
     :} |
     res_switch par_abre Identificador llave_abre
         SWITCH_ENTRADAS
         res_default sim_dos_puntos SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de la condición");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de cierre después de la condición");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7004);
     :} |
     res_switch Identificador llave_abre
         SWITCH_ENTRADAS
         res_default sim_dos_puntos SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban paréntesis encerrando identificador");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban paréntesis encerrando identificador");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7005);
     :} | 
     res_switch par_abre par_cierra llave_abre
         SWITCH_ENTRADAS
         res_default sim_dos_puntos SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador a evaluar encerrado entre paréntesis");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador a evaluar encerrado entre paréntesis");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7005);
     :} | 
     res_switch par_abre Numero par_cierra llave_abre
         SWITCH_ENTRADAS
         res_default sim_dos_puntos SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador a evaluar encerrado entre paréntesis");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador a evaluar encerrado entre paréntesis");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7005);
     :} |
     res_switch par_abre cadena_caracter par_cierra llave_abre
         SWITCH_ENTRADAS
         res_default sim_dos_puntos SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador a evaluar encerrado entre paréntesis");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador a evaluar encerrado entre paréntesis");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7005);
     :} |
     res_switch par_abre res_true par_cierra llave_abre
         SWITCH_ENTRADAS
         res_default sim_dos_puntos SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador a evaluar encerrado entre paréntesis");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador a evaluar encerrado entre paréntesis");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7005);
     :} |
     res_switch par_abre res_false par_cierra llave_abre
         SWITCH_ENTRADAS
         res_default sim_dos_puntos SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador a evaluar encerrado entre paréntesis");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador a evaluar encerrado entre paréntesis");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7005);
     :} |
     res_switch par_abre EXPRESION par_cierra llave_abre
         SWITCH_ENTRADAS
         res_default sim_dos_puntos SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador a evaluar encerrado entre paréntesis");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador a evaluar encerrado entre paréntesis");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7005);
     :} |
     res_switch par_abre PARAMETRO par_cierra llave_abre
         SWITCH_ENTRADAS
         res_default sim_dos_puntos SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba identificador a evaluar encerrado entre paréntesis");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba identificador a evaluar encerrado entre paréntesis");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7005);
     :} | 
     res_switch par_abre Identificador par_cierra
         SWITCH_ENTRADAS
         res_default sim_dos_puntos SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba llave de apertura antes del bloque de entradas de la estructura switch");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba llave de apertura antes del bloque de entradas de la estructura switch");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7007);
     :} |
     res_switch par_abre Identificador par_cierra llave_abre
         res_default sim_dos_puntos SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban entradas dentro de la estructura switch");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban entradas dentro de la estructura switch");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7008);
     :} |
     res_switch par_abre Identificador par_cierra llave_abre
         SENTENCIA_FUNCION
         res_default sim_dos_puntos SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban entradas validas dentro de la estructura switch");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban entradas validas dentro de la estructura switch");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7009);
     :} | 
     res_switch par_abre Identificador par_cierra llave_abre
         SWITCH_ENTRADAS
         res_default sim_dos_puntos 
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba al menos una sentencia dentro del default-case");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba al menos una sentencia dentro del default-case");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7010);
     :} | 
     res_switch par_abre Identificador par_cierra llave_abre
         SWITCH_ENTRADAS
         res_default SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba : después de la palabra reservada default");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba : después de la palabra reservada default");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7011);
     :} |
     res_switch par_abre Identificador par_cierra llave_abre
         SWITCH_ENTRADAS
         sim_dos_puntos SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba palabra reservada default");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba palabra reservada default");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7010);
     :}
 ;
@@ -2053,83 +2053,83 @@ SWITCH_ENTRADAS ::=
     rel_menor CASO rel_mayor sim_dos_puntos SENTENCIA_STARTUP res_exit | 
     SWITCH_ENTRADAS rel_menor CASO rel_mayor sim_dos_puntos SENTENCIA_STARTUP res_exit |
     CASO sim_dos_puntos SENTENCIA_STARTUP res_exit{:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba < al inicio del case a evaluar y > al final del mismo");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba < al inicio del case a evaluar y > al final del mismo");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(786);
     :} |
     CASO rel_mayor sim_dos_puntos SENTENCIA_STARTUP res_exit{:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba < al inicio del case a evaluar");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba < al inicio del case a evaluar");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(787);
     :}|
     rel_menor CASO sim_dos_puntos SENTENCIA_STARTUP res_exit{:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba > al final de case a evaluar");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba > al final de case a evaluar");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(788);
     :} |
     rel_menor CASO rel_mayor SENTENCIA_STARTUP res_exit{:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba : antes del bloque de instrucciones del case");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba : antes del bloque de instrucciones del case");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(789);
     :} |
     rel_menor CASO SENTENCIA_STARTUP res_exit{:
-        err_msj.add("Error Sintáctico en la línea # |Se esperaba > seguida de : al final de case a evaluar");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" |Se esperaba > seguida de : al final de case a evaluar");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(790);
     :}|
     rel_menor Identificador rel_mayor sim_dos_puntos SENTENCIA_STARTUP  res_exit{:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un número, una cadena o un valor boleando como case a evaluar, no se admiten valores dinámicos");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un número, una cadena o un valor boleando como case a evaluar, no se admiten valores dinámicos");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(791);
     :}|
     rel_menor CASO rel_mayor llave_abre SENTENCIA_STARTUP llave_cierra{:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban dos puntos al final del case a evaluar y exit al final del bloque de instrucciones del case");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban dos puntos al final del case a evaluar y exit al final del bloque de instrucciones del case");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(792);
     :} |
     CASO SENTENCIA_STARTUP res_exit {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba que el case a evaluar estuviera entre <> seguido de :");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba que el case a evaluar estuviera entre <> seguido de :");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(793);
     :} |
     SWITCH_ENTRADAS CASO sim_dos_puntos SENTENCIA_STARTUP res_exit{:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba < al inicio del case a evaluar y > al final del mismo");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba < al inicio del case a evaluar y > al final del mismo");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(794);
     :}|
     SWITCH_ENTRADAS CASO rel_mayor sim_dos_puntos SENTENCIA_STARTUP res_exit {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba < al inicio del case a evaluar");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba < al inicio del case a evaluar");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(795);
     :}|
     SWITCH_ENTRADAS rel_menor CASO sim_dos_puntos SENTENCIA_STARTUP res_exit {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba > al final de case a evaluar");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba > al final de case a evaluar");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(796);
     :}|
     SWITCH_ENTRADAS rel_menor CASO rel_mayor SENTENCIA_STARTUP res_exit {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba : antes del bloque de instrucciones del case");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba : antes del bloque de instrucciones del case");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(797);
     :}|
     SWITCH_ENTRADAS rel_menor CASO SENTENCIA_STARTUP res_exit {:
-        err_msj.add("Error Sintáctico en la línea # |Se esperaba > seguida de : al final de case a evaluar");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" |Se esperaba > seguida de : al final de case a evaluar");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(798);
     :}|
     SWITCH_ENTRADAS rel_menor Identificador rel_mayor sim_dos_puntos SENTENCIA_STARTUP res_exit {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un número, una cadena o un valor boleando como case a evaluar, no se admiten valores dinámicos");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un número, una cadena o un valor boleando como case a evaluar, no se admiten valores dinámicos");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(799);
     :}|
     SWITCH_ENTRADAS rel_menor CASO rel_mayor llave_abre SENTENCIA_STARTUP llave_cierra res_exit {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban dos puntos al final del case a evaluar y exit al final del bloque de instrucciones del case");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban dos puntos al final del case a evaluar y exit al final del bloque de instrucciones del case");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7001);
     :}|
     SWITCH_ENTRADAS CASO SENTENCIA_STARTUP res_exit {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba que el case a evaluar estuviera entre <> seguido de :");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba que el case a evaluar estuviera entre <> seguido de :");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7002);
     :}
 ;
@@ -2137,38 +2137,38 @@ SWITCH_ENTRADAS ::=
 CASO ::=
     Numero | cadena_caracter | res_true | res_false |
     Numero Numero {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un solo número, cadena o valor booleano");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un solo número, cadena o valor booleano");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(430);
     :} | 
     Numero coma Numero {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un solo número, cadena o valor booleano");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un solo número, cadena o valor booleano");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(430);
     :} |
     cadena_caracter ari_suma cadena_caracter {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un solo número, cadena o valor booleano");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un solo número, cadena o valor booleano");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(430);
     :} |
     Numero ari_suma cadena_caracter {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un solo número, cadena o valor booleano");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un solo número, cadena o valor booleano");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(430);
     :} |
     Numero ari_suma Numero {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un solo número, cadena o valor booleano");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un solo número, cadena o valor booleano");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(430);
     :} |
     cadena_caracter coma cadena_caracter {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un solo número, cadena o valor booleano");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un solo número, cadena o valor booleano");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(430);
     :} |
     Numero coma Identificador {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un solo número, cadena o valor booleano");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un solo número, cadena o valor booleano");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(430);
     :} 
 ;
@@ -2180,29 +2180,29 @@ WHILE ::=
     res_while CONDICION par_cierra llave_abre
         SENTENCIA_STARTUP
     llave_cierra{:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de apertura antes de la condición");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de apertura antes de la condición");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(775);
     :} |
     res_while par_abre CONDICION llave_abre
         SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba paréntesis de cierre después de la condición");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de cierre después de la condición");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(776);
     :} |
     res_while par_abre CONDICION par_cierra
         SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba llave de apertura antes del bloque de código del while");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba llave de apertura antes del bloque de código del while");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(777);
     :} |
     res_while par_abre par_cierra llave_abre
         SENTENCIA_STARTUP
     llave_cierra {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba condición antes del bloque de código del while");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba condición antes del bloque de código del while");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(778);
     :} 
 ;
@@ -2216,56 +2216,56 @@ DOWHILE ::=
         SENTENCIA_STARTUP
     llave_cierra res_while par_abre CONDICION par_cierra 
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un punto y coma");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un punto y coma");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}|
     res_do llave_abre
         SENTENCIA_STARTUP
     llave_cierra res_while par_abre CONDICION  sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de cierre");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un paréntesis de cierre");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}|
     res_do llave_abre
         SENTENCIA_STARTUP
     llave_cierra res_while par_abre  par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un condición dentro del while");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un condición dentro del while");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}|
     res_do llave_abre
         SENTENCIA_STARTUP
     llave_cierra res_while CONDICION par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de apertura");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un paréntesis de apertura");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}|
     res_do llave_abre
         SENTENCIA_STARTUP
     llave_cierra  par_abre CONDICION par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada while");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba la palabra reservada while");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}|
     res_do llave_abre
         SENTENCIA_STARTUP
     res_while par_abre CONDICION par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba una llave de cierre antes del while");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una llave de cierre antes del while");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}|
     res_do llave_abre
     llave_cierra res_while par_abre CONDICION par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba como minimo una instrucción dentro de las llaves del do while");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba como minimo una instrucción dentro de las llaves del do while");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}|
     res_do 
        SENTENCIA_STARTUP
     llave_cierra res_while par_abre CONDICION par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba una llave de apertura despues de la palabra do");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una llave de apertura despues de la palabra do");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}
 
 ;
@@ -2311,32 +2311,32 @@ IN ::=
     res_in par_abre VALOR_NUMERICO par_cierra sig_punto_coma|
     res_in par_abre VALOR_NUMERICO par_cierra 
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un punto y coma");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un punto y coma");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(765);
     :}|
     res_in par_abre VALOR_NUMERICO  sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de cierre");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un paréntesis de cierre");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(766);
     :}|
     res_in par_abre par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un parámetro único");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un parámetro único");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(767);
     :}|
     res_in  VALOR_NUMERICO par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de apertura");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un paréntesis de apertura");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(768);
     :}|
     res_in  sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de apertura");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un paréntesis de apertura");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(769);
     :}
     
@@ -2348,130 +2348,130 @@ OUT ::=
     res_out par_abre res_display coma cadena_caracter par_cierra sig_punto_coma  |   
     res_out par_abre Identificador coma VALOR_NUMERICO par_cierra 
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un punto y coma");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un punto y coma");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(744);
     :}|
     res_out par_abre Identificador coma VALOR_NUMERICO  sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de cierre");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un paréntesis de cierre");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(745);
     :}|
     res_out par_abre Identificador coma  par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un parámetro numérico antes del paréntesis de cierre");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un parámetro numérico antes del paréntesis de cierre");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(746);
     :}|
     res_out par_abre Identificador VALOR_NUMERICO par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba una coma despues del identificador");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una coma despues del identificador");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(747);
     :}|
     res_out par_abre  coma VALOR_NUMERICO par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un identificador después del paréntesis de apertura");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un identificador después del paréntesis de apertura");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(748);
     :}|
     res_out Identificador coma VALOR_NUMERICO par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis después del out");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un paréntesis después del out");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(749);
     :}|
     res_out par_abre  par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba una instrucción completa");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una instrucción completa");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(750);
     :}|
     res_out par_abre Identificador coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra 
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un punto y coma");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un punto y coma");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(751);
     :}|
     res_out par_abre Identificador coma VALOR_NUMERICO coma VALOR_NUMERICO  sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de cierre");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un paréntesis de cierre");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(752);
     :}|
     res_out par_abre Identificador coma VALOR_NUMERICO coma par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un parámetro antes del paréntesis de cierre");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un parámetro antes del paréntesis de cierre");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(753);
     :}|
     res_out par_abre Identificador coma VALOR_NUMERICO  VALOR_NUMERICO par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba una coma entre los dos valores numéricos");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una coma entre los dos valores numéricos");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(754);
     :}|
     res_out par_abre Identificador coma  coma VALOR_NUMERICO par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaban dos parametros numéricos");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban dos parametros numéricos");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(755);
     :}|
     res_out par_abre Identificador VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba una coma después del Identificador");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una coma después del Identificador");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(756);
     :}|
     res_out par_abre coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un Identificador después del paréntesis de apertura");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un Identificador después del paréntesis de apertura");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(757);
     :}|
     res_out Identificador coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de apertura después del out"); 
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un paréntesis de apertura después del out"); 
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(758);
     :} 
     
     |
     res_out par_abre res_display coma cadena_caracter par_cierra 
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un punto y coma"); 
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un punto y coma"); 
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(759);
     :} |
     res_out par_abre res_display coma cadena_caracter sig_punto_coma 
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de cierre antes del punto y coma"); 
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un paréntesis de cierre antes del punto y coma"); 
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(760);
     :} |
     res_out par_abre res_display coma par_cierra sig_punto_coma 
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un parametro entes del paréntesis"); 
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un parametro entes del paréntesis"); 
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(761);
     :} |
     res_out par_abre res_display cadena_caracter par_cierra sig_punto_coma 
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba una coma"); 
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una coma"); 
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(762);
     :} |
     res_out par_abre coma cadena_caracter par_cierra sig_punto_coma 
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba la sentencia display como primer parámetro"); 
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba la sentencia display como primer parámetro"); 
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(763);
     :}  |
     res_out  coma cadena_caracter par_cierra sig_punto_coma 
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de apertura después de la palabra out"); 
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un paréntesis de apertura después de la palabra out"); 
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(764);
     :} 
 ;
@@ -2481,68 +2481,68 @@ SLEEP ::=
     res_sleep par_abre EXPRESION par_cierra sig_punto_coma |
     res_sleep par_abre VALOR_NUMERICO par_cierra 
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un punto y coma");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un punto y coma");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(325);
     :}|
     res_sleep par_abre VALOR_NUMERICO sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de cierre antes del punto y coma");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un paréntesis de cierre antes del punto y coma");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(326);
     :}|
     res_sleep par_abre par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor numérico o identificador como parámetro");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un valor numérico o identificador como parámetro");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(327);
     :}|
     res_sleep VALOR_NUMERICO par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de apertura despues de la palabra reservada sleep");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un paréntesis de apertura despues de la palabra reservada sleep");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(328);
     :}|
     res_sleep par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de apertura despues de la palabra reservada sleep");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un paréntesis de apertura despues de la palabra reservada sleep");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(329);
     :}|
     res_sleep sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de apertura despues de la palabra reservada sleep");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un paréntesis de apertura despues de la palabra reservada sleep");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(330);
     :}|
     res_sleep par_abre par_cierra
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un parámetro");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un parámetro");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(331);
     :}|
     res_sleep par_abre VALOR_NUMERICO 
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de cierre después del parámetro");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un paréntesis de cierre después del parámetro");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(332);
     :}|
     res_sleep par_cierra VALOR_NUMERICO par_abre sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de apertura después de la palabra reservada sleep");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un paréntesis de apertura después de la palabra reservada sleep");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(333);
     :}|
     res_sleep par_cierra VALOR_NUMERICO par_cierra sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de apertura después de la palabra reservada sleep");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un paréntesis de apertura después de la palabra reservada sleep");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(334);
     :}|
     res_sleep par_abre VALOR_NUMERICO par_abre sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de cierre antes del punto y coma");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un paréntesis de cierre antes del punto y coma");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(335);
     :}
 ;
@@ -2563,8 +2563,8 @@ FOR ::=
         SENTENCIA_STARTUP 
     llave_cierra
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis después de la palabra reservada for");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un paréntesis después de la palabra reservada for");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(39);
     :}|
     res_for par_abre Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
@@ -2572,8 +2572,8 @@ FOR ::=
         SENTENCIA_STARTUP 
     llave_cierra
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba el tipo de dato correspondiente al identificador");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba el tipo de dato correspondiente al identificador");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(310);
     :}|  
     res_for par_abre res_def TIPO_DATO_FOR asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
@@ -2581,8 +2581,8 @@ FOR ::=
         SENTENCIA_STARTUP 
     llave_cierra
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un identificador después del tipo de dato");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un identificador después del tipo de dato");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(311);
     :} |
     res_for par_abre res_def TIPO_DATO_FOR Identificador VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
@@ -2590,8 +2590,8 @@ FOR ::=
         SENTENCIA_STARTUP 
     llave_cierra
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba el operador de asignación en el apartado de declaración de variables");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba el operador de asignación en el apartado de declaración de variables");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(312);
     :}|
     res_for par_abre res_def TIPO_DATO_FOR Identificador asi_asignacion sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
@@ -2599,8 +2599,8 @@ FOR ::=
         SENTENCIA_STARTUP 
     llave_cierra
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor en el apartado de declaración de variables");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un valor en el apartado de declaración de variables");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(313);
     :}|
     res_for par_abre res_def TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
@@ -2608,8 +2608,8 @@ FOR ::=
         SENTENCIA_STARTUP 
     llave_cierra
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un punto y coma antes de la condición");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un punto y coma antes de la condición");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(314);
     :}|
     res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma sig_punto_coma METODO_INCREMENTO par_cierra 
@@ -2617,8 +2617,8 @@ FOR ::=
         SENTENCIA_STARTUP 
     llave_cierra
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba una condición dentro de los parametros del for");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una condición dentro de los parametros del for");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(315);
     :}|
     res_for par_abre res_def TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma par_cierra 
@@ -2626,8 +2626,8 @@ FOR ::=
         SENTENCIA_STARTUP 
     llave_cierra
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un operador de incremento dentro de los parametros del for");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un operador de incremento dentro de los parametros del for");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(316);
     :}|
     res_for par_abre res_def TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO 
@@ -2635,8 +2635,8 @@ FOR ::=
         SENTENCIA_STARTUP 
     llave_cierra
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de cierre antes de la primera llave del for");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un paréntesis de cierre antes de la primera llave del for");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(317);
     :}|
     res_for par_abre res_def TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_abre 
@@ -2644,16 +2644,16 @@ FOR ::=
         SENTENCIA_STARTUP 
     llave_cierra
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba una llave de apertura despues del paréntesis de cierre");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una llave de apertura despues del paréntesis de cierre");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(318);
     :}|
     res_for par_abre res_def TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_abre 
     llave_abre
     llave_cierra
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba minimo una instrucción dentro de las llaves del for");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba minimo una instrucción dentro de las llaves del for");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(319);
     :}|
     res_for par_abre sig_punto_coma sig_punto_coma METODO_INCREMENTO par_cierra 
@@ -2661,8 +2661,8 @@ FOR ::=
         SENTENCIA_STARTUP 
     llave_cierra
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba una condición dentro de los parametros del for");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una condición dentro de los parametros del for");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(320);
     :}|
     res_for par_abre  sig_punto_coma CONDICION sig_punto_coma par_cierra 
@@ -2670,8 +2670,8 @@ FOR ::=
         SENTENCIA_STARTUP 
     llave_cierra
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un operador de incremento dentro de los parametros del for");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un operador de incremento dentro de los parametros del for");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(321);
     :}|
     res_for par_abre  sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO 
@@ -2679,8 +2679,8 @@ FOR ::=
         SENTENCIA_STARTUP 
     llave_cierra
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un paréntesis de cierre antes de la primera llave del for");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un paréntesis de cierre antes de la primera llave del for");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(322);
     :}|
     res_for par_abre  sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_abre 
@@ -2688,16 +2688,16 @@ FOR ::=
         SENTENCIA_STARTUP 
     llave_cierra
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba una llave de apertura despues del paréntesis de cierre");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una llave de apertura despues del paréntesis de cierre");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(323);
     :}|
     res_for par_abre  sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_abre 
     llave_abre
     llave_cierra
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba minimo una instrucción dentro de las llaves del for");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba minimo una instrucción dentro de las llaves del for");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(324);
     :}|
     res_for par_abre TIPO_DATO_FOR Identificador asi_asignacion sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
@@ -2705,8 +2705,8 @@ FOR ::=
         SENTENCIA_STARTUP 
     llave_cierra
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra def antes del tipo de dato");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba la palabra def antes del tipo de dato");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(336);
     :}
 
@@ -2722,14 +2722,14 @@ TIPO_DATO_FOR ::=
     tip_tinyint:tipf{:RESULT = tipf;:} | 
     tip_boolean 
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un tipo de dato numérico");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un tipo de dato numérico");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(37);
     :} |
     tip_char 
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un tipo de dato numérico");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un tipo de dato numérico");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(38);
     :} 
 ;
@@ -2738,8 +2738,8 @@ INCREMENTO ::=
     ari_resta ari_resta |
     error sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Error en la declaración del operador de incremento");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Error en la declaración del operador de incremento");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(36);
     :} 
 ;
@@ -2754,32 +2754,32 @@ OPERACION_CONTRACCION ::=
 
     Identificador OPERADOR_ARITMETICO asi_asignacion VALOR_NUMERICO  
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un punto y coma");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un punto y coma");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(31);
     :} |
     Identificador OPERADOR_ARITMETICO asi_asignacion sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un valor numérico");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un valor numérico");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(32);
     :} |
     Identificador OPERADOR_ARITMETICO VALOR_NUMERICO sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un signo de asignación");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un signo de asignación");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(33);
     :} |
     OPERADOR_ARITMETICO asi_asignacion VALOR_NUMERICO sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba un identificador antes del operador aritmetico");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un identificador antes del operador aritmetico");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(34);
     :}  
     | error sig_punto_coma 
     {:
-        err_msj.add("Error Sintáctico en la línea # | Se esperaba una acción u operación");
-        //-err_linea.add(Ç);
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una acción u operación");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(35);
     :}
 ;
