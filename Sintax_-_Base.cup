@@ -1059,7 +1059,7 @@ DECLARACION ::=
             System.out.println(var_identificador.size());
         }else{
             err_msj.add("Error Semantico en la línea " + (fright+1) + " variable " + id + " ya declarada");
-            //-err_linea.add(Ç);
+            err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         }
     :} |
     res_def:i TIPO_DATO:dato Identificador:id asi_asignacion VALOR:val sig_punto_coma:f  
@@ -1073,7 +1073,7 @@ DECLARACION ::=
             System.out.println(var_identificador.size());
         }else{
             err_msj.add("Error Semantico en la línea " + (fright+1) + " variable " + id + " ya declarada");
-            //-err_linea.add(Ç);
+            err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         }
     :} |
     res_def TIPO_DATO Identificador {:
@@ -1495,22 +1495,22 @@ CONDICION ::=
     :} |
     VALOR_NUMERICO OPERADOR_CONDICIONAL OPERADOR_CONDICIONAL VALOR_NUMERICO {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un solo operador condicional");
-        //-err_li nea.add(Ç);
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7036);
     :} |
     cadena_caracter {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una condición válida, no se admiten cadenas");
-        //-err_li nea.add(Ç);
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7037);
     :} |
     cadena_caracter OPERADOR_CONDICIONAL cadena_caracter {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una condición válida, no se admiten cadenas");
-        //-err_li nea.add(Ç);
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7037);
     :} | 
     cadena_caracter OPERADOR_CONDICIONAL VALOR_NUMERICO {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una condición válida, no se admiten cadenas");
-        //-err_li nea.add(Ç);
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7037);
     :}|
     error sig_punto_coma
@@ -1525,11 +1525,11 @@ OPERADOR_CONDICIONAL ::=
      log_xor | log_and | log_or | rel_diferente | rel_igual | rel_mayor_igual | rel_mayor | rel_menor_igual | rel_menor |
      coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un operador condicional");
-        //-err_li nea.add(Ç);
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(421);
     :} | asi_asignacion {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un operador condicional");
-        //-err_li nea.add(Ç);
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(421);
     :}
 ;
@@ -1732,7 +1732,7 @@ DECLARACION_PARAMETRO ::=
             System.out.println(var_identificador.size());
         }else{
             err_msj.add("Error Semantico en la línea " + (iright+1) + " variable " + id + " ya declarada");
-            //-err_linea.add(Ç);
+            err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         }
     :} |
     res_def:i TIPO_DATO:dato Identificador:id asi_asignacion VALOR:val 
@@ -1746,59 +1746,59 @@ DECLARACION_PARAMETRO ::=
             System.out.println(var_identificador.size());
         }else{
             err_msj.add("Error Semantico en la línea " + (iright+1) + " variable " + id + " ya declarada");
-            //-err_linea.add(Ç);
+            err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         }
     :}  |
     TIPO_DATO Identificador {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada def al inicio de la declaración");
-        //-err_linea.add(Ç);
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}  |
     TIPO_DATO Identificador asi_asignacion VALOR {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada def al inicio de la declaración");
-        //-err_linea.add(Ç);
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_pin Identificador {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
-        //-err_linea.add(Ç);
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_pin Identificador asi_asignacion VALOR {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
-        //-err_linea.add(Ç);
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_pin par_abre Numero coma Identificador par_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
-        //-err_linea.add(Ç);
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_display par_abre DISPLAY_PARAMS par_cierra  {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método display");
-        //-err_linea.add(Ç);
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_function TIPO_DATO Identificador par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra{:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis para la creación de funciones");
-        //-err_linea.add(Ç);
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_function res_void Identificador par_abre PARAMETRO par_cierra llave_abre
         SENTENCIA_FUNCION
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis para la creación de funciones");
-        //-err_linea.add(Ç); :} |
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)); :} |
     res_def res_type par_abre Identificador coma TYPE_IO par_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método type");
-        //-err_linea.add(Ç);
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_scale par_abre Identificador coma Numero coma Numero par_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método scale");
-        //-err_linea.add(Ç);
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_volt par_abre Identificador coma Numero par_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método volt");
-        //-err_linea.add(Ç);
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} |
     res_def res_volt par_abre Identificador coma Numero coma Numero par_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método volt");
-        //-err_linea.add(Ç);
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :} 
 ;
 
