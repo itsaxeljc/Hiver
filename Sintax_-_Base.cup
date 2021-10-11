@@ -788,7 +788,12 @@ INICIO ::=
             err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un identificador despues de la palabra reservada name");
             err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
             errores_gramatica(44);
-        :} 
+        :} | 
+    error sig_punto_coma
+    {:
+       err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
+       err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+    :}
 ;
 
 ESTRUCTURA_BASICA ::=
@@ -937,7 +942,12 @@ RETURN ::=
     res_return TIPO_DATO {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; después del tipo de dato");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
-    :} 
+    :} | 
+    error sig_punto_coma
+    {:
+       err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
+       err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+    :}
 ;
 CONFIG ::= 
     res_config:i llave_abre 
@@ -994,7 +1004,11 @@ SENTENCIA_CONFIG ::=
     SCALE | SENTENCIA_CONFIG SCALE |
     VOLT | SENTENCIA_CONFIG VOLT |
     MAX_VOLT | SENTENCIA_CONFIG MAX_VOLT |
-    MODE | SENTENCIA_CONFIG MODE
+    MODE | SENTENCIA_CONFIG MODE |error sig_punto_coma
+    {:
+       err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
+       err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+    :}
 ;
 
 SENTENCIA_STARTUP ::=
@@ -1204,6 +1218,11 @@ DISPLAY_PARAMS ::=
     Numero coma coma Numero{:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un valor entero después de cada coma");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+    :}|
+    error sig_punto_coma
+    {:
+       err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
+       err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}
 ;
 
@@ -1263,7 +1282,12 @@ TYPE_IO ::=
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un solo parámetro input/output");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(412);
-    :} 
+    :} |
+    error sig_punto_coma
+    {:
+       err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
+       err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+    :}
 ;
 
 SCALE ::=
@@ -1352,7 +1376,13 @@ VOLT ::=
     res_volt par_abre Identificador coma Numero coma Numero sig_punto_coma {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba paréntesis de cierre después de los parámetros del método volt");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
-    :}
+    :} |
+    res_volt par_abre Identificador coma par_cierra {:
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un parámtetro antes del paréntesis de cierre");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)); :} |
+    res_volt par_abre coma Numero par_cierra {:
+        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un identificador después del paréntesis de apertura");
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));:}
 ;
 
 MAX_VOLT ::=
@@ -1482,6 +1512,11 @@ CONDICION ::=
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una condición válida, no se admiten cadenas");
         //-err_li nea.add(Ç);
         errores_gramatica(7037);
+    :}|
+    error sig_punto_coma
+    {:
+       err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
+       err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}
 ;
 
@@ -1657,7 +1692,12 @@ TIPO_DATO ::=
 VALOR ::=
     Numero:val {:RESULT = val;:}|
     Identificador:val {:RESULT = val;:}|
-    cadena_caracter:val {:RESULT = val;:}
+    cadena_caracter:val {:RESULT = val;:}|
+    error sig_punto_coma
+    {:
+       err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
+       err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+    :}
     
 ;
 
@@ -1672,7 +1712,12 @@ PARAMETRO ::=
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaban parámetros separados por coma");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(7018);
-    :} 
+    :} |
+    error sig_punto_coma
+    {:
+       err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
+       err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+    :}
 ;
 
 DECLARACION_PARAMETRO ::= 
@@ -2316,6 +2361,7 @@ OPE ::=
         var_idSem.add("-");
         var_linExp.add(lright+1);
     :}| TERM
+
 ;
 
 TERM ::=
@@ -2327,7 +2373,7 @@ TERM ::=
     {: //Obtener variables usadas
         var_idSem.add("/");
         var_linExp.add(lright+1);
-    :}| FACTOR
+    :}| FACTOR      
 ;
 
 FACTOR ::=
@@ -2338,7 +2384,7 @@ FACTOR ::=
             var_linExp.add(idright+1);
         //}
     :}|
-    par_abre OPE par_cierra | ari_resta:l FACTOR{: //Obtener variables usadas
+     par_abre OPE par_cierra | ari_resta:l FACTOR{: //Obtener variables usadas
         var_idSem.add("-");
         var_linExp.add(lright+1);
     :}
@@ -2349,7 +2395,12 @@ OPERACION_PROC ::=
 ;
 
 OPERADOR ::=
-    OPERADOR_CONDICIONAL| ari_division | ari_resta | ari_suma | ari_multiplicacion 
+    OPERADOR_CONDICIONAL| ari_division | ari_resta | ari_suma | ari_multiplicacion |
+    error sig_punto_coma
+    {:
+       err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
+       err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+    :}
 ;
 
 IN ::=
@@ -2776,21 +2827,30 @@ TIPO_DATO_FOR ::=
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba un tipo de dato numérico");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(38);
-    :} 
+    :} |
+    error sig_punto_coma
+    {:
+       err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
+       err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+    :}
 ;
 INCREMENTO ::=
     ari_suma ari_suma |
     ari_resta ari_resta |
     error sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Error en la declaración del operador de incremento");
-        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
-        errores_gramatica(36);
-    :} 
+       err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
+       err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+    :}
 ;
 
 OPERADOR_ARITMETICO ::=
-    ari_suma | ari_resta | ari_multiplicacion | ari_division
+    ari_suma | ari_resta | ari_multiplicacion | ari_division |
+    error sig_punto_coma
+    {:
+       err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
+       err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+    :}
 ;                                                                                          
 
 OPERACION_CONTRACCION ::=
@@ -2821,10 +2881,10 @@ OPERACION_CONTRACCION ::=
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
         errores_gramatica(34);
     :}  
-    | error sig_punto_coma 
+    |
+    error sig_punto_coma
     {:
-        err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba una acción u operación");
-        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
-        errores_gramatica(35);
+       err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Sintaxis invalida, favor de verificar la estructura en el manual del lenguaje");
+       err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
     :}
 ;
