@@ -163,30 +163,30 @@ action code
         case 412:
             err_gramatica.add("res_type par_abre Identificador coma <span color=\"#FF0042\">TYPE_IO</span> par_cierra sig_punto_coma");
             break;
-        //GRAMATICAS MAX_VOLT
+        //GRAMATICAS 
         case 413:
-            err_gramatica.add("res_max_volt par_abre Identificador par_cierra <span color=\"#FF0042\">sig_punto_coma</span>");
+            err_gramatica.add("MAX_VOLT ::= res_max_volt par_abre Identificador par_cierra <span color=\"#FF0042\">sig_punto_coma</span>");
             break;
         case 414:
-            err_gramatica.add("res_max_volt par_abre Numero par_cierra <span color=\"#FF0042\">sig_punto_coma</span>");
+            err_gramatica.add("MAX_VOLT ::= res_max_volt par_abre Numero par_cierra <span color=\"#FF0042\">sig_punto_coma</span>");
             break;
         case 415:
-            err_gramatica.add("res_max_volt <span color=\"#FF0042\">par_abre</span> Identificador par_cierra sig_punto_coma");
+            err_gramatica.add("MAX_VOLT ::= res_max_volt <span color=\"#FF0042\">par_abre</span> Identificador par_cierra sig_punto_coma");
             break;
         case 416:
-            err_gramatica.add("res_max_volt par_abre Identificador <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
+            err_gramatica.add("MAX_VOLT ::= res_max_volt par_abre Identificador <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
             break;
         case 417:
-            err_gramatica.add("res_max_volt <span color=\"#FF0042\">par_abre</span> Numero par_cierra sig_punto_coma");
+            err_gramatica.add("MAX_VOLT ::= res_max_volt <span color=\"#FF0042\">par_abre</span> Numero par_cierra sig_punto_coma");
             break;
         case 418:
-            err_gramatica.add("res_max_volt par_abre Numero <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
+            err_gramatica.add("MAX_VOLT ::= res_max_volt par_abre Numero <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
             break;
         case 419:
-            err_gramatica.add("res_max_volt par_abre <span color=\"#FF0042\">Numero</span> par_cierra sig_punto_coma");
+            err_gramatica.add("MAX_VOLT ::= res_max_volt par_abre <span color=\"#FF0042\">Numero</span> par_cierra sig_punto_coma");
             break;
         case 420:
-            err_gramatica.add("res_max_volt <span color=\"#FF0042\">par_abre Numero par_cierra sig_punto_coma</span>");
+            err_gramatica.add("MAX_VOLT ::= res_max_volt <span color=\"#FF0042\">par_abre Numero par_cierra sig_punto_coma</span>");
             break;
         //GRAMATICAS OPERADOR CONDICIONAL
         case 421:
@@ -249,7 +249,7 @@ action code
             break;
         // GRAMATICAS FOR
         case 39:
-            err_gramatica.add("FOR ::= FOR ::= res_for <span color=\"#FF0042\">par_abre<span color=\"#FF0042\"> res_def TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
+            err_gramatica.add("FOR ::=res_for <span color=\"#FF0042\">par_abre<span color=\"#FF0042\"> res_def TIPO_DATO_FOR Identificador asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra<br>"+ 
                 "llave_abre<br>"+ 
                 "&nbsp&nbsp&nbsp&nbsp SENTENCIA_STARTUP<br>"+ 
                 "llave_cierra"); 
@@ -431,85 +431,85 @@ action code
         // GRAMÁTICA: OUT   
 
         case 744:
-            err_gramatica.add("OUT res_out par_abre Identificador coma VALOR_NUMERICO           <span color=\"#FF0042\">par_cierra sig_punto_coma</span> ");
+            err_gramatica.add("OUT ::= res_out par_abre Identificador coma VALOR_NUMERICO           <span color=\"#FF0042\">par_cierra sig_punto_coma</span> ");
             break;
         case 745:
-            err_gramatica.add("OUT res_out par_abre Identificador coma VALOR_NUMERICO <span color=\"#FF0042\">par_cierra</span> sig_punto_coma ");
+            err_gramatica.add("OUT ::= res_out par_abre Identificador coma VALOR_NUMERICO <span color=\"#FF0042\">par_cierra</span> sig_punto_coma ");
             break;
         case 746:
-            err_gramatica.add("OUT res_out par_abre Identificador coma <span color=\"#FF0042\">VALOR_NUMERICO</span> par_cierra sig_punto_coma ");
+            err_gramatica.add("OUT ::= res_out par_abre Identificador coma <span color=\"#FF0042\">VALOR_NUMERICO</span> par_cierra sig_punto_coma ");
             break;
         case 747:
-            err_gramatica.add("OUT res_out par_abre Identificador <span color=\"#FF0042\">coma</span> VALOR_NUMERICO par_cierra sig_punto_coma ");
+            err_gramatica.add("OUT ::= res_out par_abre Identificador <span color=\"#FF0042\">coma</span> VALOR_NUMERICO par_cierra sig_punto_coma ");
             break;
         case 748:
-            err_gramatica.add("OUT res_out par_abre <span color=\"#FF0042\">Identificador</span> coma VALOR_NUMERICO par_cierra sig_punto_coma ");
+            err_gramatica.add("OUT ::= res_out par_abre <span color=\"#FF0042\">Identificador</span> coma VALOR_NUMERICO par_cierra sig_punto_coma ");
             break;
         case 749:
-            err_gramatica.add("OUT res_out <span color=\"#FF0042\">par_abre</span> Identificador coma VALOR_NUMERICO par_cierra sig_punto_coma ");
+            err_gramatica.add("OUT ::= res_out <span color=\"#FF0042\">par_abre</span> Identificador coma VALOR_NUMERICO par_cierra sig_punto_coma ");
             break;
         case 750:
-            err_gramatica.add("OUT <span color=\"#FF0042\">res_out par_abre Identificador coma VALOR_NUMERICO par_cierra sig_punto_coma</span> ");
+            err_gramatica.add("OUT ::= <span color=\"#FF0042\">res_out par_abre Identificador coma VALOR_NUMERICO par_cierra sig_punto_coma</span> ");
             break;
         case 751:
-            err_gramatica.add("OUT res_out par_abre Identificador coma VALOR_NUMERICO par_cierra <span color=\"#FF0042\">sig_punto_coma</span> ");
+            err_gramatica.add("OUT ::= res_out par_abre Identificador coma VALOR_NUMERICO par_cierra <span color=\"#FF0042\">sig_punto_coma</span> ");
             break;
         case 752:
-            err_gramatica.add("OUT res_out par_abre Identificador coma VALOR_NUMERICO <span color=\"#FF0042\">par_cierra</span> sig_punto_coma ");
+            err_gramatica.add("OUT ::= res_out par_abre Identificador coma VALOR_NUMERICO <span color=\"#FF0042\">par_cierra</span> sig_punto_coma ");
             break;    
         case 753:
-            err_gramatica.add("OUT res_out par_abre Identificador coma <span color=\"#FF0042\">VALOR_NUMERICO</span> par_cierra sig_punto_coma ");
+            err_gramatica.add("OUT ::= res_out par_abre Identificador coma <span color=\"#FF0042\">VALOR_NUMERICO</span> par_cierra sig_punto_coma ");
             break;
         case 754:
-            err_gramatica.add("OUT res_out par_abre Identificador coma VALOR_NUMERICO <span color=\"#FF0042\">coma</span> VALOR_NUMERICO par_cierra sig_punto_coma ");
+            err_gramatica.add("OUT ::= res_out par_abre Identificador coma VALOR_NUMERICO <span color=\"#FF0042\">coma</span> VALOR_NUMERICO par_cierra sig_punto_coma ");
             break;
         case 755:
-            err_gramatica.add("OUT res_out par_abre Identificador <span color=\"#FF0042\">coma VALOR_NUMERICO coma VALOR_NUMERICO</span> par_cierra sig_punto_coma ");
+            err_gramatica.add("OUT ::= res_out par_abre Identificador <span color=\"#FF0042\">coma VALOR_NUMERICO coma VALOR_NUMERICO</span> par_cierra sig_punto_coma ");
             break;
         case 756:
-            err_gramatica.add("OUT res_out par_abre Identificador <span color=\"#FF0042\">coma</span> VALOR_NUMERICO par_cierra sig_punto_coma ");
+            err_gramatica.add("OUT ::= res_out par_abre Identificador <span color=\"#FF0042\">coma</span> VALOR_NUMERICO par_cierra sig_punto_coma ");
             break;
         case 757:
-            err_gramatica.add("OUT res_out par_abre <span color=\"#FF0042\">Identificador</span> coma VALOR_NUMERICO par_cierra sig_punto_coma ");
+            err_gramatica.add("OUT ::= res_out par_abre <span color=\"#FF0042\">Identificador</span> coma VALOR_NUMERICO par_cierra sig_punto_coma ");
             break;
         case 758:
-            err_gramatica.add("OUT res_out <span color=\"#FF0042\">par_abre</span>Identificador coma VALOR_NUMERICO par_cierra sig_punto_coma ");
+            err_gramatica.add("OUT ::= res_out <span color=\"#FF0042\">par_abre</span>Identificador coma VALOR_NUMERICO par_cierra sig_punto_coma ");
             break;
         case 759:
-            err_gramatica.add("OUT res_out par_abre res_display coma cadena_caracter par_cierre <span color=\"#FF0042\">sig_punto_coma</span>");
+            err_gramatica.add("OUT ::= res_out par_abre res_display coma cadena_caracter par_cierre <span color=\"#FF0042\">sig_punto_coma</span>");
             break;
         case 760:
-            err_gramatica.add("OUT res_out par_abre res_display coma cadena_caracter <span color=\"#FF0042\">par_cierre</span> sig_punto_coma");
+            err_gramatica.add("OUT ::= res_out par_abre res_display coma cadena_caracter <span color=\"#FF0042\">par_cierre</span> sig_punto_coma");
             break;
         case 761:
-            err_gramatica.add("OUT res_out par_abre res_display <span color=\"#FF0042\">coma cadena_caracter</span> par_cierre sig_punto_coma");
+            err_gramatica.add("OUT ::= res_out par_abre res_display <span color=\"#FF0042\">coma cadena_caracter</span> par_cierre sig_punto_coma");
             break;
         case 762:
-            err_gramatica.add("OUT res_out par_abre res_display <span color=\"#FF0042\">coma</span> cadena_caracter par_cierre sig_punto_coma");
+            err_gramatica.add("OUT ::= res_out par_abre res_display <span color=\"#FF0042\">coma</span> cadena_caracter par_cierre sig_punto_coma");
             break;
         case 763:
-            err_gramatica.add("OUT res_out par_abre <span color=\"#FF0042\">res_display</span> coma cadena_caracter par_cierre sig_punto_coma");
+            err_gramatica.add("OUT ::= res_out par_abre <span color=\"#FF0042\">res_display</span> coma cadena_caracter par_cierre sig_punto_coma");
             break;
         case 764:
-            err_gramatica.add("OUT res_out <span color=\"#FF0042\">par_abre</span> res_display coma cadena_caracter par_cierre sig_punto_coma");
+            err_gramatica.add("OUT ::= res_out <span color=\"#FF0042\">par_abre</span> res_display coma cadena_caracter par_cierre sig_punto_coma");
             break;   
 
         // GRAMÁTICA: IN   
 
         case 765:
-            err_gramatica.add("IN res_in par_abre VALOR_NUMERICO par_cierra <span color=\"#FF0042\">sig_punto_coma</span>");
+            err_gramatica.add("IN ::= res_in par_abre VALOR_NUMERICO par_cierra <span color=\"#FF0042\">sig_punto_coma</span>");
             break;
         case 766:
-            err_gramatica.add("IN res_in par_abre VALOR_NUMERICO <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
+            err_gramatica.add("IN ::= res_in par_abre VALOR_NUMERICO <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
             break;
         case 767:
-            err_gramatica.add("IN res_in par_abre <span color=\"#FF0042\">VALOR_NUMERICO</span> par_cierra sig_punto_coma");
+            err_gramatica.add("IN ::= res_in par_abre <span color=\"#FF0042\">VALOR_NUMERICO</span> par_cierra sig_punto_coma");
             break;
         case 768:
-            err_gramatica.add("IN res_in <span color=\"#FF0042\">par_abre</span> VALOR_NUMERICO par_cierra sig_punto_coma");
+            err_gramatica.add("IN ::= res_in <span color=\"#FF0042\">par_abre</span> VALOR_NUMERICO par_cierra sig_punto_coma");
             break;
         case 769:
-            err_gramatica.add("IN res_in <span color=\"#FF0042\">par_abre</span> VALOR_NUMERICO par_cierra sig_punto_coma");
+            err_gramatica.add("IN ::= res_in <span color=\"#FF0042\">par_abre</span> VALOR_NUMERICO par_cierra sig_punto_coma");
             break;
 
         // GRAMÁTICA: OPERACIÓN
@@ -529,123 +529,123 @@ action code
 
         // GRAMÁTICA: DOWHILE
         case 774:
-            err_gramatica.add("DOWHILE res_do llave_abre   <br>SENTENCIA_STARTUP<br> llave_cierra res_while par_abre CONDICION par_cierra <span color=\"#FF0042\">sig_punto_coma</span>");
+            err_gramatica.add("DOWHILE ::= res_do llave_abre   <br>SENTENCIA_STARTUP<br> llave_cierra res_while par_abre CONDICION par_cierra <span color=\"#FF0042\">sig_punto_coma</span>");
             break;
 
         // GRAMÁTICA: WHILE
         case 775:
-            err_gramatica.add("WHILE res_while <span color=\"#FF0042\">par_abre</span> CONDICION par_cierra llave_abre SENTENCIA_STARTUP llave_cierra");
+            err_gramatica.add("WHILE ::= res_while <span color=\"#FF0042\">par_abre</span> CONDICION par_cierra llave_abre SENTENCIA_STARTUP llave_cierra");
             break;
         case 776:
-            err_gramatica.add("WHILE res_while par_abre CONDICION <span color=\"#FF0042\">par_cierra</span> llave_abre SENTENCIA_STARTUP llave_cierra");
+            err_gramatica.add("WHILE ::= res_while par_abre CONDICION <span color=\"#FF0042\">par_cierra</span> llave_abre SENTENCIA_STARTUP llave_cierra");
             break;
         case 777:
-            err_gramatica.add("WHILE res_while par_abre CONDICION par_cierra <span color=\"#FF0042\">llave_abre</span> SENTENCIA_STARTUP llave_cierra");
+            err_gramatica.add("WHILE ::= res_while par_abre CONDICION par_cierra <span color=\"#FF0042\">llave_abre</span> SENTENCIA_STARTUP llave_cierra");
             break;
         case 778:
-            err_gramatica.add("WHILE res_while par_abre <span color=\"#FF0042\">CONDICION</span> par_cierra llave_abre SENTENCIA_STARTUP llave_cierra");
+            err_gramatica.add("WHILE ::= res_while par_abre <span color=\"#FF0042\">CONDICION</span> par_cierra llave_abre SENTENCIA_STARTUP llave_cierra");
             break;
         
 
         // GRAMÁTICA: SWITCH_ENTRADAS
 
         case 786:
-            err_gramatica.add("SWITCH_ENTRADAS <span color=\"#FF0042\">rel_menor</span> CASO <span color=\"#FF0042\">rel_mayor</span> sim_dos_puntos SENTENCIA_STARTUP res_exit");
+            err_gramatica.add("SWITCH_ENTRADAS ::= <span color=\"#FF0042\">rel_menor</span> CASO <span color=\"#FF0042\">rel_mayor</span> sim_dos_puntos SENTENCIA_STARTUP res_exit");
             break;
         case 787:
-            err_gramatica.add("SWITCH_ENTRADAS <span color=\"#FF0042\">rel_menor</span> CASO rel_mayor sim_dos_puntos SENTENCIA_STARTUP res_exit");
+            err_gramatica.add("SWITCH_ENTRADAS ::= <span color=\"#FF0042\">rel_menor</span> CASO rel_mayor sim_dos_puntos SENTENCIA_STARTUP res_exit");
             break;
         case 788:
-            err_gramatica.add("SWITCH_ENTRADAS rel_menor CASO <span color=\"#FF0042\">rel_mayor</span> sim_dos_puntos SENTENCIA_STARTUP res_exit");
+            err_gramatica.add("SWITCH_ENTRADAS ::= rel_menor CASO <span color=\"#FF0042\">rel_mayor</span> sim_dos_puntos SENTENCIA_STARTUP res_exit");
             break;
         case 789:
-            err_gramatica.add("SWITCH_ENTRADAS rel_menor CASO rel_mayor <span color=\"#FF0042\">sim_dos_puntos</span> SENTENCIA_STARTUP res_exit");
+            err_gramatica.add("SWITCH_ENTRADAS ::= rel_menor CASO rel_mayor <span color=\"#FF0042\">sim_dos_puntos</span> SENTENCIA_STARTUP res_exit");
             break;
         case 790:
-            err_gramatica.add("SWITCH_ENTRADAS rel_menor CASO <span color=\"#FF0042\">rel_mayor sim_dos_puntos</span> SENTENCIA_STARTUP res_exit");
+            err_gramatica.add("SWITCH_ENTRADAS ::= rel_menor CASO <span color=\"#FF0042\">rel_mayor sim_dos_puntos</span> SENTENCIA_STARTUP res_exit");
             break;
         case 791:
-            err_gramatica.add("SWITCH_ENTRADAS rel_menor <span color=\"#FF0042\">CASO</span> rel_mayor sim_dos_puntos SENTENCIA_STARTUP res_exit");
+            err_gramatica.add("SWITCH_ENTRADAS ::= rel_menor <span color=\"#FF0042\">CASO</span> rel_mayor sim_dos_puntos SENTENCIA_STARTUP res_exit");
             break;
         case 792:
-            err_gramatica.add("SWITCH_ENTRADAS rel_menor CASO rel_mayor <span color=\"#FF0042\">sim_dos_puntos SENTENCIA_STARTUP res_exit</span>");
+            err_gramatica.add("SWITCH_ENTRADAS ::= rel_menor CASO rel_mayor <span color=\"#FF0042\">sim_dos_puntos SENTENCIA_STARTUP res_exit</span>");
             break;
         case 793:
-            err_gramatica.add("SWITCH_ENTRADAS <span color=\"#FF0042\">rel_menor</span> CASO <span color=\"#FF0042\">rel_mayor sim_dos_puntos</span> SENTENCIA_STARTUP res_exit");
+            err_gramatica.add("SWITCH_ENTRADAS ::= <span color=\"#FF0042\">rel_menor</span> CASO <span color=\"#FF0042\">rel_mayor sim_dos_puntos</span> SENTENCIA_STARTUP res_exit");
             break;
         case 794:
-            err_gramatica.add("SWITCH_ENTRADAS <span color=\"#FF0042\">rel_menor</span> CASO <span color=\"#FF0042\">rel_mayor</span> sim_dos_puntos SENTENCIA_STARTUP res_exit");
+            err_gramatica.add("SWITCH_ENTRADAS ::= <span color=\"#FF0042\">rel_menor</span> CASO <span color=\"#FF0042\">rel_mayor</span> sim_dos_puntos SENTENCIA_STARTUP res_exit");
             break;
         case 795:
-            err_gramatica.add("SWITCH_ENTRADAS rel_menor CASO rel_mayor sim_dos_puntos SENTENCIA_STARTUP res_exit");
+            err_gramatica.add("SWITCH_ENTRADAS ::= rel_menor CASO rel_mayor sim_dos_puntos SENTENCIA_STARTUP res_exit");
             break;
         case 796:
-            err_gramatica.add("SWITCH_ENTRADAS rel_menor CASO <span color=\"#FF0042\">rel_mayor</span> sim_dos_puntos SENTENCIA_STARTUP res_exit");
+            err_gramatica.add("SWITCH_ENTRADAS ::= rel_menor CASO <span color=\"#FF0042\">rel_mayor</span> sim_dos_puntos SENTENCIA_STARTUP res_exit");
             break;
         case 797:
-            err_gramatica.add("SWITCH_ENTRADAS rel_menor CASO rel_mayor <span color=\"#FF0042\">sim_dos_puntos</span> SENTENCIA_STARTUP res_exit");
+            err_gramatica.add("SWITCH_ENTRADAS ::= rel_menor CASO rel_mayor <span color=\"#FF0042\">sim_dos_puntos</span> SENTENCIA_STARTUP res_exit");
             break;
         case 798:
-            err_gramatica.add("SWITCH_ENTRADAS rel_menor CASO <span color=\"#FF0042\">rel_mayor sim_dos_puntos</span> SENTENCIA_STARTUP res_exit");
+            err_gramatica.add("SWITCH_ENTRADAS ::= rel_menor CASO <span color=\"#FF0042\">rel_mayor sim_dos_puntos</span> SENTENCIA_STARTUP res_exit");
             break;
         case 799:
-            err_gramatica.add("SWITCH_ENTRADAS rel_menor <span color=\"#FF0042\">Identificador</span> rel_mayor sim_dos_puntos SENTENCIA_STARTUP res_exit");
+            err_gramatica.add("SWITCH_ENTRADAS ::= rel_menor <span color=\"#FF0042\">Identificador</span> rel_mayor sim_dos_puntos SENTENCIA_STARTUP res_exit");
             break;
         case 7001:
-            err_gramatica.add("SWITCH_ENTRADAS rel_menor CASO rel_mayor <span color=\"#FF0042\">sim_dos_puntos</span> SENTENCIA_STARTUP <span color=\"#FF0042\">res_exit</span>");
+            err_gramatica.add("SWITCH_ENTRADAS ::= rel_menor CASO rel_mayor <span color=\"#FF0042\">sim_dos_puntos</span> SENTENCIA_STARTUP <span color=\"#FF0042\">res_exit</span>");
             break;
         case 7002:
-            err_gramatica.add("SWITCH_ENTRADAS <span color=\"#FF0042\">rel_menor</span> CASO <span color=\"#FF0042\">rel_mayor sim_dos_puntos</span> SENTENCIA_STARTUP res_exit");
+            err_gramatica.add("SWITCH_ENTRADAS ::= <span color=\"#FF0042\">rel_menor</span> CASO <span color=\"#FF0042\">rel_mayor sim_dos_puntos</span> SENTENCIA_STARTUP res_exit");
             break;
         
         // GRAMÁTICA: SWITCH
         
         case 7003:
-            err_gramatica.add("SWITCH res_switch <span color=\"#FF0042\">par_abre</span> Identificador par_cierra llave_abre  <br>SWITCH_ENTRADAS<br> llave_cierra");
+            err_gramatica.add("SWITCH ::= res_switch <span color=\"#FF0042\">par_abre</span> Identificador par_cierra llave_abre  <br>SWITCH_ENTRADAS<br> llave_cierra");
             break;
         case 7004:
-            err_gramatica.add("SWITCH res_switch par_abre Identificador <span color=\"#FF0042\">par_cierra</span> llave_abre  <br>SWITCH_ENTRADAS<br> llave_cierra");
+            err_gramatica.add("SWITCH ::= res_switch par_abre Identificador <span color=\"#FF0042\">par_cierra</span> llave_abre  <br>SWITCH_ENTRADAS<br> llave_cierra");
             break;
         case 7005:
-            err_gramatica.add("SWITCH res_switch <span color=\"#FF0042\">par_abre</span> Identificador <span color=\"#FF0042\">par_cierra</span> llave_abre  <br>SWITCH_ENTRADAS<br> llave_cierra");
+            err_gramatica.add("SWITCH ::= res_switch <span color=\"#FF0042\">par_abre</span> Identificador <span color=\"#FF0042\">par_cierra</span> llave_abre  <br>SWITCH_ENTRADAS<br> llave_cierra");
             break;
         case 7006:
-            err_gramatica.add("SWITCH res_switch par_abre <span color=\"#FF0042\">Identificador</span> par_cierra llave_abre  <br>SWITCH_ENTRADAS<br> llave_cierra");
+            err_gramatica.add("SWITCH ::= res_switch par_abre <span color=\"#FF0042\">Identificador</span> par_cierra llave_abre  <br>SWITCH_ENTRADAS<br> llave_cierra");
             break;
         case 7007:
-            err_gramatica.add("SWITCH res_switch par_abre Identificador par_cierra <span color=\"#FF0042\">llave_abre</span> <br>SWITCH_ENTRADAS<br> llave_cierra");
+            err_gramatica.add("SWITCH ::= res_switch par_abre Identificador par_cierra <span color=\"#FF0042\">llave_abre</span> <br>SWITCH_ENTRADAS<br> llave_cierra");
             break;
         case 7008:
-            err_gramatica.add("SWITCH res_switch par_abre Identificador par_cierra llave_abre  <span color=\"#FF0042\"><br>SWITCH_ENTRADAS<br></span> llave_cierra");
+            err_gramatica.add("SWITCH ::= res_switch par_abre Identificador par_cierra llave_abre  <span color=\"#FF0042\"><br>SWITCH_ENTRADAS<br></span> llave_cierra");
             break;
         case 7009:
-            err_gramatica.add("SWITCH res_switch par_abre Identificador par_cierra llave_abre  <span color=\"#FF0042\"><br>SWITCH_FUNCION<br></span> llave_cierra");
+            err_gramatica.add("SWITCH ::= res_switch par_abre Identificador par_cierra llave_abre  <span color=\"#FF0042\"><br>SWITCH_FUNCION<br></span> llave_cierra");
             break;
         case 7010:
-            err_gramatica.add("SWITCH res_switch par_abre Identificador par_cierra llave_abre  <br>SWITCH_ENTRADAS<br> <span color=\"#FF0042\">res_default</span> sim_dos_puntos llave_cierra");
+            err_gramatica.add("SWITCH ::= res_switch par_abre Identificador par_cierra llave_abre  <br>SWITCH_ENTRADAS<br> <span color=\"#FF0042\">res_default</span> sim_dos_puntos llave_cierra");
             break;
         case 7011:
-            err_gramatica.add("SWITCH res_switch par_abre Identificador par_cierra llave_abre  <br>SWITCH_ENTRADAS<br> res_default <span color=\"#FF0042\">sim_dos_puntos</span> llave_cierra");
+            err_gramatica.add("SWITCH ::= res_switch par_abre Identificador par_cierra llave_abre  <br>SWITCH_ENTRADAS<br> res_default <span color=\"#FF0042\">sim_dos_puntos</span> llave_cierra");
             break;
 
         // GRAMÁTICA: IF
         case 7012:
-            err_gramatica.add("IF res_if <span color=\"#FF0042\">par_abre</span> CONDICION par_cierra llave_abre <br>SENTENCIA_STARTUP<br> llave_cierra");
+            err_gramatica.add("IF ::= res_if <span color=\"#FF0042\">par_abre</span> CONDICION par_cierra llave_abre <br>SENTENCIA_STARTUP<br> llave_cierra");
             break;
         case 7013:
-            err_gramatica.add("IF res_if par_abre CONDICION <span color=\"#FF0042\">par_cierra</span> llave_abre <br>SENTENCIA_STARTUP<br> llave_cierra");
+            err_gramatica.add("IF ::= res_if par_abre CONDICION <span color=\"#FF0042\">par_cierra</span> llave_abre <br>SENTENCIA_STARTUP<br> llave_cierra");
             break;
         case 7014:
-            err_gramatica.add("IF res_if par_abre CONDICION par_cierra <span color=\"#FF0042\">llave_abre</span> <br>SENTENCIA_STARTUP<br> llave_cierra");
+            err_gramatica.add("IF ::= res_if par_abre CONDICION par_cierra <span color=\"#FF0042\">llave_abre</span> <br>SENTENCIA_STARTUP<br> llave_cierra");
             break;    
         case 7015:
-            err_gramatica.add("IF res_if par_abre CONDICION par_cierra llave_abre <br>SENTENCIA_STARTUP<br> llave_cierra res_else <span color=\"#FF0042\">llave_abre</span>      <br>SENTENCIA_STARTUP<br> llave_cierra");
+            err_gramatica.add("IF ::= res_if par_abre CONDICION par_cierra llave_abre <br>SENTENCIA_STARTUP<br> llave_cierra res_else <span color=\"#FF0042\">llave_abre</span>      <br>SENTENCIA_STARTUP<br> llave_cierra");
             break;
         case 7016:
-            err_gramatica.add("IF res_if par_abre CONDICION par_cierra llave_abre <br>SENTENCIA_STARTUP<br> llave_cierra <span color=\"#FF0042\">res_else</span> llave_abre      <br>SENTENCIA_STARTUP<br> llave_cierra");
+            err_gramatica.add("IF ::= res_if par_abre CONDICION par_cierra llave_abre <br>SENTENCIA_STARTUP<br> llave_cierra <span color=\"#FF0042\">res_else</span> llave_abre      <br>SENTENCIA_STARTUP<br> llave_cierra");
             break;
         case 7017:
-            err_gramatica.add("IF res_if par_abre CONDICION par_cierra llave_abre <br>SENTENCIA_STARTUP<br> llave_cierra");
+            err_gramatica.add("IF ::= res_if par_abre CONDICION par_cierra llave_abre <br>SENTENCIA_STARTUP<br> llave_cierra");
             break;
 
         // GRAMÁTICA: PARAMETRO
@@ -655,75 +655,75 @@ action code
 
         // GRAMÁTICA: MODE
         case 7019:
-            err_gramatica.add("MODE res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO par_cierra <span color=\"#FF0042\">sig_punto_coma</span>");
+            err_gramatica.add("MODE ::= res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO par_cierra <span color=\"#FF0042\">sig_punto_coma</span>");
             break;
         case 7020:
-            err_gramatica.add("MODE res_model par_abre VALOR_NUMERICO <span color=\"#FF0042\">coma</span> VALOR_NUMERICO par_cierra sig_punto_coma");
+            err_gramatica.add("MODE ::= res_model par_abre VALOR_NUMERICO <span color=\"#FF0042\">coma</span> VALOR_NUMERICO par_cierra sig_punto_coma");
             break;
         case 7021:
-            err_gramatica.add("MODE res_model par_abre VALOR_NUMERICO <span color=\"#FF0042\">coma</span> VALOR_NUMERICO <span color=\"#FF0042\">coma</span> VALOR_NUMERICO par_cierra sig_punto_coma");
+            err_gramatica.add("MODE ::= res_model par_abre VALOR_NUMERICO <span color=\"#FF0042\">coma</span> VALOR_NUMERICO <span color=\"#FF0042\">coma</span> VALOR_NUMERICO par_cierra sig_punto_coma");
             break;
         case 7022:
-            err_gramatica.add("MODE res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
+            err_gramatica.add("MODE ::= res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
             break;
         case 7023:
-            err_gramatica.add("MODE res_model <span color=\"#FF0042\">par_abre</span> VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma");
+            err_gramatica.add("MODE ::= res_model <span color=\"#FF0042\">par_abre</span> VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma");
             break;
         case 7024:
-            err_gramatica.add("MODE res_model <span color=\"#FF0042\">par_abre</span> VALOR_NUMERICO coma VALOR_NUMERICO <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
+            err_gramatica.add("MODE ::= res_model <span color=\"#FF0042\">par_abre</span> VALOR_NUMERICO coma VALOR_NUMERICO <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
             break;
         case 7025:
-            err_gramatica.add("MODE res_model <span color=\"#FF0042\">par_abre</span> VALOR_NUMERICO coma VALOR_NUMERICO <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
+            err_gramatica.add("MODE ::= res_model <span color=\"#FF0042\">par_abre</span> VALOR_NUMERICO coma VALOR_NUMERICO <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
             break;
         case 7026:
-            err_gramatica.add("MODE res_model <span color=\"#FF0042\">par_abre</span>VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO <span color=\"#FF0042\">par_cierra]sig_punto_coma");
+            err_gramatica.add("MODE ::= res_model <span color=\"#FF0042\">par_abre</span>VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO <span color=\"#FF0042\">par_cierra]sig_punto_coma");
             break;
         case 7027:
-            err_gramatica.add("MODE res_model <span color=\"#FF0042\">par_abre</span>VALOR_NUMERICO <span color=\"#FF0042\">par_cierra]sig_punto_coma");
+            err_gramatica.add("MODE ::= res_model <span color=\"#FF0042\">par_abre</span>VALOR_NUMERICO <span color=\"#FF0042\">par_cierra]sig_punto_coma");
             break;
         case 7028:
-            err_gramatica.add("MODE res_model <span color=\"#FF0042\">par_abre</span>VALOR_NUMERICO coma VALOR_NUMERICO <span color=\"#FF0042\">par_cierra]sig_punto_coma");
+            err_gramatica.add("MODE ::= res_model <span color=\"#FF0042\">par_abre</span>VALOR_NUMERICO coma VALOR_NUMERICO <span color=\"#FF0042\">par_cierra]sig_punto_coma");
             break;
 
         
         //GRAMÁTICA: CONDICION
         case 7030:
-            err_gramatica.add("CONDICION VALOR_NUMERICO OPERADOR_CONDICIONAL <span color=\"#FF0042\">VALOR_NUMERICO</span>");
+            err_gramatica.add("CONDICION ::= VALOR_NUMERICO OPERADOR_CONDICIONAL <span color=\"#FF0042\">VALOR_NUMERICO</span>");
             break;
         case 7031:
-            err_gramatica.add("CONDICION <span color=\"#FF0042\">par_abre CONDICION par_cierra</span> OPERADOR_CONDICIONAL <span color=\"#FF0042\">par_abre CONDICION par_cierra</span>");
+            err_gramatica.add("CONDICION ::= <span color=\"#FF0042\">par_abre CONDICION par_cierra</span> OPERADOR_CONDICIONAL <span color=\"#FF0042\">par_abre CONDICION par_cierra</span>");
             break;
         case 7032:
-            err_gramatica.add("CONDICION par_abre CONDICION par_cierra <span color=\"#FF0042\">OPERADOR_CONDICIONAL</span> par_abre CONDICION par_cierra");
+            err_gramatica.add("CONDICION ::= par_abre CONDICION par_cierra <span color=\"#FF0042\">OPERADOR_CONDICIONAL</span> par_abre CONDICION par_cierra");
             break;
         case 7033:
-            err_gramatica.add("CONDICION VALOR_NUMERICO <span color=\"#FF0042\">OPERADOR_CONDICIONAL</span> VALOR_NUMERICO");
+            err_gramatica.add("CONDICION ::= VALOR_NUMERICO <span color=\"#FF0042\">OPERADOR_CONDICIONAL</span> VALOR_NUMERICO");
             break;
         case 7034:
-            err_gramatica.add("CONDICION log_not <span color=\"#FF0042\">Identificador</span> OPERADOR_CONDICIONAL VALOR_NUMERICO");
+            err_gramatica.add("CONDICION ::= log_not <span color=\"#FF0042\">Identificador</span> OPERADOR_CONDICIONAL VALOR_NUMERICO");
             break;
         case 7035:
-            err_gramatica.add("CONDICION <span color=\"#FF0042\">VALOR_NUMERICO</span> OPERADOR_CONDICIONAL <span color=\"#FF0042\">VALOR_NUMERICO</span>");
+            err_gramatica.add("CONDICION ::= <span color=\"#FF0042\">VALOR_NUMERICO</span> OPERADOR_CONDICIONAL <span color=\"#FF0042\">VALOR_NUMERICO</span>");
             break;
         case 7036:
-            err_gramatica.add("CONDICION VALOR_NUMERICO <span color=\"#FF0042\">OPERADOR_CONDICIONAL</span> <span color=\"#FF0042\">OPERADOR_CONDICIONAL</span> VALOR_NUMERICO");
+            err_gramatica.add("CONDICION ::= VALOR_NUMERICO <span color=\"#FF0042\">OPERADOR_CONDICIONAL</span> <span color=\"#FF0042\">OPERADOR_CONDICIONAL</span> VALOR_NUMERICO");
             break;
         case 7037:
-            err_gramatica.add("CONDICION <span color=\"#FF0042\">cadena_caracter</span> OPERADOR_CONDICIONAL <span color=\"#FF0042\">cadena_caracter</span>");
+            err_gramatica.add("CONDICION ::= <span color=\"#FF0042\">cadena_caracter</span> OPERADOR_CONDICIONAL <span color=\"#FF0042\">cadena_caracter</span>");
             break;
         case 7038:
-            err_gramatica.add("CONDICION <span color=\"#FF0042\">cadena_caracter</span> OPERADOR_CONDICIONAL VALOR_NUMERICO");
+            err_gramatica.add("CONDICION ::= <span color=\"#FF0042\">cadena_caracter</span> OPERADOR_CONDICIONAL VALOR_NUMERICO");
             break;
 
         //GRAMÁTICA: WAIT
         case 7039:
-            err_gramatica.add("WAIT res_wait par_abre CONDICION par_cierra <span color=\"#FF0042\">sig_punto_coma</span>");
+            err_gramatica.add("WAIT ::= res_wait par_abre CONDICION par_cierra <span color=\"#FF0042\">sig_punto_coma</span>");
             break;
         case 7040:
-            err_gramatica.add("WAIT res_wait <span color=\"#FF0042\">par_abre</span> CONDICION par_cierra sig_punto_coma");
+            err_gramatica.add("WAIT ::= res_wait <span color=\"#FF0042\">par_abre</span> CONDICION par_cierra sig_punto_coma");
             break;
         case 7041:
-            err_gramatica.add("WAIT res_wait par_abre CONDICION <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
+            err_gramatica.add("WAIT ::= res_wait par_abre CONDICION <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
             break;
   // GRAMÁTICA: RETURN 
 
@@ -891,25 +891,25 @@ action code
             err_gramatica.add("SCALE ::= res_scale par_abre Identificador coma Numero coma Numero <span color=\"#FF0042\"> par_cierra </span> sig_punto_coma");
             break; 
         case 500: 
-            err_msj.add("res_do llave_abre SENTENCIA_STARTUP llave_cierra res_while par_abre CONDICION par_cierra sig_punto_coma");
+            err_msj.add("DOWHILE ::= res_do llave_abre SENTENCIA_STARTUP llave_cierra res_while par_abre CONDICION par_cierra sig_punto_coma");
             break; 
         case 501: 
-            err_msj.add("res_do llave_abre SENTENCIA_STARTUP llave_cierra res_while par_abre CONDICION <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
+            err_msj.add("DOWHILE ::= res_do llave_abre SENTENCIA_STARTUP llave_cierra res_while par_abre CONDICION <span color=\"#FF0042\">par_cierra</span> sig_punto_coma");
             break; 
         case 502: 
-            err_msj.add("res_do llave_abre SENTENCIA_STARTUP llave_cierra res_while <span color=\"#FF0042\">par_abre</span> CONDICION par_cierra sig_punto_coma");
+            err_msj.add("DOWHILE ::= res_do llave_abre SENTENCIA_STARTUP llave_cierra res_while <span color=\"#FF0042\">par_abre</span> CONDICION par_cierra sig_punto_coma");
             break; 
         case 503: 
-            err_msj.add("res_do llave_abre SENTENCIA_STARTUP llave_cierra <span color=\"#FF0042\">res_while</span> par_abre CONDICION par_cierra sig_punto_coma");
+            err_msj.add("DOWHILE ::= res_do llave_abre SENTENCIA_STARTUP llave_cierra <span color=\"#FF0042\">res_while</span> par_abre CONDICION par_cierra sig_punto_coma");
             break; 
         case 504: 
-            err_msj.add("res_do llave_abre SENTENCIA_STARTUP <span color=\"#FF0042\">llave_cierra</span> res_while par_abre CONDICION par_cierra sig_punto_coma");
+            err_msj.add("DOWHILE ::= res_do llave_abre SENTENCIA_STARTUP <span color=\"#FF0042\">llave_cierra</span> res_while par_abre CONDICION par_cierra sig_punto_coma");
             break; 
         case 505: 
-            err_msj.add("res_do llave_abre <span color=\"#FF0042\">SENTENCIA_STARTUP</span> llave_cierra res_while par_abre CONDICION par_cierra sig_punto_coma");
+            err_msj.add("DOWHILE ::= res_do llave_abre <span color=\"#FF0042\">SENTENCIA_STARTUP</span> llave_cierra res_while par_abre CONDICION par_cierra sig_punto_coma");
             break; 
         case 506: 
-            err_msj.add("res_do <span color=\"#FF0042\">llave_abre</span> SENTENCIA_STARTUP llave_cierra res_while par_abre CONDICION par_cierra sig_punto_coma");
+            err_msj.add("DOWHILE ::= res_do <span color=\"#FF0042\">llave_abre</span> SENTENCIA_STARTUP llave_cierra res_while par_abre CONDICION par_cierra sig_punto_coma");
             break;      
 
 
