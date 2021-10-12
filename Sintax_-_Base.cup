@@ -378,11 +378,43 @@ action code
         case 335:
             err_gramatica.add("SLEEP ::= res_sleep par_abre VALOR_NUMERICO <span color=\"#FF0042\">par_cierra<span color=\"#FF0042\"> sig_punto_coma"); 
             break; 
-        // CASO: ERROR GENERAL
-
-        case 7777:
-            err_gramatica.add("ERROR GENERAL, Sintaxis invalida, checar el manual del lenguaje");
-            break;
+// GRAMATICA VOLT    
+        case 337:
+            err_gramatica.add("VOLT ::= res_volt par_abre Identificador coma Numero par_cierra <span color=\"#FF0042\">sig_punto_coma</span>"); 
+            break; 
+        case 338:
+            err_gramatica.add("VOLT ::= res_volt par_abre Identificador coma Numero coma Numero par_cierra <span color=\"#FF0042\">sig_punto_coma</span>"); 
+            break; 
+        case 339:
+            err_gramatica.add("VOLT ::= res_volt par_abre <span color=\"#FF0042\">Identificador</span> coma Numero par_cierra sig_punto_coma"); 
+            break;     
+        case 340:
+            err_gramatica.add("VOLT ::= res_volt par_abre <span color=\"#FF0042\">Identificador</span> coma Numero coma Numero par_cierra sig_punto_coma"); 
+            break;     
+        case 341:
+            err_gramatica.add("VOLT ::= res_volt par_abre Identificador <span color=\"#FF0042\">coma</span> Numero par_cierra sig_punto_coma"); 
+            break;     
+        case 342:
+            err_gramatica.add("VOLT ::= res_volt par_abre <span color=\"#FF0042\">Identificador coma Numero coma Numero</span> par_cierra sig_punto_coma"); 
+            break;   
+        case 343:
+            err_gramatica.add("VOLT ::= res_volt <span color=\"#FF0042\">par_abre</span> Identificador coma Numero par_cierra sig_punto_coma"); 
+            break;   
+        case 344:
+            err_gramatica.add("VOLT ::= res_volt par_abre Identificador coma Numero par_cierra <span color=\"#FF0042\">sig_punto_coma</span>"); 
+            break;      
+        case 345:
+            err_gramatica.add("VOLT ::= res_volt <span color=\"#FF0042\">par_abre</span> Identificador coma Numero coma Numero par_cierra sig_punto_coma"); 
+            break;  
+        case 346:
+            err_gramatica.add("VOLT ::= res_volt par_abre Identificador coma Numero coma Numero <span color=\"#FF0042\">par_cierra</span> sig_punto_coma"); 
+            break; 
+        case 347:
+            err_gramatica.add("VOLT ::= res_volt par_abre Identificador coma Numero <span color=\"#FF0042\">par_cierra</span> sig_punto_coma"); 
+            break; 
+        case 348:
+            err_gramatica.add("VOLT ::= res_volt par_abre <span color=\"#FF0042\">Identificador</span> coma Numero par_cierra sig_punto_coma"); 
+            break;            
 
         // GRAMÁTICA: OUT   
 
@@ -866,9 +898,10 @@ action code
             break; 
         case 506: 
             err_msj.add("res_do <span color=\"#FF0042\">llave_abre</span> SENTENCIA_STARTUP llave_cierra res_while par_abre CONDICION par_cierra sig_punto_coma");
-            break;                            
+            break;      
 
-        case 9999:
+
+        case 9999: // CASO DE ERROR GENERAL, GENERA UN NULL PARA NO PERDER LA RELACION ENTRE err_msj - err_linea y err_gramatica
             err_gramatica.add(null);
             break;
         case 10:// este es el id para los errores semanticos de Jon
