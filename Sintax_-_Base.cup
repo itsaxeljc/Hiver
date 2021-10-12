@@ -9,12 +9,12 @@ parser code
     
     
     public void syntax_error(Symbol s){
-       pnlSalida.textPane.setText(pnlSalida.textPane.getText()+"Error sintáctico en la línea "+(s.right +1)+": "+ s.value+"\n");
-       System.out.println("Error R de sintaxis: "+ s.value +" en la Linea "+(s.right+1) );
+       //pnlSalida.textPane.setText(pnlSalida.textPane.getText()+"Error sintáctico en la línea "+(s.right +1)+": "+ s.value+"\n");
+       //System.out.println("Error R de sintaxis: "+ s.value +" en la Linea "+(s.right+1) );
     }
     public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
         //pnlSalida.textPane.setText(pnlSalida.textPane.getText()+"Error NR de sintaxis: "+ s.value +" en la Linea " +  (s.left+1)+"\n");
-        System.out.println("Error NR de sintaxis: "+ s.value +" en la Linea " + (s.left+1));
+        //System.out.println("Error NR de sintaxis: "+ s.value +" en la Linea " + (s.left+1));
     }
 
     public ArrayList getvar_identificador() { return action_obj.var_identificador; }
