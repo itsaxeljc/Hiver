@@ -980,7 +980,7 @@ non terminal INICIO, ESTRUCTURA_BASICA,DECLARACION,
 FUNCIONES, FUNCION, CONFIG, STARTUP,SENTENCIA_STARTUP,SENTENCIA_CONFIG, TIPO_DATO, PARAMETRO , PIN, DISPLAY, DISPLAY_PARAMS,
 TYPE, TYPE_IO, SCALE,DOWHILE,EXPRESION, OPERACION,IF,CASO,WHILE,SWITCH,SWITCH_ENTRADAS,VOLT, MAX_VOLT, WAIT, CONDICION, MODE, 
 VALOR_NUMERICO ,OPERADORES_CONTRACCION,INCREMENTO_FOR,INCREMENTO,FOR,OUT,SLEEP,OPERACION_PROC, OPERADOR,VALOR,TIPO_DATO_FOR, 
-OPERADOR_CONDICIONAL,RETURN,IN,SENTENCIA_FUNCION,OPERADOR_ARITMETICO,METODO_INCREMENTO,OPERACION_CONTRACCION,OPE,TERM,FACTOR,DECLARACION_PARAMETRO;
+OPERADOR_CONDICIONAL,RETURN,IN,SENTENCIA_FUNCION,OPERADOR_ARITMETICO,METODO_INCREMENTO,OPERACION_CONTRACCION,OPE,TERM,FACTOR,DECLARACION_PARAMETRO,CALL_FUNCTION,PARAMETRO_CALL_FUNCTION;
 
 
 start with INICIO;
@@ -1167,6 +1167,13 @@ FUNCION ::=
         errores_gramatica(404);
     :}
 ;
+CALL_FUNCTION ::=
+    Identificador par_abre PARAMETRO_CALL_FUNCTION par_cierra sig_punto_coma
+;
+
+PARAMETRO_CALL_FUNCTION ::=
+    VALOR | PARAMETRO_CALL_FUNCTION coma VALOR
+;
 
 RETURN ::=
     res_return Identificador sig_punto_coma | 
@@ -1267,7 +1274,8 @@ SENTENCIA_STARTUP ::=
    OUT | SENTENCIA_STARTUP OUT |
    SLEEP | SENTENCIA_STARTUP SLEEP |
    FOR | SENTENCIA_STARTUP FOR |
-   OPERADORES_CONTRACCION | SENTENCIA_STARTUP OPERADORES_CONTRACCION 
+   OPERADORES_CONTRACCION | SENTENCIA_STARTUP OPERADORES_CONTRACCION |
+   CALL_FUNCTION | SENTENCIA_STARTUP CALL_FUNCTION
 ;
 
 SENTENCIA_FUNCION ::=
@@ -1318,7 +1326,23 @@ DECLARACION ::=
             err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
             errores_gramatica(10);
         }
-    :} |
+    :} 
+    |
+    res_def:i TIPO_DATO:dato Identificador:id asi_asignacion CALL_FUNCTION sig_punto_coma:f
+    {: //vamos a validar cuando aparecen estas expresiones
+        if(!idExiste(id+"")){
+            System.out.println("tipo: "+ dato + " identificador: "+ id + " valor null ");
+            var_identificador.add(id);
+            var_tipo_dato.add(dato);
+            //var_valor.add(val);
+            rollist(id, "Variable", dato, iright+1, fright+1);
+            System.out.println(var_identificador.size());
+        }else{
+            err_msj.add("Error Semantico en la línea " + (fright+1) + " variable " + id + " ya declarada");
+            err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+            errores_gramatica(10);
+        }
+    :}|
     res_def TIPO_DATO Identificador {:
         err_msj.add("Error Sintáctico en la línea "+(((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)+" | Se esperaba ; al final de la declaración");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
