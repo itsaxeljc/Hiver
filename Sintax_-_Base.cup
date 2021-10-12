@@ -415,7 +415,19 @@ action code
         case 348:
             err_gramatica.add("VOLT ::= res_volt par_abre <span color=\"#FF0042\">Identificador</span> coma Numero par_cierra sig_punto_coma"); 
             break;            
-
+// GRAMATICA DECLARACION_PARAMETRO        
+        case 349:
+            err_gramatica.add("DECLARACION_PARAMETRO ::= <span color=\"#FF0042\">res_def</span> TIPO_DATO Identificador"); 
+            break; 
+        case 350:
+            err_gramatica.add("DECLARACION_PARAMETRO ::=  <span color=\"#FF0042\">res_def</span> TIPO_DATO Identificador asi_asignacion VALOR "); 
+            break; 
+        case 351:
+            err_gramatica.add("DECLARACION_PARAMETRO ::= res_def <span color=\"#FF0042\">TIPO_DATO Identificador</span>"); 
+            break; 
+        case 352:
+            err_gramatica.add("DECLARACION_PARAMETRO ::= res_def TIPO_DATO <span color=\"#FF0042\">Identificador asi_asignacion VALOR</span>"); 
+            break; 
         // GRAMÁTICA: OUT   
 
         case 744:
@@ -2087,53 +2099,77 @@ DECLARACION_PARAMETRO ::=
     TIPO_DATO Identificador {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada def al inicio de la declaración");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(349);
+
     :}  |
     TIPO_DATO Identificador asi_asignacion VALOR {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba la palabra reservada def al inicio de la declaración");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(350);
+
     :} |
     res_def res_pin Identificador {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(351);
+
     :} |
     res_def res_pin Identificador asi_asignacion VALOR {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(352);
+
     :} |
     res_def res_pin par_abre Numero coma Identificador par_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método pin");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(351);
+
     :} |
     res_def res_display par_abre DISPLAY_PARAMS par_cierra  {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método display");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(351);
+
     :} |
     res_def res_function TIPO_DATO Identificador par_abre PARAMETRO par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra{:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis para la creación de funciones");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(351);
+
     :} |
     res_def res_function res_void Identificador par_abre PARAMETRO par_cierra llave_abre
         SENTENCIA_FUNCION
     llave_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis para la creación de funciones");
-        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1)); :} |
+        err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(351);
+ :} |
     res_def res_type par_abre Identificador coma TYPE_IO par_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método type");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(351);
+
     :} |
     res_def res_scale par_abre Identificador coma Numero coma Numero par_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método scale");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(351);
+
     :} |
     res_def res_volt par_abre Identificador coma Numero par_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método volt");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(351);
+
     :} |
     res_def res_volt par_abre Identificador coma Numero coma Numero par_cierra {:
         err_msj.add("Error Sintáctico en la línea # | Se esperaba tipo de dato e identificador, consulte la sintaxis del método volt");
         err_linea.add((((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top)).right +1));
+        errores_gramatica(351);
+
     :} 
 ;
 
