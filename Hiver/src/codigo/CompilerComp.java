@@ -238,7 +238,8 @@ public class CompilerComp extends javax.swing.JFrame {
         //System.out.println(listaExpre.get(0).get(0));
         //pnlSalida.textPane.setText(pnlSalida.textPane.getText() + "\nDespues entrar lista");
         
-        // Crear la lista de todos los valores que hubo en las expresiones
+        // Crear la lista de todos los valores que hubo en las expresiones y si no está la variable en la tabla
+        boolean enTabla = false;
         for(int i = 0; i < var_idSem.size(); i++){
             //pnlSalida.textPane.setText(pnlSalida.textPane.getText() + "\nDespues del for1");
             listaExpre.get(0).add(var_linExp.get(i).toString());
@@ -249,7 +250,7 @@ public class CompilerComp extends javax.swing.JFrame {
             }else if(listaExpre.get(1).get(i).matches("[0-9]*")){
                 listaExpre.get(2).add("config");
                 listaExpre.get(3).add("int");
-            }else if(listaExpre.get(1).get(i).matches("[0-9]+[.][0-9]*")){
+            }else if(listaExpre.get(1).get(i).matches("[0-9]*[.][0-9]*")){
                 listaExpre.get(2).add("config");
                 listaExpre.get(3).add("float");
             }else if(listaExpre.get(1).get(i).matches("['].*[']")){
@@ -259,18 +260,28 @@ public class CompilerComp extends javax.swing.JFrame {
                 for(int j = 0; j < variables.getRowCount(); j++){
                     String ident = variables.getValueAt(j, 0).toString();
                     if(listaExpre.get(1).get(i).equals(ident)){
+                        enTabla = true;
                         String ubicacion = variables.getValueAt(j, 3).toString();
                         listaExpre.get(2).add(ubicacion);
                         String tipo = variables.getValueAt(j, 1).toString();
                         listaExpre.get(3).add(tipo);
                     }
                 }
+                if(!enTabla){
+                    listaExpre.get(2).add("'NO_DECL'");
+                    listaExpre.get(3).add("");
+                }
+                enTabla = false;
             }
         }
         //pnlSalida.textPane.setText(pnlSalida.textPane.getText() + "\nAntes del for");
+        //pnlSalida.textPane.setText(pnlSalida.textPane.getText() + "\nOperandos: " + var_idSem.size());
         for(int i = 0; i < var_idSem.size(); i++){
+            //pnlSalida.textPane.setText(pnlSalida.textPane.getText() + "\nFor in" + i);
             System.out.println(listaExpre.get(0).get(i) + " | " + listaExpre.get(1).get(i) + " | " + listaExpre.get(2).get(i)+ " | " + listaExpre.get(3).get(i));
+            //pnlSalida.textPane.setText(pnlSalida.textPane.getText() + "\nFor fin" + i);
         }
+        //pnlSalida.textPane.setText(pnlSalida.textPane.getText() + "\nDespues del for");
         
         // Errores semanticos para que las variables coincidan en ambito y en tipo
         int lineaAnt = Integer.parseInt(listaExpre.get(0).get(0));
@@ -280,25 +291,60 @@ public class CompilerComp extends javax.swing.JFrame {
         for(int i = 1; i < listaExpre.get(0).size(); i++){
             lineaAct = Integer.parseInt(listaExpre.get(0).get(i));
             if(lineaAnt != lineaAct || (i + 1) == listaExpre.get(0).size()){
+                // Comparar si en la siguiente iteración ya saldría del for
                 if(!((i + 1) == listaExpre.get(0).size())){
                     i--;
                 }
+                // Si hubo más de 1 variable en la expresión
                 if(numVari>1){
                     datoIzq = listaExpre.get(1).get(i);
                     ubiIzq = listaExpre.get(2).get(i);
                     tipoIzq = listaExpre.get(3).get(i);
+                    String ubicacionExpre = ubiIzq;
                     for(int j = 1; j < numVari; j++){
                         datoDer = listaExpre.get(1).get(i-j);
                         ubiDer = listaExpre.get(2).get(i-j);
                         tipoDer = listaExpre.get(3).get(i-j);
-                        
+                        for(int k = 0; k < variables.getRowCount(); k++){
+                            if(datoDer.matches(variables.getValueAt(k, 0).toString())){
+                                if(variables.getValueAt(k, 2) == null){
+                                    errorExpre += "Error en linea: " + lineaAnt + " la variable " + datoDer + " no tiene ningún valor asignado\n";
+                                }
+                            }
+                        }
                         // Chequeo de ubicaciones
-                        if(ubiIzq.equals("config")){
+                        /*if(ubiIzq.equals("config")){
                             if(!ubiDer.equals("config")){
                                 errorExpre += "Error en linea: " + lineaAnt + " el valor " + datoDer + " pertenece al ambito " + ubiDer + "\n";
                             }
                         }else if(!ubiIzq.equals(ubiDer) && !ubiDer.equals("config")){
                             errorExpre += "Error en linea: " + lineaAnt + " el valor " + datoDer + " pertenece al ambito " + ubiDer + "\n";
+                        }*/
+                        
+                        // Chequeo de ubicaciones
+                        ubicacionExpre = "";
+                        if(lineaIConfig <= lineaAnt && lineaFConfig >= lineaAnt){
+                            // Está dentro de config
+                            ubicacionExpre = "config";
+                        }else{
+                            if(lineaIStart <= lineaAnt && lineaFStart >= lineaAnt){
+                                // Está dentro de start-end
+                                ubicacionExpre = "start-end";
+                            }else{
+                                for (int k = 0; k < var_idSimb.size(); k++){
+                                    if(var_rollSimb.get(k).toString().equals("Funcion")){
+                                        int lineaInicioFunci = Integer.parseInt(var_lStartSimb.get(k).toString());
+                                        int lineaFinFunci = Integer.parseInt(var_lEndSimb.get(k).toString());
+                                        if(lineaInicioFunci <= lineaAnt && lineaFinFunci >= lineaAnt){
+                                            ubicacionExpre = var_idSimb.get(k).toString();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                        if(!ubiDer.equals(ubicacionExpre) && !ubiDer.equals("config")){
+                            errorExpre += "Error en linea: " + lineaAnt + " el valor " + datoDer + " pertenece al ambito " + ubiDer + " " + ubicacionExpre +  "\n";
                         }
                         
                         // Chequeo de tipos
@@ -352,6 +398,17 @@ public class CompilerComp extends javax.swing.JFrame {
                                 }
                                 break;
                         }
+                        
+                        for(int k = 0; k < variables.getRowCount(); k++){
+                            if(datoIzq.matches(variables.getValueAt(k, 0).toString())){
+                                if(variables.getValueAt(k, 2) == null){
+                                    variables.setValueAt("'EXPRESION'", k, 2);
+                                }
+                            }
+                        }
+                    }
+                    if(!ubiIzq.equals(ubicacionExpre) && !ubiIzq.equals("config")){
+                        errorExpre += "Error en linea: " + lineaAnt + " el valor " + datoIzq + " pertenece al ambito " + ubiIzq + "\n";
                     }
                 }
                 i++;
