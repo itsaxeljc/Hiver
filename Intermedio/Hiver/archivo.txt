@@ -1,0 +1,34 @@
+name temperatura_control;
+
+config{
+    display(1,2,);
+    pin(8,ter.mo); 
+    type(termo,input);
+    volt(termo,3.5);
+    pin(3,alarm);
+    type(alarm, output);
+    volt(alarm,2.5);
+    pin (4,servomot1);
+    volt(servomot1,3.5,2);
+    def float temperatur=15;
+}
+
+function void estabilizaTemp(def float temp){
+        while(temp 30){
+            out(servomot1,2,4);
+            out(display,'Regulando temperatura...');
+            temp=in(termo);
+        }
+}
+
+start; 
+
+    temperature= in(termo); 
+		
+    if(temperature>=30)
+        out(alarm,3.3); 
+        out(servomot1,5,2);
+        estabilizaTemp(temperature); 
+        out(display, 'Temperatura regulada...');
+    }
+end;
