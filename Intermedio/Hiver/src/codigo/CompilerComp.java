@@ -272,6 +272,8 @@ public class CompilerComp extends javax.swing.JFrame {
             
             if(errores.size() == 0){
                 JOptionPane.showMessageDialog(this, "Analisis completado con exito!\nNo se detectaron errores", "Completado", JOptionPane.INFORMATION_MESSAGE);
+                GeneradorIntermedio intermedio = new GeneradorIntermedio("hola");
+                intermedio.getGenerado();
             }else{
                 JOptionPane.showMessageDialog(this, "Analisis completado con " + errores.size() +  " errores!", "Completado", JOptionPane.ERROR_MESSAGE);
             }
