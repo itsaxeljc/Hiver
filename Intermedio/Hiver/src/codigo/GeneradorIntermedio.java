@@ -13,7 +13,7 @@ import java.util.StringTokenizer;
  */
 public class GeneradorIntermedio {
     
-    String codigo;
+    String codigo, cabecera = "";
     static String generado = "";
     
     public GeneradorIntermedio(String codeIntermedio){
@@ -36,6 +36,7 @@ public class GeneradorIntermedio {
                 //comentario = "%//%",
                 ///sentenciaIn = "(\\s)*"+id+"(\\s)*=(\\s)*in(\\()(\\s)*"+id+"(\\s)*(\\))(;)",
                 sentenciaIn = ".*=in[\\(].*[\\)];.*",
+                //sentenciaIf = "if[\\(].*[\\)]{",
                 main3 = "((\\s)*END(\\s)*(\\})(\\s)*)";
                 //"var1=in(pin1);"
         
