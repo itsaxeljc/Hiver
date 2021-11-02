@@ -13,7 +13,7 @@ import java.util.StringTokenizer;
  */
 public class GeneradorIntermedio {
     
-    String codigo, cabecera = "";
+    static String codigo, cabecera = "";
     static String generado = "";
     
     public GeneradorIntermedio(String codeIntermedio){
@@ -45,7 +45,7 @@ public class GeneradorIntermedio {
                 //"var1=in(pin1);//comment"
         
         //  Variable para testear
-        String test = "out(10,AXEL+axel + 'asdasd' + intasdlj + 'hola, jeje, xd');// hola es un comentario";
+        String test = "def tinyint var1;// hola es un comentario";
         
         //  Dividir en lineas el codigo
         StringTokenizer lineasCode = new StringTokenizer(test, "\n");
@@ -91,7 +91,7 @@ public class GeneradorIntermedio {
                 //  Tipos tinyint, int, float, double
                 if(tipoVar[1].matches("tinyint.*")){
                     String[] declaracion = tipoVar[1].split("tinyint");
-                    generado += "tinyint " + declaracion[1] + "\n";
+                    generado += "tinyint " + declaracion[1] + ";\n";
                 }else if(tipoVar[1].matches("int.*")){
                     String[] declaracion = tipoVar[1].split("int");
                     generado += "int " + declaracion[1] + ";\n";
@@ -107,13 +107,15 @@ public class GeneradorIntermedio {
                 String[] sinPar = linea.split("[\\)];");
                 String[] vars = sinPar[0].split("[,]");
                 generado += "lcd.print(" + vars[1];
-                for(int i=2; i<vars.length;i++){
+                for(int i=2; i<vars.length; i++){
                     generado += "," + vars[i];               
-                }   
+                }
                 generado += ");\n";
             }
 
         }
+        cabecera = "";
+        generado = cabecera + generado;
         System.out.println(generado);
     }
     
