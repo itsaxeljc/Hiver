@@ -29,6 +29,11 @@ action code
     public ArrayList var_functions=new ArrayList();
     public boolean funci = false;
 
+    public ArrayList var_identificador=new ArrayList();
+    public ArrayList var_numPin=new ArrayList();   
+    public ArrayList<String> var_mode=new ArrayList<String>();   
+    public ArrayList<String> var_type=new ArrayList<String>();
+
     public void setPosicion (int p){
         switch (p){//1: config, 2:start-end, 3:funciones
             case 1:
@@ -56,9 +61,21 @@ action code
             var_temp.clear();  
         }
     }
- 
+    public void pinConfig(Object identificador,Object pin, String mode, String type){ //Identificador: nombre del pin, mode: analog/digital, type: input/output
+            var_identificador.add(identificador);
+            var_numPin.add(pin);
+            var_mode.add(mode.toLowerCase());
+            var_type.add(type.toLowerCase());
+    }
 
-
+    public int getIndexPin(Object pin) { 
+            int index=var_numPin.indexOf(pin);
+            if (index!=-1) 
+                return index;
+            else 
+                return var_identificador.indexOf(pin);
+          
+        }
 
 :}
 
@@ -76,7 +93,6 @@ FUNCIONES, FUNCION, CONFIG, STARTUP,SENTENCIA_STARTUP,SENTENCIA_CONFIG, TIPO_DAT
 TYPE, TYPE_IO, SCALE,DOWHILE,EXPRESION, OPERACION,IF,CASO,WHILE,SWITCH,SWITCH_ENTRADAS,VOLT, MAX_VOLT, WAIT, CONDICION, MODE, 
 VALOR_NUMERICO ,OPERADORES_CONTRACCION,INCREMENTO_FOR,INCREMENTO,FOR,OUT,SLEEP,OPERACION_PROC, OPERADOR,VALOR,TIPO_DATO_FOR, 
 OPERADOR_CONDICIONAL,RETURN,IN,SENTENCIA_FUNCION,OPERADOR_ARITMETICO,FOR_T,FOR_T1,METODO_INCREMENTO,OPERACION_CONTRACCION,OPE,TERM,FACTOR,DECLARACION_PARAMETRO,CALL_FUNCTION,PARAMETRO_CALL_FUNCTION,IF_T,ELSE_T,SENTENCIAS_IF;
-
 
 start with INICIO;
 
@@ -236,6 +252,7 @@ PIN ::=
     sig_punto_coma:f {: 
         var_cabecera.add("byte "+ id +" = "+ n +";");
         var_temp.add("pinMode("+n+",OUTPUT);");
+        pinConfig(id,n,"OUTPUT","digital");
     :}
 ;
 
@@ -312,7 +329,13 @@ OPERADOR_CONDICIONAL ::=
 ;
 
 MODE ::=
-    res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma |
+    res_model par_abre VALOR_NUMERICO:n coma Numero:num par_cierra sig_punto_coma 
+    {://cambiar el modo del pin a digital o analogico
+        int index = getIndexPin(n);
+        if (index !=-1){
+            var_mode.set(index,(num.toString().equals("1"))?"analog":"digital");
+        }else System.err.println("Error dio -1 en mode");
+    :}|
     res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma |
     res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma 
 ;
@@ -461,9 +484,41 @@ IN ::=
 ;
 
 OUT ::=
-    res_out par_abre Identificador coma VALOR_NUMERICO par_cierra sig_punto_coma |
-    res_out par_abre Identificador coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma |
-    res_out par_abre res_display coma cadena_caracter par_cierra sig_punto_coma  
+    res_out par_abre Identificador:id coma VALOR_NUMERICO:val par_cierra sig_punto_coma
+    {://cambiar la salida en función de su modo
+        int index = getIndexPin(id);
+        if (index !=-1){
+            if (var_mode.get(index).equals("digital")){
+                var_temp.add("digitalWrite("+id+","+val+");");
+            } else if (var_mode.get(index).equals("analog")){
+                var_temp.add("analogWrite("+id+","+((Integer.parseInt(val))*255/5)+");");
+            } else 
+                System.err.println("Error no entro ni en digital ni en analogico en OUT: "+ var_mode.get(index)+" index: "+index);
+        }else System.err.println("Error dio -1 en OUT");
+    :}|
+    res_out par_abre Identificador:id coma Numero:val coma VALOR_NUMERICO:valor par_cierra sig_punto_coma
+    {://cambiar la salida en función de su modo
+        int index = getIndexPin(id);
+        if (index !=-1){
+            if (var_mode.get(index).equals("digital")){//comprobar si es digital
+                var_temp.add("digitalWrite("+id+","+val+");");
+                var_temp.add("delay("+valor+");");
+                var_temp.add("digitalWrite("+id+",0);");
+
+            } else if (var_mode.get(index).equals("analog")){//comprobar si es analogo
+                var_temp.add("analogWrite("+id+","+((Integer.parseInt(val))*255/5)+");");
+                var_temp.add("delay("+valor+");");
+                var_temp.add("analogWrite("+id+",0);");
+            } else 
+                System.err.println("Error no entro ni en digital ni en analogico en OUT: "+ var_mode.get(index)+" index: "+index);
+        }else System.err.println("Error dio -1 en OUT");
+    :} |
+    res_out par_abre res_display:dis coma cadena_caracter:cadena par_cierra sig_punto_coma  
+    {:  
+        var_temp.add("lcd.clear();");
+        var_temp.add("lcd.setCursor(0,0);");
+        var_temp.add("lcd.print("+cadena+");");
+    :}
 ;
 
 SLEEP ::=
