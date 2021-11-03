@@ -1,0 +1,508 @@
+package codigo;
+
+import java_cup.runtime.Symbol;
+import java.util.ArrayList;
+import java.util.Stack;
+
+parser code
+{:
+    
+    
+    public void syntax_error(Symbol s){
+       //pnlSalida.textPane.setText(pnlSalida.textPane.getText()+"Error sintáctico en la línea "+(s.right +1)+": "+ s.value+"\n");
+       System.out.println("Error R de sintaxis: "+ s.value +" en la Linea "+(s.right+1) );
+    }
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
+        //pnlSalida.textPane.setText(pnlSalida.textPane.getText()+"Error NR de sintaxis: "+ s.value +" en la Linea " +  (s.left+1)+"\n");
+        System.out.println("Error NR de sintaxis: "+ s.value +" en la Linea " + (s.left+1));
+    }
+
+              //ArrayList Para Código Intermedio
+    public ArrayList getvar_cabecera() { return action_obj.var_cabecera; }
+    public ArrayList getvar_codIntermedio() { return action_obj.var_codIntermedio;}
+    public ArrayList getvar_functions() { return action_obj.var_functions;}
+
+:};
+action code
+{://Codigo de acciones vamos a simular atributos heredados con variables globales
+    String heredado="";
+    String aux="";
+    Stack<Display> display = new Stack<>();
+    Display tmp;
+
+    // Para el código Intermedio
+    public ArrayList var_temp=new ArrayList();
+    public ArrayList var_tempF=new ArrayList();
+    public ArrayList var_cabecera=new ArrayList();
+    public ArrayList var_codIntermedio=new ArrayList();
+    public ArrayList var_start=new ArrayList();   
+    public ArrayList var_functions=new ArrayList();
+    public boolean funci = false;
+
+    public void setPosicion (int p){
+        switch (p){//1: config, 2:start-end, 3:funciones
+            case 1:
+                funci=false;
+                var_codIntermedio.add("void setup{"); 
+                break;
+            case 2:
+                funci=false;
+                var_codIntermedio.add("void loop{"); 
+                break;
+            case 3:
+                funci=true;
+            break;
+        }
+        if(funci){
+            for (int i=0;i<var_temp.size();i++){
+                    //var_functions.add("Función: "+i);
+                    var_functions.add(var_temp.get(i)+"\n");
+            }
+            var_functions.add("\n}\n\n");
+            var_temp.clear();
+        }else{
+        for (int i = 0; i< var_temp.size();i++){
+            var_codIntermedio.add(var_temp.get(i));
+        }
+        var_codIntermedio.add("}");   
+        var_temp.clear();  
+        }
+    }
+ 
+
+
+
+:}
+
+terminal res_if,res_else,res_while,res_do,res_for,res_exit,res_return,res_function,res_void,res_null,res_input,res_output,res_in,
+res_out,res_def,res_true,res_false,res_start,res_end,res_array,res_type,res_display,rel_igual,res_config,res_scale,res_pin,res_volt,res_wait,res_model,res_sleep,res_switch,
+res_default,res_name, res_max_volt,asi_asignacion,ari_suma,ari_resta,ari_multiplicacion,ari_division,log_and,log_or,log_xor,log_not,rel_menor,rel_mayor,rel_menor_igual, rel_mayor_igual,
+rel_diferente, sig_punto_coma,par_abre,par_cierra,llave_abre,llave_cierra,cor_abre,cor_cierra,sim_dos_puntos,tip_tinyint,tip_int,tip_float, tip_double,tip_char,tip_boolean,
+
+
+Identificador,
+Numero,coma,cadena_caracter,
+Numero_incorrecto1,Numero_incorrecto2,Identificador_no_valido,Error_simbo_punto,Error_simbolo_no_valido,Error_numerico,Numero_incorrecto3,Numero_incorrecto4,ERROR;
+non terminal INICIO, ESTRUCTURA_BASICA,DECLARACION, 
+FUNCIONES, FUNCION, CONFIG, STARTUP,SENTENCIA_STARTUP,SENTENCIA_CONFIG, TIPO_DATO, PARAMETRO , PIN, DISPLAY, DISPLAY_PARAMS,
+TYPE, TYPE_IO, SCALE,DOWHILE,EXPRESION, OPERACION,IF,CASO,WHILE,SWITCH,SWITCH_ENTRADAS,VOLT, MAX_VOLT, WAIT, CONDICION, MODE, 
+VALOR_NUMERICO ,OPERADORES_CONTRACCION,INCREMENTO_FOR,INCREMENTO,FOR,OUT,SLEEP,OPERACION_PROC, OPERADOR,VALOR,TIPO_DATO_FOR, 
+OPERADOR_CONDICIONAL,RETURN,IN,SENTENCIA_FUNCION,OPERADOR_ARITMETICO,METODO_INCREMENTO,OPERACION_CONTRACCION,OPE,TERM,FACTOR,DECLARACION_PARAMETRO,CALL_FUNCTION,PARAMETRO_CALL_FUNCTION;
+
+
+start with INICIO;
+
+INICIO ::= 
+    res_name Identificador sig_punto_coma 
+    ESTRUCTURA_BASICA 
+;
+
+ESTRUCTURA_BASICA ::=
+    FUNCIONES CONFIG STARTUP |
+    CONFIG STARTUP FUNCIONES |
+    CONFIG FUNCIONES STARTUP |
+    CONFIG FUNCIONES STARTUP FUNCIONES |
+    FUNCIONES CONFIG STARTUP FUNCIONES |
+    FUNCIONES CONFIG FUNCIONES STARTUP |
+    FUNCIONES CONFIG FUNCIONES STARTUP FUNCIONES |
+    CONFIG STARTUP 
+;
+
+FUNCIONES ::=
+    FUNCIONES FUNCION | FUNCION
+;
+
+FUNCION ::=
+    res_function:i TIPO_DATO:d Identificador:id par_abre PARAMETRO:p par_cierra llave_abre
+            SENTENCIA_FUNCION
+    llave_cierra:f {:
+        var_functions.add(d+" "+id+"("+p+"){\n");
+        setPosicion(3);
+    :}|
+    res_function:i res_void:d Identificador:id par_abre PARAMETRO:p par_cierra llave_abre
+            SENTENCIA_FUNCION
+    llave_cierra:f {:
+        var_functions.add(d+" "+id+"("+p+"){\n");
+        setPosicion(3);
+    :}| 
+    res_function:i res_void:d Identificador:id par_abre par_cierra llave_abre
+            SENTENCIA_FUNCION
+    llave_cierra:f {:
+        var_functions.add(d+" "+id+"(){\n");
+        setPosicion(3);
+    :}
+    
+;
+CALL_FUNCTION ::=
+    Identificador par_abre PARAMETRO_CALL_FUNCTION par_cierra sig_punto_coma
+;
+
+PARAMETRO_CALL_FUNCTION ::=
+    VALOR | PARAMETRO_CALL_FUNCTION coma VALOR
+;
+
+
+PARAMETRO ::=
+    DECLARACION_PARAMETRO:dp {: RESULT=dp; :} | 
+    PARAMETRO:p coma:c DECLARACION_PARAMETRO:dp {: RESULT=p+""+c+""+dp; :}
+;
+
+DECLARACION_PARAMETRO ::= 
+    res_def:i TIPO_DATO:dato Identificador:id
+    {: 
+        RESULT=dato+" "+id;
+    :} |
+    res_def:i TIPO_DATO:dato Identificador:id asi_asignacion VALOR:val 
+    {: 
+        RESULT=dato+" "+id+"="+val;
+    :}  
+;
+
+RETURN ::=
+    res_return Identificador:i sig_punto_coma {: var_temp.add("return "+i+";");:}| 
+    res_return sig_punto_coma {: var_temp.add("return;");:} |
+    error sig_punto_coma
+;
+CONFIG ::= 
+    res_config:i llave_abre 
+        SENTENCIA_CONFIG   
+    llave_cierra:f {:
+        setPosicion(1);
+    :}
+;
+
+STARTUP ::= 
+    res_start:i sig_punto_coma
+        SENTENCIA_STARTUP
+    res_end sig_punto_coma:f {:
+        setPosicion(2);
+    :}
+;
+
+SENTENCIA_CONFIG ::=
+    DECLARACION | SENTENCIA_CONFIG DECLARACION |
+    PIN | SENTENCIA_CONFIG PIN |
+    DISPLAY | SENTENCIA_CONFIG DISPLAY |
+    TYPE | SENTENCIA_CONFIG TYPE |
+    SCALE | SENTENCIA_CONFIG SCALE |
+    VOLT | SENTENCIA_CONFIG VOLT |
+    MAX_VOLT | SENTENCIA_CONFIG MAX_VOLT |
+    MODE | SENTENCIA_CONFIG MODE 
+;
+
+SENTENCIA_STARTUP ::=
+   DECLARACION | SENTENCIA_STARTUP DECLARACION | 
+   VOLT | SENTENCIA_STARTUP VOLT |
+   WAIT | SENTENCIA_STARTUP WAIT |
+   RETURN| SENTENCIA_STARTUP RETURN |
+   res_exit | SENTENCIA_STARTUP res_exit |
+   IF | SENTENCIA_STARTUP IF |
+   SWITCH | SENTENCIA_STARTUP SWITCH |
+   WHILE | SENTENCIA_STARTUP WHILE |
+   DOWHILE | SENTENCIA_STARTUP DOWHILE |
+   EXPRESION | SENTENCIA_STARTUP EXPRESION |
+   IN | SENTENCIA_STARTUP IN |
+   OUT | SENTENCIA_STARTUP OUT |
+   SLEEP | SENTENCIA_STARTUP SLEEP |
+   FOR | SENTENCIA_STARTUP FOR |
+   OPERADORES_CONTRACCION | SENTENCIA_STARTUP OPERADORES_CONTRACCION |
+   CALL_FUNCTION | SENTENCIA_STARTUP CALL_FUNCTION
+;
+
+SENTENCIA_FUNCION ::=
+   DECLARACION | SENTENCIA_FUNCION DECLARACION | 
+   VOLT | SENTENCIA_FUNCION VOLT |
+   WAIT | SENTENCIA_FUNCION WAIT |
+   RETURN| SENTENCIA_FUNCION RETURN |
+   res_exit | SENTENCIA_FUNCION res_exit |
+   IF | SENTENCIA_FUNCION IF |
+   SWITCH | SENTENCIA_FUNCION SWITCH |
+   WHILE | SENTENCIA_FUNCION WHILE |
+   DOWHILE | SENTENCIA_FUNCION DOWHILE |
+   EXPRESION | SENTENCIA_FUNCION EXPRESION |
+   IN | SENTENCIA_FUNCION IN |
+   OUT | SENTENCIA_FUNCION OUT |
+   SLEEP | SENTENCIA_FUNCION SLEEP |
+   FOR | SENTENCIA_FUNCION FOR |
+   OPERADORES_CONTRACCION | SENTENCIA_FUNCION OPERADORES_CONTRACCION 
+;
+
+DECLARACION ::= 
+    res_def:i TIPO_DATO:dato Identificador:id sig_punto_coma:f
+    {: 
+            var_temp.add(dato +" "+ id+";");
+    :} |
+    res_def:i TIPO_DATO:dato Identificador:id asi_asignacion VALOR:val sig_punto_coma:f  
+    {: 
+            var_temp.add(dato +" "+ id + " = "+ val+";");
+    :} 
+    |
+    res_def:i TIPO_DATO:dato Identificador:id asi_asignacion CALL_FUNCTION sig_punto_coma:f
+    {: 
+        
+    :}
+;
+
+PIN ::= 
+    res_pin:i par_abre Numero:n coma Identificador:id par_cierra 
+    sig_punto_coma:f {: 
+        
+        var_cabecera.add("byte "+ id +" = "+ n +";");
+        var_temp.add("pinMode("+n+",OUTPUT);");
+    :}
+;
+
+DISPLAY ::=
+    res_display par_abre DISPLAY_PARAMS:params par_cierra sig_punto_coma {:
+    var_cabecera.add(0,"#include <liquidCristal.h>");
+    var_cabecera.add("LiquidCrystal lcd("+params+");");
+    var_temp.add("lcd.begin(16,2);");
+    var_temp.add("lcd.clear();");
+    :}
+;
+
+DISPLAY_PARAMS ::=
+    Numero:n {:RESULT=n; :} | 
+    Numero:n coma:c DISPLAY_PARAMS:r {:RESULT= n+""+c+""+r;:}
+;
+
+TYPE ::=
+    res_type par_abre Identificador:id coma TYPE_IO:tipo par_cierra sig_punto_coma 
+    {:
+         var_temp.add("pinMode("+id+","+tipo+");");
+    :}
+;
+
+TYPE_IO ::=
+    res_input:tip {:RESULT=tip;:} | 
+    res_output:tip {:RESULT=tip;:} 
+;
+
+SCALE ::=
+    res_scale par_abre Identificador coma Numero coma Numero par_cierra sig_punto_coma 
+;
+
+VOLT ::=
+    res_volt par_abre Identificador coma Numero par_cierra sig_punto_coma |
+    res_volt par_abre Identificador coma Numero coma Numero par_cierra sig_punto_coma
+;
+
+MAX_VOLT ::=
+    res_max_volt par_abre Identificador par_cierra sig_punto_coma |
+    res_max_volt par_abre Numero par_cierra sig_punto_coma 
+;
+
+WAIT ::=
+    res_wait par_abre CONDICION par_cierra sig_punto_coma 
+;
+
+CONDICION ::=
+    VALOR_NUMERICO:val OPERADOR_CONDICIONAL:oc VALOR_NUMERICO:val2{:
+        RESULT=val+""+oc+""+val2+"";
+    :}
+    | par_abre:pa CONDICION:c par_cierra:pc {:
+        RESULT=pa+""+c+""+pc+"";
+    :} |
+    log_not:l Identificador:i{:
+        RESULT=l+""+i+"";
+    :} | log_not:l Identificador:i OPERADOR_CONDICIONAL:o CONDICION:c {:
+        RESULT=l+""+i+""+o+""+c+"";
+    :}
+    | VALOR_NUMERICO:val{:
+        RESULT=val+"";
+    :} | res_false:r{:
+        RESULT=r+"";
+    :} | res_true:r{:
+        RESULT=r+"";
+    :} 
+;
+
+
+OPERADOR_CONDICIONAL ::=
+     log_xor:lx{:RESULT=lx;:} | log_and:la{:RESULT=la;:} | log_or:lo{:RESULT=lo;:} | rel_diferente:rd{:RESULT=rd;:} | 
+     rel_igual:ri{:RESULT=ri;:} | rel_mayor_igual:rmi{:RESULT=rmi;:} | rel_mayor:rm{:RESULT=rm;:} | rel_menor_igual:mi{:RESULT=mi;:} |
+     rel_menor:rmn{:RESULT=rmn;:} 
+;
+
+MODE ::=
+    res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma |
+    res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma |
+    res_model par_abre VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma 
+;
+
+TIPO_DATO ::= 
+    tip_tinyint:tip{:RESULT = tip;:} | 
+    tip_int:tip {:RESULT = tip;:}| 
+    tip_boolean:tip {:RESULT = tip;:}| 
+    tip_float:tip {:RESULT = tip;:}| 
+    tip_double:tip {:RESULT = tip;:}| 
+    tip_char:tip{:RESULT = tip;:}
+;
+
+VALOR ::=
+    Numero:val {:RESULT = val;:}|
+    Identificador:val {:RESULT = val;:}|
+    cadena_caracter:val {:RESULT = val;:}
+    
+;
+
+VALOR_NUMERICO ::=
+    Numero:n {:RESULT =n;:} | Identificador:i {:RESULT=i;:}
+;
+
+IF ::=
+    res_if:i par_abre:pa CONDICION:c par_cierra:pc llave_abre:la
+        SENTENCIA_STARTUP
+    llave_cierra {:
+        var_temp.add(i+""+pa+""+c+""+pc+""+la+"\n");
+    :}
+    |
+    res_if par_abre CONDICION par_cierra llave_abre
+        SENTENCIA_STARTUP
+    llave_cierra 
+    res_else 
+    llave_abre
+        SENTENCIA_STARTUP
+    llave_cierra
+ ;
+
+ SWITCH ::=
+    res_switch par_abre Identificador par_cierra llave_abre
+        SWITCH_ENTRADAS
+    llave_cierra|
+    res_switch par_abre Identificador par_cierra llave_abre
+        SWITCH_ENTRADAS
+        res_default sim_dos_puntos SENTENCIA_STARTUP
+    llave_cierra 
+;
+
+SWITCH_ENTRADAS ::=
+    rel_menor CASO rel_mayor sim_dos_puntos SENTENCIA_STARTUP res_exit | 
+    SWITCH_ENTRADAS rel_menor CASO rel_mayor sim_dos_puntos SENTENCIA_STARTUP res_exit 
+;
+
+CASO ::=
+    Numero | cadena_caracter | res_true | res_false 
+;
+
+WHILE ::=
+    res_while par_abre CONDICION par_cierra llave_abre
+        SENTENCIA_STARTUP
+    llave_cierra 
+;
+
+DOWHILE ::=
+    res_do llave_abre
+        SENTENCIA_STARTUP
+    llave_cierra res_while par_abre CONDICION par_cierra sig_punto_coma
+
+
+;
+
+EXPRESION ::=
+    Identificador:id asi_asignacion OPE:op sig_punto_coma:l
+    {: 
+        var_temp.add(id + "=" + op+";"); 
+    :}|
+    Identificador:id asi_asignacion:l IN
+    {: 
+
+    :}
+;
+
+OPE ::=
+    OPE:op ari_suma:l TERM:ter
+    {:
+        RESULT = op +"+"+ter;        
+    :}| OPE:op ari_resta:l TERM:ter
+    {: 
+        RESULT = op +"-"+ter; 
+    :}| TERM:ter {:RESULT=ter;:}
+
+;
+
+TERM ::=
+    TERM:ter ari_multiplicacion:l FACTOR:fact
+    {: 
+        RESULT = ter+"*"+ fact;
+
+    :}| TERM:ter ari_division:l FACTOR:fact
+    {: 
+        
+        RESULT = ter + "/"+ fact; 
+    :}| 
+    FACTOR:fact {:RESULT=fact;:}      
+;
+
+FACTOR ::=
+    VALOR:id
+    {: 
+            RESULT =id;
+    :}|
+     par_abre OPE:op par_cierra
+        {:RESULT= "("+op+")";:}
+      | ari_resta:l FACTOR:fact{: 
+        RESULT = "-" + fact;
+    :}
+;
+
+OPERACION_PROC ::=
+    VALOR OPERADOR
+;
+
+OPERADOR ::=
+    OPERADOR_CONDICIONAL| ari_division | ari_resta | ari_suma | ari_multiplicacion
+;
+
+IN ::=
+    res_in par_abre VALOR_NUMERICO par_cierra sig_punto_coma
+    
+;
+
+OUT ::=
+    res_out par_abre Identificador coma VALOR_NUMERICO par_cierra sig_punto_coma |
+    res_out par_abre Identificador coma VALOR_NUMERICO coma VALOR_NUMERICO par_cierra sig_punto_coma |
+    res_out par_abre res_display coma cadena_caracter par_cierra sig_punto_coma  
+;
+
+SLEEP ::=
+    res_sleep par_abre VALOR_NUMERICO par_cierra sig_punto_coma |
+    res_sleep par_abre EXPRESION par_cierra sig_punto_coma 
+;
+
+FOR ::=
+    res_for par_abre res_def:i TIPO_DATO_FOR:dato Identificador:id asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
+    llave_abre 
+        SENTENCIA_STARTUP 
+    llave_cierra {:
+
+    :} |
+    res_for par_abre sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
+    llave_abre 
+        SENTENCIA_STARTUP 
+    llave_cierra 
+
+;
+METODO_INCREMENTO ::=
+ Identificador INCREMENTO | OPERACION_CONTRACCION
+;
+
+TIPO_DATO_FOR ::=
+    tip_int:tipf{:RESULT = tipf;:} | 
+    tip_float:tipf{:RESULT = tipf;:} | 
+    tip_double:tipf{:RESULT = tipf;:} | 
+    tip_tinyint:tipf{:RESULT = tipf;:} 
+;
+INCREMENTO ::=
+    ari_suma ari_suma |
+    ari_resta ari_resta 
+;
+
+OPERADOR_ARITMETICO ::=
+    ari_suma | ari_resta | ari_multiplicacion | ari_division
+;                                                                                          
+
+OPERACION_CONTRACCION ::=
+    Identificador OPERADOR_ARITMETICO asi_asignacion VALOR_NUMERICO sig_punto_coma |
+    Identificador INCREMENTO sig_punto_coma
+;
