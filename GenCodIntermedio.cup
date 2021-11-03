@@ -478,7 +478,7 @@ FOR_T ::=
 
 FOR_T1 ::=
     res_for:f par_abre sig_punto_coma CONDICION:c sig_punto_coma METODO_INCREMENTO:met par_cierra 
-      {:var_temp.add(f+"; "+c+"; "+met+"){");:}
+      {:var_temp.add(f+"(; "+c+"; "+met+"){");:}
 ;
 FOR ::=
     FOR_T 
