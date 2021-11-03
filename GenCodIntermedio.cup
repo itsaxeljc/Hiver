@@ -6,16 +6,6 @@ import java.util.Stack;
 
 parser code
 {:
-    
-    
-    public void syntax_error(Symbol s){
-       //pnlSalida.textPane.setText(pnlSalida.textPane.getText()+"Error sintáctico en la línea "+(s.right +1)+": "+ s.value+"\n");
-       System.out.println("Error R de sintaxis: "+ s.value +" en la Linea "+(s.right+1) );
-    }
-    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
-        //pnlSalida.textPane.setText(pnlSalida.textPane.getText()+"Error NR de sintaxis: "+ s.value +" en la Linea " +  (s.left+1)+"\n");
-        System.out.println("Error NR de sintaxis: "+ s.value +" en la Linea " + (s.left+1));
-    }
 
               //ArrayList Para Código Intermedio
     public ArrayList getvar_cabecera() { return action_obj.var_cabecera; }
@@ -43,27 +33,26 @@ action code
         switch (p){//1: config, 2:start-end, 3:funciones
             case 1:
                 funci=false;
-                var_codIntermedio.add("void setup{\n"); 
+                var_codIntermedio.add("void setup{"); 
                 break;
             case 2:
                 funci=false;
-                var_codIntermedio.add("void loop{\n"); 
+                var_codIntermedio.add("void loop{"); 
                 break;
             case 3:
-                funci=true;
-            break;
+                //funci=true;
+                for (int i=0;i<var_temp.size();i++){
+                    var_functions.add(var_temp.get(i)+"");
+                }
+                var_functions.add("}");
+                var_temp.clear();
+                break;
         }
-        if(funci){
-            for (int i=0;i<var_temp.size();i++){
-                    var_functions.add(var_temp.get(i)+"\n");
-            }
-            var_functions.add("\n}\n\n");
-            var_temp.clear();
-        }else{
+        if(p==1 || p==2){
             for (int i = 0; i< var_temp.size();i++){
-                var_codIntermedio.add(var_temp.get(i)+"\n");
+                var_codIntermedio.add(var_temp.get(i));
             }
-            var_codIntermedio.add("}\n \n");   
+            var_codIntermedio.add("}");   
             var_temp.clear();  
         }
     }
@@ -86,7 +75,7 @@ non terminal INICIO, ESTRUCTURA_BASICA,DECLARACION,
 FUNCIONES, FUNCION, CONFIG, STARTUP,SENTENCIA_STARTUP,SENTENCIA_CONFIG, TIPO_DATO, PARAMETRO , PIN, DISPLAY, DISPLAY_PARAMS,
 TYPE, TYPE_IO, SCALE,DOWHILE,EXPRESION, OPERACION,IF,CASO,WHILE,SWITCH,SWITCH_ENTRADAS,VOLT, MAX_VOLT, WAIT, CONDICION, MODE, 
 VALOR_NUMERICO ,OPERADORES_CONTRACCION,INCREMENTO_FOR,INCREMENTO,FOR,OUT,SLEEP,OPERACION_PROC, OPERADOR,VALOR,TIPO_DATO_FOR, 
-OPERADOR_CONDICIONAL,RETURN,IN,SENTENCIA_FUNCION,OPERADOR_ARITMETICO,METODO_INCREMENTO,OPERACION_CONTRACCION,OPE,TERM,FACTOR,DECLARACION_PARAMETRO,CALL_FUNCTION,PARAMETRO_CALL_FUNCTION;
+OPERADOR_CONDICIONAL,RETURN,IN,SENTENCIA_FUNCION,OPERADOR_ARITMETICO,METODO_INCREMENTO,OPERACION_CONTRACCION,OPE,TERM,FACTOR,DECLARACION_PARAMETRO,CALL_FUNCTION,PARAMETRO_CALL_FUNCTION,IF_T,ELSE_T,SENTENCIAS_IF;
 
 
 start with INICIO;
@@ -115,19 +104,19 @@ FUNCION ::=
     res_function:i TIPO_DATO:d Identificador:id par_abre PARAMETRO:p par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra:f {:
-        var_functions.add(d+" "+id+"("+p+"){\n");
+        var_functions.add(d+" "+id+"("+p+"){");
         setPosicion(3);
     :}|
     res_function:i res_void:d Identificador:id par_abre PARAMETRO:p par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra:f {:
-        var_functions.add(d+" "+id+"("+p+"){\n");
+        var_functions.add(d+" "+id+"("+p+"){");
         setPosicion(3);
     :}| 
     res_function:i res_void:d Identificador:id par_abre par_cierra llave_abre
             SENTENCIA_FUNCION
     llave_cierra:f {:
-        var_functions.add(d+" "+id+"(){\n");
+        var_functions.add(d+" "+id+"(){");
         setPosicion(3);
     :}
     
@@ -245,15 +234,15 @@ DECLARACION ::=
 PIN ::= 
     res_pin:i par_abre Numero:n coma Identificador:id par_cierra 
     sig_punto_coma:f {: 
-        var_cabecera.add("byte "+ id +" = "+ n +";\n");
+        var_cabecera.add("byte "+ id +" = "+ n +";");
         var_temp.add("pinMode("+n+",OUTPUT);");
     :}
 ;
 
 DISPLAY ::=
     res_display par_abre DISPLAY_PARAMS:params par_cierra sig_punto_coma {:
-    var_cabecera.add(0,"#include <liquidCristal.h>\n");
-    var_cabecera.add("LiquidCrystal lcd("+params+");\n");
+    var_cabecera.add(0,"#include <liquidCristal.h>");
+    var_cabecera.add("LiquidCrystal lcd("+params+");");
     var_temp.add("lcd.begin(16,2);");
     var_temp.add("lcd.clear();");
     :}
@@ -347,21 +336,32 @@ VALOR ::=
 VALOR_NUMERICO ::=
     Numero:n {:RESULT =n;:} | Identificador:i {:RESULT=i;:}
 ;
+IF_T ::=
+    res_if:i par_abre:pa CONDICION:c par_cierra:pc llave_abre:la
+    {:
+        var_temp.add(i+""+pa+""+c+""+pc+""+la);
+    :}
+;
+SENTENCIAS_IF ::=
+    SENTENCIA_STARTUP
+    {:var_temp.add("}");:}
+;
+ELSE_T ::=
+    llave_cierra res_else:e llave_abre
+    {:var_temp.add(e+"{");:}
+
+;
 
 IF ::=
-    res_if:i par_abre:pa CONDICION:c par_cierra:pc llave_abre:la
-        SENTENCIA_STARTUP
-    llave_cierra {:
-        var_temp.add(i+""+pa+""+c+""+pc+""+la+"\n");
-    :}
-    |
-    res_if par_abre CONDICION par_cierra llave_abre
-        SENTENCIA_STARTUP
+    IF_T
+        SENTENCIAS_IF
     llave_cierra 
-    res_else 
-    llave_abre
-        SENTENCIA_STARTUP
-    llave_cierra
+    |
+    IF_T
+        SENTENCIAS_IF
+    ELSE_T
+        SENTENCIAS_IF
+    llave_cierra 
  ;
 
  SWITCH ::=
@@ -402,9 +402,9 @@ EXPRESION ::=
     {: 
         var_temp.add(id + "=" + op+";"); 
     :}|
-    Identificador:id asi_asignacion:l IN:i
+    Identificador:id asi_asignacion:l IN
     {: 
-        var_temp.add(id + "=" +i+"");
+
     :}
 ;
 
@@ -455,7 +455,8 @@ OPERADOR ::=
 IN ::=
     res_in:r par_abre:pa VALOR_NUMERICO:v par_cierra:pc sig_punto_coma:sp{:
         RESULT=(r+""+pa+""+v+""+pc+""+sp+"");
-    :}  
+    :}
+    
 ;
 
 OUT ::=
@@ -468,7 +469,7 @@ SLEEP ::=
     res_sleep:s par_abre:pa VALOR_NUMERICO:v par_cierra:pc sig_punto_coma:sp{:
         var_temp.add(s+""+pa+""+v+""+pc+""+sp+"");
     :} 
-;
+;    
 
 FOR ::=
     res_for par_abre res_def:i TIPO_DATO_FOR:dato Identificador:id asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
