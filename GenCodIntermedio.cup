@@ -75,7 +75,7 @@ non terminal INICIO, ESTRUCTURA_BASICA,DECLARACION,
 FUNCIONES, FUNCION, CONFIG, STARTUP,SENTENCIA_STARTUP,SENTENCIA_CONFIG, TIPO_DATO, PARAMETRO , PIN, DISPLAY, DISPLAY_PARAMS,
 TYPE, TYPE_IO, SCALE,DOWHILE,EXPRESION, OPERACION,IF,CASO,WHILE,SWITCH,SWITCH_ENTRADAS,VOLT, MAX_VOLT, WAIT, CONDICION, MODE, 
 VALOR_NUMERICO ,OPERADORES_CONTRACCION,INCREMENTO_FOR,INCREMENTO,FOR,OUT,SLEEP,OPERACION_PROC, OPERADOR,VALOR,TIPO_DATO_FOR, 
-OPERADOR_CONDICIONAL,RETURN,IN,SENTENCIA_FUNCION,OPERADOR_ARITMETICO,METODO_INCREMENTO,OPERACION_CONTRACCION,OPE,TERM,FACTOR,DECLARACION_PARAMETRO,CALL_FUNCTION,PARAMETRO_CALL_FUNCTION,IF_T,ELSE_T,SENTENCIAS_IF;
+OPERADOR_CONDICIONAL,RETURN,IN,SENTENCIA_FUNCION,OPERADOR_ARITMETICO,FOR_T,FOR_T1,METODO_INCREMENTO,OPERACION_CONTRACCION,OPE,TERM,FACTOR,DECLARACION_PARAMETRO,CALL_FUNCTION,PARAMETRO_CALL_FUNCTION,IF_T,ELSE_T,SENTENCIAS_IF;
 
 
 start with INICIO;
@@ -352,6 +352,7 @@ ELSE_T ::=
 
 ;
 
+
 IF ::=
     IF_T
         SENTENCIAS_IF
@@ -469,23 +470,31 @@ SLEEP ::=
     res_sleep:s par_abre:pa VALOR_NUMERICO:v par_cierra:pc sig_punto_coma:sp{:
         var_temp.add(s+""+pa+""+v+""+pc+""+sp+"");
     :} 
-;    
+;
+FOR_T ::=
+    res_for:f par_abre res_def TIPO_DATO_FOR:dato Identificador:id asi_asignacion VALOR_NUMERICO:val sig_punto_coma CONDICION:c sig_punto_coma METODO_INCREMENTO:met par_cierra
+    {:var_temp.add(f+"("+dato+" "+ id+"="+val+"; "+c+"; "+met+"){");:}
+;
 
+FOR_T1 ::=
+    res_for:f par_abre sig_punto_coma CONDICION:c sig_punto_coma METODO_INCREMENTO:met par_cierra 
+      {:var_temp.add(f+"; "+c+"; "+met+"){");:}
+;
 FOR ::=
-    res_for par_abre res_def:i TIPO_DATO_FOR:dato Identificador:id asi_asignacion VALOR_NUMERICO sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
+    FOR_T 
     llave_abre 
         SENTENCIA_STARTUP 
-    llave_cierra {:
-
-    :} |
-    res_for par_abre sig_punto_coma CONDICION sig_punto_coma METODO_INCREMENTO par_cierra 
+    llave_cierra {:var_temp.add("}");:} |
+    FOR_T1
     llave_abre 
         SENTENCIA_STARTUP 
-    llave_cierra 
+    llave_cierra {:var_temp.add("}");:}
 
 ;
+
 METODO_INCREMENTO ::=
- Identificador INCREMENTO | OPERACION_CONTRACCION
+    Identificador:id INCREMENTO:inc {:RESULT=id+""+inc;:} | 
+    Identificador:id OPERADOR_ARITMETICO:op asi_asignacion VALOR_NUMERICO:val {:RESULT=""+id+op+"="+val+""; //las doble comillas al inicio son necesarias porque da error el result sin ellas, quein sabe por que:}
 ;
 
 TIPO_DATO_FOR ::=
@@ -495,14 +504,13 @@ TIPO_DATO_FOR ::=
     tip_tinyint:tipf{:RESULT = tipf;:} 
 ;
 INCREMENTO ::=
-    ari_suma ari_suma |
-    ari_resta ari_resta 
+    ari_suma ari_suma {:RESULT="++";:} |
+    ari_resta ari_resta {:RESULT="--";:}
 ;
 
 OPERADOR_ARITMETICO ::=
-    ari_suma | ari_resta | ari_multiplicacion | ari_division
-;                                                                                          
-
+    ari_suma:ari {:RESULT = ari;:} | ari_resta:ari {:RESULT = ari;:} | ari_multiplicacion:ari {:RESULT = ari;:} | ari_division:ari {:RESULT = ari;:}
+;           
 OPERACION_CONTRACCION ::=
     Identificador OPERADOR_ARITMETICO asi_asignacion VALOR_NUMERICO sig_punto_coma |
     Identificador INCREMENTO sig_punto_coma
