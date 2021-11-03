@@ -43,11 +43,11 @@ action code
         switch (p){//1: config, 2:start-end, 3:funciones
             case 1:
                 funci=false;
-                var_codIntermedio.add("void setup{"); 
+                var_codIntermedio.add("void setup{\n"); 
                 break;
             case 2:
                 funci=false;
-                var_codIntermedio.add("void loop{"); 
+                var_codIntermedio.add("void loop{\n"); 
                 break;
             case 3:
                 funci=true;
@@ -55,17 +55,16 @@ action code
         }
         if(funci){
             for (int i=0;i<var_temp.size();i++){
-                    //var_functions.add("Función: "+i);
                     var_functions.add(var_temp.get(i)+"\n");
             }
             var_functions.add("\n}\n\n");
             var_temp.clear();
         }else{
-        for (int i = 0; i< var_temp.size();i++){
-            var_codIntermedio.add(var_temp.get(i));
-        }
-        var_codIntermedio.add("}");   
-        var_temp.clear();  
+            for (int i = 0; i< var_temp.size();i++){
+                var_codIntermedio.add(var_temp.get(i)+"\n");
+            }
+            var_codIntermedio.add("}\n \n");   
+            var_temp.clear();  
         }
     }
  
@@ -246,16 +245,15 @@ DECLARACION ::=
 PIN ::= 
     res_pin:i par_abre Numero:n coma Identificador:id par_cierra 
     sig_punto_coma:f {: 
-        
-        var_cabecera.add("byte "+ id +" = "+ n +";");
+        var_cabecera.add("byte "+ id +" = "+ n +";\n");
         var_temp.add("pinMode("+n+",OUTPUT);");
     :}
 ;
 
 DISPLAY ::=
     res_display par_abre DISPLAY_PARAMS:params par_cierra sig_punto_coma {:
-    var_cabecera.add(0,"#include <liquidCristal.h>");
-    var_cabecera.add("LiquidCrystal lcd("+params+");");
+    var_cabecera.add(0,"#include <liquidCristal.h>\n");
+    var_cabecera.add("LiquidCrystal lcd("+params+");\n");
     var_temp.add("lcd.begin(16,2);");
     var_temp.add("lcd.clear();");
     :}
