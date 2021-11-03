@@ -402,9 +402,9 @@ EXPRESION ::=
     {: 
         var_temp.add(id + "=" + op+";"); 
     :}|
-    Identificador:id asi_asignacion:l IN
+    Identificador:id asi_asignacion:l IN:i
     {: 
-
+        var_temp.add(id + "=" +i+"");
     :}
 ;
 
@@ -453,8 +453,9 @@ OPERADOR ::=
 ;
 
 IN ::=
-    res_in par_abre VALOR_NUMERICO par_cierra sig_punto_coma
-    
+    res_in:r par_abre:pa VALOR_NUMERICO:v par_cierra:pc sig_punto_coma:sp{:
+        RESULT=(r+""+pa+""+v+""+pc+""+sp+"");
+    :}  
 ;
 
 OUT ::=
@@ -464,8 +465,9 @@ OUT ::=
 ;
 
 SLEEP ::=
-    res_sleep par_abre VALOR_NUMERICO par_cierra sig_punto_coma |
-    res_sleep par_abre EXPRESION par_cierra sig_punto_coma 
+    res_sleep:s par_abre:pa VALOR_NUMERICO:v par_cierra:pc sig_punto_coma:sp{:
+        var_temp.add(s+""+pa+""+v+""+pc+""+sp+"");
+    :} 
 ;
 
 FOR ::=
