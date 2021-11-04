@@ -6,7 +6,7 @@ import java.util.Stack;
 
 parser code
 {:
-
+              //editado desde Github
               //ArrayList Para Código Intermedio
     public ArrayList getvar_cabecera() { return action_obj.var_cabecera; }
     public ArrayList getvar_codIntermedio() { return action_obj.var_codIntermedio;}
