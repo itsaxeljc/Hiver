@@ -491,7 +491,7 @@ OUT ::=
             if (var_mode.get(index).equals("digital")){
                 var_temp.add("digitalWrite("+id+","+val+");");
             } else if (var_mode.get(index).equals("analog")){
-                var_temp.add("analogWrite("+id+","+((Integer.parseInt(val))*255/5)+");");
+                var_temp.add("analogWrite("+id+","+((Integer.parseInt(val+""))*255/5)+");");
             } else 
                 System.err.println("Error no entro ni en digital ni en analogico en OUT: "+ var_mode.get(index)+" index: "+index);
         }else System.err.println("Error dio -1 en OUT");
@@ -506,7 +506,7 @@ OUT ::=
                 var_temp.add("digitalWrite("+id+",0);");
 
             } else if (var_mode.get(index).equals("analog")){//comprobar si es analogo
-                var_temp.add("analogWrite("+id+","+((Integer.parseInt(val))*255/5)+");");
+                var_temp.add("analogWrite("+id+","+((Integer.parseInt(val+""))*255/5)+");");
                 var_temp.add("delay("+valor+");");
                 var_temp.add("analogWrite("+id+",0);");
             } else 
