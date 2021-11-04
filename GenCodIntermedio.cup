@@ -64,8 +64,8 @@ action code
     public void pinConfig(Object identificador,Object pin, String mode, String type){ //Identificador: nombre del pin, mode: analog/digital, type: input/output
             var_identificador.add(identificador);
             var_numPin.add(pin);
-            var_mode.add(mode.toLowerCase());
-            var_type.add(type.toLowerCase());
+            var_mode.add(type.toLowerCase());
+            var_type.add(mode.toLowerCase());
     }
 
     public int getIndexPin(Object pin) { 
