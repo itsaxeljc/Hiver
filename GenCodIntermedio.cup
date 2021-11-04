@@ -28,7 +28,6 @@ action code
     public ArrayList var_start=new ArrayList();   
     public ArrayList var_functions=new ArrayList();
     public boolean funci = false;
-    public boolean setup = false;
 
     public ArrayList var_identificador=new ArrayList();
     public ArrayList var_numPin=new ArrayList();   
@@ -48,7 +47,7 @@ action code
             case 3:
                 //funci=true;
                 for (int i=0;i<var_temp.size();i++){
-                    var_functions.add("       "+var_temp.get(i)+"");
+                    var_functions.add(var_temp.get(i)+"");
                 }
                 var_functions.add("}");
                 var_temp.clear();
@@ -56,13 +55,12 @@ action code
         }
         if(p==1 || p==2){
             for (int i = 0; i< var_temp.size();i++){
-                var_codIntermedio.add("       "+var_temp.get(i));
+                var_codIntermedio.add(var_temp.get(i));
             }
             var_codIntermedio.add("}");   
             var_temp.clear();  
         }
     }
-
     public void pinConfig(Object identificador,Object pin, String mode, String type){ //Identificador: nombre del pin, mode: analog/digital, type: input/output
             var_identificador.add(identificador);
             var_numPin.add(pin);
@@ -179,12 +177,10 @@ RETURN ::=
     error sig_punto_coma
 ;
 CONFIG ::= 
-    res_config:i llave_abre
-        {: setup = true; :} 
+    res_config:i llave_abre 
         SENTENCIA_CONFIG   
     llave_cierra:f {:
         setPosicion(1);
-        setup=false;
     :}
 ;
 
@@ -247,13 +243,11 @@ SENTENCIA_FUNCION ::=
 DECLARACION ::= 
     res_def:i TIPO_DATO:dato Identificador:id sig_punto_coma:f
     {: 
-        if(setup==false)var_temp.add(dato +" "+ id+";");
-        else var_cabecera.add(dato +" "+ id+";");
+            var_temp.add(dato +" "+ id+";");
     :} |
     res_def:i TIPO_DATO:dato Identificador:id asi_asignacion VALOR:val sig_punto_coma:f  
     {: 
-            if(setup==false)var_temp.add(dato +" "+ id + " = "+ val+";");
-            else var_cabecera.add(dato +" "+ id + " = "+ val+";");
+            var_temp.add(dato +" "+ id + " = "+ val+";");
     :} 
     |
     res_def:i TIPO_DATO:dato Identificador:id asi_asignacion CALL_FUNCTION sig_punto_coma:f
