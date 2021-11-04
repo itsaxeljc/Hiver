@@ -162,6 +162,15 @@ DECLARACION_PARAMETRO ::=
     :}  
 ;
 
+DECLARACION ::= 
+    res_def:i TIPO_DATO:dato Identificador:id sig_punto_coma:f{:
+            var_temp.add(dato + " " + id + ";");
+    :} |
+    res_def:i TIPO_DATO:dato Identificador:id asi_asignacion VALOR:val sig_punto_coma:f {:
+            var_temp.add(dato + " " + id + " = " + val + ";");
+    :}
+;
+
 RETURN ::=
     res_return Identificador:i sig_punto_coma {: var_temp.add("return "+i+";");:}| 
     res_return sig_punto_coma {: var_temp.add("return;");:} |
@@ -426,11 +435,21 @@ WHILE ::=
 ;
 
 DOWHILE ::=
-    res_do llave_abre
-        SENTENCIA_STARTUP
-    llave_cierra res_while par_abre CONDICION par_cierra sig_punto_coma
+    DOWHILE_T1
+    SENTENCIA_STARTUP
+    DOWHILE_T2
+;
 
+DOWHILE_T1 ::= 
+    res_do:d llave_abre:la {:
+        var_temp.add(d+""+la);
+    :}
+;
 
+DOWHILE_T2 ::= 
+    llave_cierra:lc res_while:w par_abre:pa CONDICION:c par_cierra:pc sig_punto_coma:sp{:
+        var_temp.add(lc+""+w+""+pa+""+c+""+pc+""+sp+"");
+    :} 
 ;
 
 EXPRESION ::=
