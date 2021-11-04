@@ -411,10 +411,18 @@ CASO ::=
     Numero | cadena_caracter | res_true | res_false 
 ;
 
+
+WHILE_T ::=
+    res_while:i par_abre:pa CONDICION:c par_cierra:pc llave_abre:la
+    {:
+        var_temp.add(i+""+pa+""+c+""+pc+""+la);
+    :}
+;
+
 WHILE ::=
-    res_while par_abre CONDICION par_cierra llave_abre
+    WHILE_T
         SENTENCIA_STARTUP
-    llave_cierra 
+    llave_cierra{:var_temp.add("}");:}
 ;
 
 DOWHILE ::=
