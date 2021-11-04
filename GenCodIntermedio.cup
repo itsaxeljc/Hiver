@@ -332,7 +332,7 @@ CONDICION ::=
 
 
 OPERADOR_CONDICIONAL ::=
-     log_xor:lx{:RESULT=lx;:} | log_and:la{:RESULT=la;:} | log_or:lo{:RESULT=lo;:} | rel_diferente:rd{:RESULT=rd;:} | 
+     log_xor:lx{:RESULT=lx;:} | log_and:la{:RESULT=la;:} | log_or:lo{:RESULT=lo;:} | rel_diferente:rd{:RESULT="!=";:} | 
      rel_igual:ri{:RESULT=ri;:} | rel_mayor_igual:rmi{:RESULT=rmi;:} | rel_mayor:rm{:RESULT=rm;:} | rel_menor_igual:mi{:RESULT=mi;:} |
      rel_menor:rmn{:RESULT=rmn;:} 
 ;
